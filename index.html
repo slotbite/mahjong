@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mahjong Plant Game</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+
+    <div class="wrapper">
+
+        <h1>Mahjong Plant Game</h1>
+        <p>Matches: <span id="matches">0</span></p>
+        <label for="difficulty">Difficulty:</label>
+        <select id="difficulty" onchange="resetGame()">
+    <option value="6">6</option>
+    <option value="8">8</option>
+    <option value="16">16</option>
+  </select>
+        <ul class="cards">
+            <div id="game-board"></div>
+            <p>by kakar00t</p>
+    </div>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
