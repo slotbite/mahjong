@@ -52,8 +52,12 @@
             position: relative;
             perspective: 1000px;
             transform-style: preserve-3d;
-            height: 80px;
-            width: 80px;
+            /* height: 200px;
+            width: 200px; */
+            /* height: 20vh;
+            width: 30vh; */
+            height: 20vmin;
+            width: 20vmin;
             border-radius: 5px;
             border: 1px solid #2c3e5059;
         }
