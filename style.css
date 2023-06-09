@@ -1,88 +1,213 @@
-/* Import Google Font - Poppins */
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-* {
-    margin: 0;
-    padding: 0;
-    color: #78716c;
-    font-family: 'Poppins', sans-serif;
-}
-
-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: #dcf1d9;
-}
-
-.wrapper {
-    padding: 25px;
-    border-radius: 10px;
-    background: #f8f8f860;
-    box-shadow: 0 10px 30px #2C3E50;
-}
-
-.cards,
-.card,
-.view {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.cards {
-    /* height: 400px; */
-    width: 400px;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.card {
-    display: inline-block;
-    width: 100px;
-    height: 100px;
-    border: 1px solid #2c3e5059;
-    margin: 5px;
-    border-radius: 5px;
-    text-align: center;
-    vertical-align: middle;
-    /* font-family: 'Consolas', monospace; */
-    font-size: 50px;
-    background-size: cover;
-    background-position: center;
-    cursor: pointer;
-}
-
-.card {
-    display: inline-block;
-    width: 80px;
-    height: 80px;
-    margin: 5px;
-    text-align: center;
-    font-family: 'Consolas', monospace;
-    font-size: 40px;
-    line-height: 80px;
-}
-
-.card.selected {
-    border: 1px solid #4CAF50;
-}
-
-.board {
-    text-align: center;
-}
-
-.alert {
-    font-size: 24px;
-    margin-top: 10px;
-}
-
-board {
-    text-align: center;
-}
-
-.alert {
-    font-size: 24px;
-    margin-top: 10px;
-}
+        /* Import Google Font - Poppins */
+        
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            color: #78716c;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        p {
+            font-size: 20px;
+        }
+        
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            /* background: #dcf1d9; */
+            background: #8a929b;
+            /* min-height: 100vh; */
+            background-image: url("img/plants_wallpaper.jpg");
+            background-size: cover;
+            background-size: 100% auto;
+            /* backdrop-filter: blur(1px); */
+        }
+        
+        .wrapper {
+            padding: 25px;
+            border-radius: 10px;
+            /* background: #6be2ff; */
+            backdrop-filter: blur(19px);
+            box-shadow: 0 10px 30px #2C3E50;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cards,
+        #game-board,
+        .card,
+        .view,
+        .details,
+        p {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cards .card {
+            cursor: pointer;
+            position: relative;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            height: 80px;
+            width: 80px;
+            border-radius: 5px;
+            border: 1px solid #2c3e5059;
+        }
+        
+        .cards,
+        .card,
+        .view {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cards,
+        #game-board {
+            /* height: 400px; */
+            /* width: 400px; */
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        /* .card { */
+        /* display: inline-block; */
+        /* margin: 5px; */
+        /* text-align: center; */
+        /* vertical-align: middle; */
+        /* font-family: 'Consolas', monospace; */
+        /* font-size: 50px; */
+        /* background-size: cover; */
+        /* background-position: center; */
+        /* transition: transform 0.5s; */
+        /* cursor: pointer; */
+        /* mix-blend-mode: color-burn; */
+        /* } */
+        /* .card { */
+        /* display: inline-block; */
+        /* width: 80px;
+        height: 80px; */
+        /* margin: 5px; */
+        /* text-align: center;
+        font-family: 'Consolas', monospace; */
+        /* font-size: 40px; */
+        /* line-height: 80px; */
+        /* } */
+        
+        .cards .card .view {
+            width: 100%;
+            height: 100%;
+            user-select: none;
+            pointer-events: none;
+            position: absolute;
+            backdrop-filter: blur(25px);
+            border-radius: 5px;
+            backface-visibility: hidden;
+            /* overflow: auto; */
+            transition: transform 0.25s linear;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card .front-view img {
+            width: 80%;
+        }
+        
+        .card .back-view img {
+            max-width: 55%;
+        }
+        
+        .card .back-view {
+            transform: rotateY(-180deg);
+        }
+        
+        .card.flip .back-view {
+            transform: rotateY(0);
+        }
+        
+        .card.flip .front-view {
+            transform: rotateY(180deg);
+        }
+        
+        .card.selected {
+            border: 1px solid #4CAF50;
+            /* transform: rotateY(0deg); */
+        }
+        
+        .card.disabled {
+            pointer-events: none;
+        }
+        
+        .matches {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+        
+        .board {
+            text-align: center;
+        }
+        
+        .alert {
+            font-size: 24px;
+            margin-top: 10px;
+        }
+        
+        .alert {
+            font-size: 24px;
+            margin-top: 10px;
+        }
+        
+        .button {
+            width: 40px;
+            height: 40px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            display: flex;
+            /* justify-content: right; */
+        }
+        
+        .details p {
+            font-size: 18px;
+            height: 17px;
+            padding-right: 18px;
+            border-right: 2px solid #f8f8f860;
+        }
+        
+        .details p span {
+            margin-left: 8px;
+        }
+        
+        .details .time {
+            display: none;
+        }
+        
+        .details p b {
+            font-weight: 500;
+        }
+        
+        .details button {
+            cursor: pointer;
+            font-size: 14px;
+            /* color: #6563ff; */
+            border-radius: 4px;
+            padding: 4px 11px;
+            background: #ffffff00;
+            border: 2px solid #4b4b4b13;
+            transition: 0.3s ease;
+        }
+        
+        .details button:hover {
+            color: #ffffff11;
+            background: #ffffff25;
+        }
+        
+        #sound-button,
+        #modeButton {
+            display: none;
+        }

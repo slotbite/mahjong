@@ -36,9 +36,18 @@ let matches = 0;
 let selectedCards = [];
 let gameBoard = document.getElementById('game-board');
 let matchesElement = document.getElementById('matches');
+let soundEnabled = true;
+let modeEnable = true;
+let sound_on = 'img/frog_green.png';
+let sound_off = 'img/frog_green_back.png';
+let mode_on = 'img/cards_black.png';
+let mode_off = 'img/cards.png';
+
+const reset_game_btn = document.querySelector(".details button");
+
 
 function resetGame() {
-    playSound('sound/drama_boom.mp3');
+    // playSound('sound/drama_boom.mp3');
     pairs = parseInt(document.getElementById('difficulty').value);
     matches = 0;
     selectedCards = [];
@@ -57,64 +66,140 @@ function createGameBoard() {
     for (let i = 0; i < pairs * 2; i++) {
         const card = document.createElement('div');
         card.classList.add('card');
-        card.style.backgroundImage = `url(img/${shuffledCards[i]})`;
+
+
+        const frontView = document.createElement('div');
+        frontView.classList.add('view', 'front-view');
+        const frontImage = document.createElement('img');
+        frontImage.src = 'img/question.png';
+        frontImage.alt = 'icon';
+        frontView.appendChild(frontImage);
+        card.appendChild(frontView);
+
+        const backView = document.createElement('div');
+        backView.classList.add('view', 'back-view');
+        const backImage = document.createElement('img');
+        backImage.src = `img/${shuffledCards[i]}`;
+        backImage.alt = 'card-img';
+        backView.appendChild(backImage);
+        card.appendChild(backView);
+
+
+
+        // card.style.backgroundImage = `url(img/${shuffledCards[i]})`;
         card.setAttribute('data-index', shuffledCards[i]);
         card.addEventListener('click', () => selectCard(card));
+        // card.addEventListener("click", flipCard);
         gameBoard.appendChild(card);
     }
 }
 
 
 
+function flipCard({ target: clickedCard }) {
+    if (cardOne !== clickedCard && !disableDeck) {
+        clickedCard.classList.add("flip");
+        if (!cardOne) {
+            return cardOne = clickedCard;
+        }
+        cardTwo = clickedCard;
+        disableDeck = true;
+        let cardOneImg = cardOne.querySelector(".back-view img").src,
+            cardTwoImg = cardTwo.querySelector(".back-view img").src;
+        matchCards(cardOneImg, cardTwoImg);
+    }
+}
 
 function selectCard(card) {
+
+    playSound('sound/flip_card.mp3');
+
     if (card.classList.contains('selected')) {
         return;
     }
 
     card.classList.add('selected');
+    card.classList.add("flip");
     selectedCards.push(card);
 
     if (selectedCards.length === 2) {
-        setTimeout(checkCards, 1000);
+        // setTimeout(checkCards, 10);
+        checkCards();
     }
-    if (card.getAttribute('data-index') === 'michi.png') {
+    if (/michi/.test(card.getAttribute('data-index'))) {
         playSound('sound/cat_purr.mp3');
     }
-
-    playSound('sound/flip_card.mp3');
 }
 
 function checkCards() {
     const card1 = selectedCards[0];
     const card2 = selectedCards[1];
+    console.log("to chek", card1, card2)
+    card2.classList.add("flip");
     const index1 = card1.getAttribute('data-index');
     const index2 = card2.getAttribute('data-index');
     console.log(index1, index2);
     if (index1 === index2) {
-        playSound('sound/match.mp3');
-        card1.style.visibility = 'hidden';
-        card2.style.visibility = 'hidden';
+
+
+        setTimeout(function() {
+            playSound('sound/match.mp3');
+            card1.style.visibility = 'hidden';
+            card2.style.visibility = 'hidden';
+
+        }, 300);
+
         matches++;
         matchesElement.textContent = matches;
 
         if (matches === pairs) {
-            playSound('sound/clean_win.mp3');
-            alert('Superb! You won!');
-            resetGame();
+
+            setTimeout(function() {
+                playSound('sound/clean_win.mp3');
+                alert('Superb! You won!');
+                resetGame();
+            }, 1500);
+            // playSound('sound/clean_win.mp3');
+            // alert('Superb! You won!');
+            // resetGame();
         }
     } else {
         card1.classList.remove('selected');
         card2.classList.remove('selected');
+
+
+        setTimeout(function() {
+            card1.classList.remove("flip");
+            card2.classList.remove("flip");
+
+        }, 1500);
         playSound('sound/bad_match.mp3');
     }
 
     selectedCards = [];
 }
 
+
+function toggleSound() {
+    soundEnabled = !soundEnabled;
+    const soundButton = document.getElementById('sound-button');
+    soundButton.innerHTML = soundEnabled ? `<img src="${sound_on}" alt="Sound On">` : `<img src="${sound_off}" alt="Sound Off">`;
+
+}
+
+function toggleMode() {
+    modeEnable = !modeEnable;
+    const modeEButton = document.getElementById('modeButton');
+    modeEButton.innerHTML = modeEnable ? `<img src="${mode_on}" alt="Sound On">` : `<img src="${mode_off}" alt="Sound Off">`;
+
+}
+
+
 function playSound(soundPath) {
-    const audio = new Audio(soundPath);
-    audio.play();
+    if (soundEnabled) {
+        const audio = new Audio(soundPath);
+        audio.play();
+    }
 }
 
 function shuffleArray(array) {
@@ -126,4 +211,10 @@ function shuffleArray(array) {
     return newArray;
 }
 
+function presset_reset() {
+    playSound('sound/drama_boom.mp3');
+    resetGame();
+}
+
 resetGame();
+reset_game_btn.addEventListener("click", presset_reset);
