@@ -153,9 +153,9 @@ function checkCards() {
         matchesElement.textContent = matches;
 
         if (matches === pairs) {
-
+            playSound('sound/clean_win.mp3');
             setTimeout(function() {
-                playSound('sound/clean_win.mp3');
+                
                 alert('Superb! You won!');
                 resetGame();
             }, 1500);
