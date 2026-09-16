@@ -57,7 +57,7 @@ export function createEnvironment({ scene, camera, renderer, manifest, glassMate
   try {
     const pmrem = new THREE.PMREMGenerator(renderer);
     scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-    scene.environmentIntensity = 0.22;   // reflejo uniforme sobre caras planas: bajo para no lavar el pixel art
+    scene.environmentIntensity = 0.55;   // reflejos visibles en vidrio translúcido sin lavar el pixel art
     pmrem.dispose();
   } catch (err) { console.warn('[scene/env] sin environment map', err); }
 

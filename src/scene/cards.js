@@ -6,11 +6,15 @@ import { tween, ease } from './anim.js';
 import { slotPosition } from './layout.js';
 import { BACK_KEY } from './themes.js';
 
-// Valores de §2.2. `roughness` se baja de 0.18 a 0.07: en Three la rugosidad también
-// desenfoca lo que se ve a través del vidrio y con 0.18 el pixel art de la carta salía borroso.
+// Valores de §2.2 iteración 2. Vidrio luminoso verde-azulado translúcido con símbolo nítido en superficie.
+// transmission 0.88 para cuerpo visible, color claro #dfeaf0, atenuación suave #a9c9d6,
+// roughness 0.08 para suavidad, envMap 1.4 para reflejos, sheen 0.5 para borde luminoso.
 export const GLASS = Object.freeze({
-  transmission: 0.85, roughness: 0.07, thickness: 0.35, ior: 1.45, clearcoat: 0.6,
-  clearcoatRoughness: 0.15, tint: 0x8fb3c7, tintAmount: 0.12,
+  transmission: 0.88, roughness: 0.08, thickness: 0.35, ior: 1.48,
+  attenuationColor: 0xa9c9d6, attenuationDistance: 2.0,
+  clearcoat: 0.7, clearcoatRoughness: 0.1, sheen: 0.5, sheenRoughness: 0.4,
+  sheenColor: 0xf4ead8,
+  tint: 0xdfeaf0, tintAmount: 0.08,
 });
 const LIME = new THREE.Color(0xb8d96a);
 const SKY = new THREE.Color(0x8fb3c7);
@@ -24,8 +28,12 @@ export function createGlassMaterial() {
   return new THREE.MeshPhysicalMaterial({
     color, metalness: 0, roughness: GLASS.roughness,
     transmission: GLASS.transmission, thickness: GLASS.thickness, ior: GLASS.ior,
+    attenuationColor: new THREE.Color(GLASS.attenuationColor),
+    attenuationDistance: GLASS.attenuationDistance,
     clearcoat: GLASS.clearcoat, clearcoatRoughness: GLASS.clearcoatRoughness,
-    specularIntensity: 0.6, envMapIntensity: 0.45,
+    sheen: GLASS.sheen, sheenRoughness: GLASS.sheenRoughness,
+    sheenColor: new THREE.Color(GLASS.sheenColor),
+    specularIntensity: 1, envMapIntensity: 1.4,
     emissive: BLACK.clone(), emissiveIntensity: 0,
     side: THREE.FrontSide,
   });
@@ -42,18 +50,30 @@ function radialTexture() {
   return new THREE.CanvasTexture(c);
 }
 
+function diagonalShineTexture(opacity = 0.35) {
+  const c = document.createElement('canvas'); c.width = 256; c.height = 256;
+  const g = c.getContext('2d');
+  const grad = g.createLinearGradient(0, 0, 256, 256);
+  grad.addColorStop(0, `rgba(255,255,255,${opacity})`);
+  grad.addColorStop(0.45, 'rgba(255,255,255,0.1)');
+  grad.addColorStop(1, 'rgba(255,255,255,0)');
+  g.fillStyle = grad; g.fillRect(0, 0, 256, 256);
+  return new THREE.CanvasTexture(c);
+}
+
 export function createCards({ scene, bus, EV, isReducedMotion }) {
   const board = new THREE.Group();
   scene.add(board);
 
   const geo = new RoundedBoxGeometry(1, 1, 0.12, 4, 0.08);
   const frontGeo = new THREE.PlaneGeometry(0.84, 0.84);
-  const frostGeo = new THREE.PlaneGeometry(0.96, 0.96);
   const symbolGeo = new THREE.PlaneGeometry(0.5, 0.5);
+  const shineGeo = new THREE.PlaneGeometry(0.9, 0.9);
   const holeGeo = new THREE.PlaneGeometry(1.15, 1.15);
   const baseGlass = createGlassMaterial();
-  const frostMat = new THREE.MeshStandardMaterial({ color: 0x6b93a4, roughness: 1, metalness: 0 });
   const holeTex = radialTexture();
+  const shineTex = diagonalShineTexture(0.35);
+  const shineTexBack = diagonalShineTexture(0.2);
 
   let textures = null;   // Map id → Texture
   let theme = null;
@@ -75,18 +95,30 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
 
     const frontMat = new THREE.MeshBasicMaterial({ map: texFor(data.pairKey), alphaTest: 0.5, side: THREE.FrontSide, toneMapped: false });
     const front = new THREE.Mesh(frontGeo, frontMat);
-    front.position.z = 0.04;
+    front.position.z = 0.062;  // en la superficie frontal para máxima nitidez
+    front.renderOrder = 1;
 
-    const frost = new THREE.Mesh(frostGeo, frostMat);
-    frost.position.z = -0.035;
-    frost.material.side = THREE.DoubleSide;
+    // Brillo especular diagonal en la cara frontal
+    const shineMat = new THREE.MeshBasicMaterial({ map: shineTex, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false });
+    const shine = new THREE.Mesh(shineGeo, shineMat);
+    shine.position.z = 0.063;
+    shine.renderOrder = 2;
 
     const backMat = new THREE.MeshBasicMaterial({ map: texFor(BACK_KEY), alphaTest: 0.5, side: THREE.FrontSide, toneMapped: false });
     const back = new THREE.Mesh(symbolGeo, backMat);
-    back.position.z = -0.05;
+    back.position.z = -0.062;  // en la superficie trasera para máxima nitidez
     back.rotation.y = Math.PI;
+    back.renderOrder = 1;
 
-    group.add(glass, front, frost, back);
+    // Brillo especular diagonal en la cara trasera (más tenue)
+    const shineBackMat = new THREE.MeshBasicMaterial({ map: shineTexBack, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false });
+    const shineBack = new THREE.Mesh(shineGeo, shineBackMat);
+    shineBack.position.z = -0.063;
+    shineBack.rotation.y = Math.PI;
+    shineBack.renderOrder = 2;
+
+    group.add(glass, front, shine, back, shineBack);
+    glass.renderOrder = 0;
     const slot = slotPosition(data.index, cols, rows);
     const card = {
       index: data.index, pairKey: data.pairKey, group, glass, glassMat, front, frontMat, back, backMat,
