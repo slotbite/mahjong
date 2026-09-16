@@ -1,20 +1,18 @@
 // Fichas de vidrio: geometría y texturas compartidas, materiales por ficha para
 // hover/brillo/desvanecido. Animaciones §2.2 con easing cozy.
 import * as THREE from 'three';
-import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { tween, ease } from './anim.js';
 import { slotPosition } from './layout.js';
 import { BACK_KEY } from './themes.js';
 
-// Valores de §2.2 iteración 2. Vidrio luminoso verde-azulado translúcido con símbolo nítido en superficie.
-// transmission 0.88 para cuerpo visible, color claro #dfeaf0, atenuación suave #a9c9d6,
-// roughness 0.08 para suavidad, envMap 1.4 para reflejos, sheen 0.5 para borde luminoso.
+// Valores gem-19: Gema de cristal con biseles facetados tipo diamante/zafiro.
+// transmission 1.0 para máxima refracción, ior 2.2 para efecto gema con biseles pronunciados,
+// thickness 0.6, clearcoat 1.0 para reflejos brillantes, metalness 0.1 para facetas reflectivas.
 export const GLASS = Object.freeze({
-  transmission: 0.88, roughness: 0.08, thickness: 0.35, ior: 1.48,
-  attenuationColor: 0xa9c9d6, attenuationDistance: 2.0,
-  clearcoat: 0.7, clearcoatRoughness: 0.1, sheen: 0.5, sheenRoughness: 0.4,
-  sheenColor: 0xf4ead8,
-  tint: 0xdfeaf0, tintAmount: 0.08,
+  transmission: 1.0, roughness: 0.05, thickness: 0.6, ior: 2.2,
+  attenuationColor: 0x9fd3c7, attenuationDistance: 1.2,
+  clearcoat: 1.0, clearcoatRoughness: 0.1, metalness: 0.1,
+  envMapIntensity: 1.5,
 });
 const LIME = new THREE.Color(0xb8d96a);
 const SKY = new THREE.Color(0x8fb3c7);
@@ -26,16 +24,13 @@ const TILT = (8 * Math.PI) / 180;
 const DUR = { flip: 320, settle: 900, drop: 560, dropStagger: 40, tilt: 220, press: 160, fade: 180 };
 
 export function createGlassMaterial() {
-  const color = new THREE.Color(0xffffff).lerp(new THREE.Color(GLASS.tint), GLASS.tintAmount);
   return new THREE.MeshPhysicalMaterial({
-    color, metalness: 0, roughness: GLASS.roughness,
+    color: 0xffffff, metalness: GLASS.metalness, roughness: GLASS.roughness,
     transmission: GLASS.transmission, thickness: GLASS.thickness, ior: GLASS.ior,
     attenuationColor: new THREE.Color(GLASS.attenuationColor),
     attenuationDistance: GLASS.attenuationDistance,
     clearcoat: GLASS.clearcoat, clearcoatRoughness: GLASS.clearcoatRoughness,
-    sheen: GLASS.sheen, sheenRoughness: GLASS.sheenRoughness,
-    sheenColor: new THREE.Color(GLASS.sheenColor),
-    specularIntensity: 1, envMapIntensity: 1.4,
+    envMapIntensity: GLASS.envMapIntensity,
     emissive: BLACK.clone(), emissiveIntensity: 0,
     side: THREE.FrontSide,
   });
@@ -63,12 +58,73 @@ function diagonalShineTexture(opacity = 0.35) {
   return new THREE.CanvasTexture(c);
 }
 
+function createGemGeometry() {
+  const shape = new THREE.Shape();
+  const size = 0.5;      // mitad de lado 1.0
+  const radius = 0.1;    // radio de esquina
+  shape.moveTo(-size + radius, -size);
+  shape.lineTo(size - radius, -size);
+  shape.quadraticCurveTo(size, -size, size, -size + radius);
+  shape.lineTo(size, size - radius);
+  shape.quadraticCurveTo(size, size, size - radius, size);
+  shape.lineTo(-size + radius, size);
+  shape.quadraticCurveTo(-size, size, -size, size - radius);
+  shape.lineTo(-size, -size + radius);
+  shape.quadraticCurveTo(-size, -size, -size + radius, -size);
+
+  const extrudeSettings = {
+    steps: 1, depth: 0.06, bevelEnabled: true,
+    bevelThickness: 0.06, bevelSize: 0.12, bevelSegments: 2
+  };
+  const geo = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+  geo.center();
+  return geo;
+}
+
+function createVoxelQuestionMark(baseColor) {
+  const group = new THREE.Group();
+  const grid = [
+    [0,0,1,1,1,1,0,0],
+    [0,1,1,0,0,1,1,0],
+    [0,1,1,0,0,1,1,0],
+    [0,0,0,0,1,1,0,0],
+    [0,0,0,1,1,0,0,0],
+    [0,0,0,1,1,0,0,0],
+    [0,0,0,0,0,0,0,0],
+    [0,0,0,1,1,0,0,0]
+  ];
+  const boxGeo = new THREE.BoxGeometry(0.055, 0.055, 0.055);
+  const boxMat = new THREE.MeshStandardMaterial({
+    color: baseColor, emissive: baseColor.clone().multiplyScalar(0.3),
+    roughness: 0.3, toneMapped: false
+  });
+  const offsetX = -(8 * 0.055) / 2 + 0.0275;
+  const offsetY = (8 * 0.055) / 2 - 0.0275;
+  for (let y = 0; y < grid.length; y++) {
+    for (let x = 0; x < grid[y].length; x++) {
+      if (grid[y][x] === 1) {
+        const cube = new THREE.Mesh(boxGeo, boxMat.clone());
+        cube.position.set(x * 0.055 + offsetX, -y * 0.055 + offsetY, 0);
+        group.add(cube);
+      }
+    }
+  }
+  group.position.z = -0.045;
+  group.rotation.y = Math.PI;
+  group.userData.materials = group.children.map(c => c.material);
+  return group;
+}
+
 export function createCards({ scene, bus, EV, isReducedMotion }) {
   const board = new THREE.Group();
   scene.add(board);
 
-  const geo = new RoundedBoxGeometry(1, 1, 0.12, 4, 0.08);
-  const frontGeo = new THREE.PlaneGeometry(0.84, 0.84);
+  // Detectar parámetro URL ?art=inside
+  const urlParams = new URLSearchParams(typeof location !== 'undefined' ? location.search : '');
+  const artInside = urlParams.get('art') === 'inside';
+
+  const geo = createGemGeometry();
+  const frontGeo = new THREE.PlaneGeometry(0.7, 0.7);
   const symbolGeo = new THREE.PlaneGeometry(0.5, 0.5);
   const shineGeo = new THREE.PlaneGeometry(0.9, 0.9);
   const holeGeo = new THREE.PlaneGeometry(1.15, 1.15);
@@ -85,8 +141,29 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
   let phase = 'idle';    // idle | dealing | playing | hint | won | lost
   let hovered = -1;
   let time = 0;
+  let backVoxelGroups = [];  // grupos de voxels por carta
 
   function texFor(id) { return textures?.get(id) ?? null; }
+
+  function extractDominantColor(texture) {
+    if (!texture || !texture.image) return new THREE.Color(0x55ff55);
+    try {
+      const canvas = document.createElement('canvas');
+      canvas.width = texture.image.width;
+      canvas.height = texture.image.height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(texture.image, 0, 0);
+      const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+      let r = 0, g = 0, b = 0, count = 0;
+      for (let i = 0; i < data.length; i += 4) {
+        if (data[i + 3] > 128) { r += data[i]; g += data[i + 1]; b += data[i + 2]; count++; }
+      }
+      if (count === 0) return new THREE.Color(0x55ff55);
+      return new THREE.Color(r / count / 255, g / count / 255, b / count / 255);
+    } catch (e) {
+      return new THREE.Color(0x55ff55);
+    }
+  }
 
   function makeCard(data) {
     const group = new THREE.Group();
@@ -97,33 +174,33 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
 
     const frontMat = new THREE.MeshBasicMaterial({ map: texFor(data.pairKey), alphaTest: 0.5, side: THREE.FrontSide, toneMapped: false });
     const front = new THREE.Mesh(frontGeo, frontMat);
-    front.position.z = 0.062;  // en la superficie frontal para máxima nitidez
+    // Geometría gem: faceta frontal aproximadamente en z = 0.06-0.09; con bevel de 0.06, ponemos front en +0.091
+    front.position.z = artInside ? -0.03 : 0.091;
     front.renderOrder = 1;
 
     // Brillo especular diagonal en la cara frontal
     const shineMat = new THREE.MeshBasicMaterial({ map: shineTex, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false });
     const shine = new THREE.Mesh(shineGeo, shineMat);
-    shine.position.z = 0.063;
+    shine.position.z = artInside ? -0.031 : 0.092;
     shine.renderOrder = 2;
 
-    const backMat = new THREE.MeshBasicMaterial({ map: texFor(BACK_KEY), alphaTest: 0.5, side: THREE.FrontSide, toneMapped: false });
-    const back = new THREE.Mesh(symbolGeo, backMat);
-    back.position.z = -0.062;  // en la superficie trasera para máxima nitidez
-    back.rotation.y = Math.PI;
-    back.renderOrder = 1;
+    // Reemplazar back (imagen) con grupo de voxels
+    const backColor = extractDominantColor(texFor(BACK_KEY));
+    const voxelGroup = createVoxelQuestionMark(backColor);
+    backVoxelGroups.push({ group: voxelGroup, color: backColor });
 
-    // Brillo especular diagonal en la cara trasera (más tenue)
+    // Brillo especular diagonal en la cara trasera (mantener para consistencia visual)
     const shineBackMat = new THREE.MeshBasicMaterial({ map: shineTexBack, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false });
     const shineBack = new THREE.Mesh(shineGeo, shineBackMat);
     shineBack.position.z = -0.063;
     shineBack.rotation.y = Math.PI;
     shineBack.renderOrder = 2;
 
-    group.add(glass, front, shine, back, shineBack);
+    group.add(glass, front, shine, voxelGroup, shineBack);
     glass.renderOrder = 0;
     const slot = slotPosition(data.index, cols, rows);
     const card = {
-      index: data.index, pairKey: data.pairKey, group, glass, glassMat, front, frontMat, back, backMat,
+      index: data.index, pairKey: data.pairKey, group, glass, glassMat, front, frontMat, voxelGroup,
       slot, faceUp: false, matched: false, tiltTarget: 0, dropping: false, hoverK: 0, tweens: [], baseZ: 0, bobPhase: Math.random() * 6.283,
     };
     group.rotation.y = FACE_DOWN;
@@ -139,7 +216,13 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
   function track(card, t) { card.tweens.push(t); return t; }
 
   function setOpacity(card, o) {
-    const mats = [card.glassMat, card.frontMat, card.backMat];
+    const mats = [card.glassMat, card.frontMat];
+    // Agregar materiales de voxels
+    if (card.voxelGroup) {
+      for (const child of card.voxelGroup.children) {
+        if (child.material) mats.push(child.material);
+      }
+    }
     for (const m of mats) {
       const transparent = o < 0.999;
       if (m.transparent !== transparent) { m.transparent = transparent; m.needsUpdate = true; }
@@ -152,10 +235,15 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
     for (const c of cards) {
       kill(c);
       board.remove(c.group);
-      c.glassMat.dispose(); c.frontMat.dispose(); c.backMat.dispose();
+      c.glassMat.dispose(); c.frontMat.dispose();
+      if (c.voxelGroup) {
+        for (const child of c.voxelGroup.children) {
+          if (child.material) child.material.dispose();
+        }
+      }
     }
     for (const h of holes) { board.remove(h.mesh); h.mesh.material.dispose(); }
-    cards = []; holes = []; hovered = -1;
+    cards = []; holes = []; hovered = -1; backVoxelGroups = [];
   }
 
   // --- animaciones ---
@@ -341,9 +429,20 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
 
   function setTheme(payload) {
     theme = payload.theme; textures = payload.textures;
+    const backTex = texFor(BACK_KEY);
+    const backColor = extractDominantColor(backTex);
     for (const card of cards) {
       card.frontMat.map = texFor(card.pairKey); card.frontMat.needsUpdate = true;
-      card.backMat.map = texFor(BACK_KEY); card.backMat.needsUpdate = true;
+      // Actualizar color de voxels
+      if (card.voxelGroup) {
+        for (const child of card.voxelGroup.children) {
+          if (child.material) {
+            child.material.color.copy(backColor);
+            child.material.emissive.copy(backColor.clone().multiplyScalar(0.3));
+            child.material.needsUpdate = true;
+          }
+        }
+      }
     }
   }
 

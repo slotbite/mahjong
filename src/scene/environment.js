@@ -53,11 +53,42 @@ export function createEnvironment({ scene, camera, renderer, manifest, glassMate
   // Niebla exponencial --bg-mid
   scene.fog = new THREE.FogExp2(0x1f4d3a, 0.012);
 
-  // Entorno PMREM para reflejos del vidrio
+  // Entorno procedural bokeh (selva) para reflejos del vidrio tipo gema
+  function createJungleBackground() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 1024; canvas.height = 1024;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#061709';
+    ctx.fillRect(0, 0, 1024, 1024);
+    // Círculos difuminados: hojas y luces bokeh
+    for (let i = 0; i < 200; i++) {
+      const x = Math.random() * 1024, y = Math.random() * 1024;
+      const radius = Math.random() * 60 + 20;
+      const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+      const g = Math.floor(Math.random() * 150) + 50;
+      const b = Math.floor(Math.random() * 60) + 20;
+      if (Math.random() > 0.9) {
+        gradient.addColorStop(0, 'rgba(200, 255, 150, 0.8)');
+      } else {
+        gradient.addColorStop(0, `rgba(10, ${g}, ${b}, 0.6)`);
+      }
+      gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.mapping = THREE.EquirectangularReflectionMapping;
+    texture.colorSpace = THREE.SRGBColorSpace;
+    return texture;
+  }
+
   try {
+    const jungleEnvTex = createJungleBackground();
     const pmrem = new THREE.PMREMGenerator(renderer);
-    scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-    scene.environmentIntensity = 0.55;   // reflejos visibles en vidrio translúcido sin lavar el pixel art
+    scene.environment = pmrem.fromEquirectangular(jungleEnvTex).texture;
+    scene.environmentIntensity = 1.0;
     pmrem.dispose();
   } catch (err) { console.warn('[scene/env] sin environment map', err); }
 
