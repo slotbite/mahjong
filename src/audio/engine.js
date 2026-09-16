@@ -155,7 +155,7 @@ const ambient = {
       }
     }
     currentAmbientIds = [];
-    ambientGainNodes = {};
+    for (const k of Object.keys(ambientGainNodes)) { try { ambientGainNodes[k].disconnect(); } catch {} delete ambientGainNodes[k]; }
   },
 
   setIntensity(v) {
