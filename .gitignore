@@ -1,0 +1,13 @@
+# custodia: worktrees de agentes y estado de coordinación
+.claude/worktrees/
+.orquestacion/
+
+# dependencias / intermedios
+node_modules/
+tools/.cache/
+*.log
+.DS_Store
+Thumbs.db
+
+# assets crudos descargados (los procesados sí se versionan)
+assets/raw/

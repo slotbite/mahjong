@@ -1,36 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Mahjong Plant Game</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <!-- Autoplay is allowed. -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f2a22">
+  <meta name="description" content="Memorice Cozy: un memorice indie y relajado con fichas de vidrio, pixel art, plantas y lluvia tropical.">
+  <title>Memorice Cozy</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Estilos: tokens (director) + módulos de UI (ui-6) -->
+  <link rel="stylesheet" href="./styles/tokens.css">
+  <link rel="stylesheet" href="./styles/ui.css">
+
+  <!-- Three.js vendorizado (core-1 coloca los archivos en /vendor). Rutas relativas por GitHub Pages. -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./vendor/three.module.min.js",
+      "three/addons/": "./vendor/addons/"
+    }
+  }
+  </script>
+  <link rel="modulepreload" href="./src/main.js">
+  <link rel="modulepreload" href="./src/core/bus.js">
+  <link rel="modulepreload" href="./src/core/settings.js">
 </head>
 <body>
-    <div class="wrapper">
-        <h1>Mahjong Plant Game</h1>
-        <div>
-            <label for="difficulty">Difficulty:</label>
-            <select id="difficulty" onchange="resetGame()">
-            <option value="2">2</option>
-            <option value="6">6</option>
-            <option value="8">8</option>
-            <option value="16">16</option>
-        </select>
-            <div class="button" id="sound-button" onclick="toggleSound()"><img src="img/frog_green.png" alt="Sound On"></div>
-            <div class="button" id="modeButton" onclick="toggleMode()"><img src="img/cards_black.png" alt="Memorice On"></div>
-            <!-- <button id="modeButton">Memorice</button> -->
-            <div class="details">
-                <p class="time">Time: <span><b>20</b>s</span></p>
-                <p class="flips">Matches: <span id="matches"><b>0</b></span></p>
-                <button>Refresh</button>
-            </div>
-        </div>
-        <ul class="cards">
-            <div id="game-board"></div>
-        </ul>
-        <p>by kakar00t</p>
-    </div>
-    </div>
-    <script src="script.js"></script>
+  <!-- Capa 3D: escena Three.js (core-1) -->
+  <canvas id="scene" aria-hidden="true"></canvas>
+
+  <!-- Capa UI: HUD, ajustes, victoria, récords (ui-6). Todo en HTML/CSS sobre el canvas. -->
+  <div id="ui-root">
+    <header id="hud" class="glass" aria-live="polite"></header>
+    <aside id="hud-left" class="glass island" hidden></aside>
+    <aside id="hud-right" class="glass island" hidden></aside>
+    <div id="board-a11y" role="grid" aria-label="Tablero de memorice"></div>
+    <dialog id="settings-dialog" class="glass"></dialog>
+    <dialog id="win-dialog" class="glass"></dialog>
+    <div id="toast" role="status" aria-live="polite"></div>
+  </div>
+
+  <p id="boot-error" class="glass" hidden></p>
+  <noscript>Memorice Cozy necesita JavaScript.</noscript>
+
+  <script type="module" src="./src/main.js"></script>
 </body>
 </html>

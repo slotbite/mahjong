@@ -1,0 +1,71 @@
+{
+  "version": 2,
+  "_nota": "Manifiesto inicial del andamiaje. assets-2 lo reemplaza con rutas a assets/themes/** optimizadas. Mientras, apunta a img/ actual para que las demás ramas rendericen.",
+  "themes": [
+    {
+      "id": "plantas",
+      "name": { "es": "Plantas de interior", "en": "Houseplants" },
+      "palette": "original",
+      "backSymbol": "img/question.png",
+      "easterEgg": { "match": "michi", "sfx": "cat_purr" },
+      "cards": [
+        { "id": "snake_plant", "src": "img/snake_plant.png", "w": 512, "h": 768, "license": "own", "attribution": "" },
+        { "id": "dragon_plant", "src": "img/dragon_plant.png", "w": 512, "h": 768, "license": "own", "attribution": "" },
+        { "id": "helecho", "src": "img/helecho.png", "w": 512, "h": 768, "license": "own", "attribution": "" },
+        { "id": "mostera", "src": "img/mostera.png", "w": 512, "h": 768, "license": "own", "attribution": "" },
+        { "id": "michi", "src": "img/michi.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "michi2", "src": "img/michi2.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "tocomple", "src": "img/tocomple.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "image1", "src": "img/image1.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "image2", "src": "img/image2.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "image3", "src": "img/image3.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "image4", "src": "img/image4.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "image5", "src": "img/image5.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "image6", "src": "img/image6.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "p_0652f4", "src": "img/0652f495af742bfc227868aef1895b87-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "p_212a5d", "src": "img/212a5d208ff38edae4ec52148f612dbc-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "p_40e8bc", "src": "img/40e8bcd1f4b7ae3807d032663e4add1a-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "p_53917e", "src": "img/53917e4a0b9a5e824a62e0d9fffaabd0-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "p_574ec3", "src": "img/574ec3c4ea68f82161b66d44b1c505b1-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "p_708386", "src": "img/7083865e376f9f2de39cc379697c25e7-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "p_82ba85", "src": "img/82ba85e1b41683b4959882410e5ccf11-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "p_ad9b21", "src": "img/ad9b212973142413798eea793bb79cfb-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "p_ba3ec5", "src": "img/ba3ec572793b6aefb7f025000afec006-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "p_bcd038", "src": "img/bcd038cd7bf05e6b045d573b45344e4a-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "p_c3d423", "src": "img/c3d423e2584adc54fa880aa4cf3acc2d-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "p_cfc0b4", "src": "img/cfc0b46bd063dbe4cdfcb97678d72d1d-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "p_d21720", "src": "img/d217204d254399cfda91ace90f5a1ec8-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "p_e0ec5d", "src": "img/e0ec5dfedb542bd0c594ed26d6795c61-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "p_e25ebb", "src": "img/e25ebbc2ee51c8372118111c078848b4-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
+        { "id": "p_eac1d2", "src": "img/eac1d280713648dad40b89501e248b9d-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" }
+      ]
+    },
+    { "id": "selva", "name": { "es": "Selva tropical", "en": "Rainforest" }, "palette": "jungle-dusk", "backSymbol": null, "cards": [] },
+    { "id": "cozy", "name": { "es": "Rincón cozy", "en": "Cozy corner" }, "palette": "cozy-pastel", "backSymbol": null, "cards": [] },
+    { "id": "geek", "name": { "es": "Pasatiempos geek", "en": "Geek hobbies" }, "palette": "pico8", "backSymbol": null, "cards": [] },
+    { "id": "cafe", "name": { "es": "Café y té", "en": "Coffee & tea" }, "palette": "cozy-pastel", "backSymbol": null, "cards": [] },
+    { "id": "manualidades", "name": { "es": "Manualidades", "en": "Crafts" }, "palette": "sweetie16", "backSymbol": null, "cards": [] },
+    { "id": "noche", "name": { "es": "Cielo nocturno", "en": "Night sky" }, "palette": "endesga32", "backSymbol": null, "cards": [] },
+    { "id": "acuario", "name": { "es": "Acuario", "en": "Aquarium" }, "palette": "sweetie16", "backSymbol": null, "cards": [] }
+  ],
+  "backgrounds": [
+    { "id": "jungle-rain", "srcset": { "1920": "img/plants_wallpaper.jpg" }, "license": "unknown", "attribution": "wallpaper v1, pendiente de reemplazo por assets-2" }
+  ],
+  "audio": {
+    "ambient": {},
+    "sfx": {
+      "flip":     { "mp3": "sound/flip_card.mp3", "gain": 0.6 },
+      "match":    { "mp3": "sound/match.mp3", "gain": 0.7 },
+      "miss":     { "mp3": "sound/bad_match.mp3", "gain": 0.5 },
+      "deal":     { "mp3": "sound/card_shuffle.mp3", "gain": 0.6 },
+      "win":      { "mp3": "sound/clean_win.mp3", "gain": 0.8 },
+      "cat_purr": { "mp3": "sound/cat_purr.mp3", "gain": 0.7 }
+    }
+  },
+  "palettes": {
+    "gameboy": ["#0f380f", "#306230", "#8bac0f", "#9bbc0f"],
+    "pico8": ["#000000", "#1d2b53", "#7e2553", "#008751", "#ab5236", "#5f574f", "#c2c3c7", "#fff1e8", "#ff004d", "#ffa300", "#ffec27", "#00e436", "#29adff", "#83769c", "#ff77a8", "#ffccaa"],
+    "cozy-pastel": ["#2b2a33", "#5a4a5f", "#8c6f8a", "#c9a7b8", "#f4ead8", "#e8c39e", "#c8744a", "#9a5a3c", "#6a9a5b", "#b8d96a", "#8fb3c7", "#5d7f94"],
+    "jungle-dusk": ["#0f2a22", "#1f4d3a", "#2f6b4b", "#6a9a5b", "#b8d96a", "#f4ead8", "#c8744a", "#8fb3c7", "#e0b04c", "#7b3f5c", "#3b6f8a", "#1a1a24"]
+  }
+}
