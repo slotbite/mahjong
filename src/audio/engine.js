@@ -239,7 +239,7 @@ function setVolume(channel, v) {
 function handleBusEvents() {
   // card:flip → flip (solo si faceUp: true)
   ctx.bus.on(ctx.EV.CARD_FLIP, ({ faceUp }) => {
-    if (faceUp) playSfx('flip', { rate: 0.96 + Math.random() * 0.08 });
+    if (faceUp) playSfx('flip', { rate: 1.04 + Math.random() * 0.02 }); // el dueño prefirió la variante más aguda del ±4 %
   });
 
   // pair:match → match con rate variable según racha
