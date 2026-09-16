@@ -11,10 +11,12 @@ import { BACK_KEY } from './themes.js';
 // specularIntensity 1.0, envMapIntensity 2.2 para reflejos visibles en bokeh mejorado.
 export const GLASS = Object.freeze({
   // Boceto gema_cristal_transparente.html: cristal sin color propio, todo es refracción del entorno.
-  transmission: 1.0, roughness: 0.05, thickness: 0.5, ior: 2.4,
+  // Cámara ortográfica y ficha delgada: ior moderado y grosor óptico corto para que la selva
+  // se vea a través; el ior 2.4 del boceto desplazaba la muestra fuera de la ficha (gris).
+  transmission: 1.0, roughness: 0.04, thickness: 0.3, ior: 1.35,
   attenuationColor: 0xffffff, attenuationDistance: Infinity, // vidrio incoloro: el fondo se ve sin tinte
-  clearcoat: 1.0, clearcoatRoughness: 0.1, metalness: 0.1,
-  specularIntensity: 1.0, envMapIntensity: 1.0,
+  clearcoat: 1.0, clearcoatRoughness: 0.1, metalness: 0.0,
+  specularIntensity: 0.8, envMapIntensity: 0.7,
 });
 const LIME = new THREE.Color(0xb8d96a);
 const SKY = new THREE.Color(0x8fb3c7);
@@ -35,7 +37,7 @@ export function createGlassMaterial() {
     specularIntensity: GLASS.specularIntensity,
     envMapIntensity: GLASS.envMapIntensity,
     emissive: BLACK.clone(), emissiveIntensity: 0,
-    side: THREE.DoubleSide, transparent: true, opacity: 1.0,
+    side: THREE.FrontSide,
   });
 }
 
