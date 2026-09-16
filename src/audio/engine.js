@@ -253,9 +253,8 @@ function handleBusEvents() {
   ctx.bus.on(ctx.EV.PAIR_MISS, () => {});
 
   // game:dealt → deal
-  ctx.bus.on(ctx.EV.GAME_DEALT, () => {
-    playSfx('deal');
-  });
+  // game:dealt → sin sonido por ahora (el dueño descartó el reparto sintetizado; candidato 'deal-bottle' en el banco)
+  ctx.bus.on(ctx.EV.GAME_DEALT, () => {});
 
   // hint:used → hint
   ctx.bus.on(ctx.EV.HINT_USED, () => {

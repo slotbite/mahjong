@@ -119,6 +119,18 @@ const SOUNDS = [
   // --- sfx ---
   { id: 'flip', kind: 'sfx', src: 'kalimba', lufs: -19, gain: 0.5, af: `asetrate=${SR * 1.75},aresample=${SR},highpass=f=350,lowpass=f=6500,afade=t=in:d=0.003`, maxDur: 0.14, fadeOut: 0.06,
     note: 'golpe de cristal agudo tipo xilófono (pedido del dueño): el cuenco de match ~1.6 octavas arriba, corto; el motor varía ±4 % el rate' },
+  { id: 'deal-bottle', kind: 'sfx', src: 'glass', lufs: -18, gain: 0.55, maxDur: 1.0, fadeOut: 0.25,
+    // Candidato: golpes de silicona sobre botella de vidrio. Tap de vidrio bajado ~1 octava, paso bajo
+    // 1.4 kHz (mate, sin tintineo) y resonancia hueca ~420 Hz; 6 golpes escalonados con tonos distintos.
+    af: (() => {
+      const hits = [[0, 0.52], [70, 0.58], [150, 0.49], [230, 0.61], [320, 0.55], [420, 0.47]];
+      const n = hits.length;
+      const split = `asplit=${n}` + hits.map((_, i) => `[h${i}]`).join('');
+      const chains = hits.map(([ms, r], i) => `[h${i}]asetrate=${Math.round(SR * r)},aresample=${SR},lowpass=f=1400,bass=g=6:f=420:w=0.5,adelay=${ms}|${ms}[o${i}]`).join(';');
+      const mix = hits.map((_, i) => `[o${i}]`).join('') + `amix=inputs=${n}:normalize=0:dropout_transition=0`;
+      return `${split};${chains};${mix}`;
+    })(),
+    note: 'candidato para el reparto (evaluar en el banco); no suena en el juego' },
   { id: 'flip-v1', kind: 'sfx', src: 'glass', lufs: -18, gain: 0.5, af: 'lowpass=f=9000', maxDur: 0.5,
     note: 'tap de vidrio v1 (comparación en el banco)' },
   { id: 'match', kind: 'sfx', src: 'kalimba', lufs: -18, gain: 0.7, maxDur: 1.8, fadeOut: 0.5,

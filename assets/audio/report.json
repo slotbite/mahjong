@@ -211,9 +211,23 @@
       "gainDb": 1.5,
       "ogg": 4672,
       "m4a": 2986
+    },
+    "deal-bottle": {
+      "hash": "46b4126f57",
+      "kind": "sfx",
+      "src": "glass",
+      "duration": 0.994,
+      "channels": 1,
+      "kbps": 56,
+      "lufsIn": -15.4,
+      "lufsOut": -17.3,
+      "truePeakOut": -1.4,
+      "gainDb": -2.6,
+      "ogg": 7244,
+      "m4a": 8016
     }
   },
-  "generatedAt": "2026-09-16T19:01:13.256Z",
+  "generatedAt": "2026-09-16T19:04:01.552Z",
   "targets": {
     "ambientLufs": -23,
     "sfxLufs": -18,
