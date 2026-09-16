@@ -401,8 +401,12 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
     for (const card of shown) {
       kill(card);
       rotateTo(card, 0, DUR.flip, false);
-      const r0 = card.glassMat.roughness;
-      track(card, tween({ dur: 400, onUpdate: (k) => { card.glassMat.roughness = r0 + (0.6 - r0) * k; } }));
+      // El esmerilado de la pista solo tiene sentido si el arte está fuera del cristal;
+      // con ?art=inside dejaba las imágenes ilegibles (reporte del dueño).
+      if (!artInside) {
+        const r0 = card.glassMat.roughness;
+        track(card, tween({ dur: 400, onUpdate: (k) => { card.glassMat.roughness = r0 + (0.35 - r0) * k; } }));
+      }
     }
     tween({ dur: 0, delay: duration, onDone: () => {
       for (const card of shown) {
