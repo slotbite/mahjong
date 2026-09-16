@@ -170,13 +170,14 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
       adjustedTargetY = 2 * Math.PI;
     }
 
-    if (isReducedMotion() || dur === 0) {
-      // Giro instantáneo + "fade" por escala (0.86→1). No se usa opacidad: un material
-      // transparente sale del pase de transmisión y el vidrio mostraría solo el esmerilado.
-      card.group.rotation.y = targetY; card.group.rotation.z = card.tiltTarget;
-      card.group.scale.set(0.86, 0.86, 1);
-      return track(card, tween({ dur: DUR.fade, ease: ease.outCubic, onUpdate: (k) => { const s = 0.86 + 0.14 * k; card.group.scale.set(s, s, 1); }, onDone: () => card.group.scale.set(1, 1, 1) }));
+    if (dur === 0) {
+      card.group.rotation.y = targetY; card.group.rotation.z = card.tiltTarget; card.group.position.z = card.baseZ;
+      return null;
     }
+    // Movimiento reducido (ajuste "on" o el SO con animaciones desactivadas): el giro es la
+    // información esencial del juego, así que se conserva, más corto y sin elevación. Antes se
+    // sustituía por un zoom 0.86→1 y el dueño lo percibía como "no gira".
+    if (isReducedMotion()) { dur = Math.min(dur, 180); withLift = false; }
     return track(card, tween({
       dur, ease: ease.cozy,
       onUpdate: (k, lin) => {
