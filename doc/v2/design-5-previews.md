@@ -1,9 +1,24 @@
 # design-5 — Vistas previas y guía de estilo de Memorice Cozy v2
 
-**Canvas publicado (pieza de aprobación):** https://claude.ai/artifact/2RNcj5NWUTSnTip92ekYSr
+## Cómo ver las previews (local)
+
 **Rama:** `feat/v2_design-5-previews` · **Fuente:** `doc/v2/design-5/` · **Propuesta base:** `doc/v2/PROPUESTA_V2.md` §1, §2, §4, §5
 
-El canvas es un lienzo con zoom y desplazamiento; cada artboard se puede exportar a PNG/PDF desde su barra. Los PNG ya exportados están en `doc/v2/design-5/preview-*.png` (todos ≤ 430 KB).
+Para ver los artboards en tamaño real en tu navegador:
+
+```bash
+# En la raíz del worktree (mahjong/cowfish/.claude/worktrees/design-5)
+python -m http.server 8085 --bind 127.0.0.1
+
+# Luego abre en el navegador:
+http://127.0.0.1:8085/doc/v2/design-5/
+```
+
+El archivo `index.html` proporciona una navegación interactiva con lista de artboards, visor de tamaño real, e iframes embebidos para cada diseño.
+
+**Nota:** El canvas publicado por error en Claude Artifacts queda pendiente de eliminación por el dueño (desde `/artifacts` en Claude Code, tecla d). La entrega válida es solo local.
+
+Los PNG de cada artboard están en `doc/v2/design-5/png/` (todos ≤ 500 KB).
 
 ## 1. Artboards entregados
 
@@ -82,10 +97,12 @@ Arte real usado en las fichas: `snake_plant`, helecho colgante (`82ba…-pixelic
 
 ```
 doc/v2/design-5-previews.md      este documento
+doc/v2/design-5/index.html       navegador local de artboards (abre en http://127.0.0.1:8085/doc/v2/design-5/)
+doc/v2/design-5/support.js       soporte para web component <x-dc>
 doc/v2/design-5/build.mjs        genera los *.dc.html y canvas.json (node build.mjs)
-doc/v2/design-5/*.dc.html        6 artboards (fuente del canvas)
+doc/v2/design-5/render-pngs.mjs  renderiza PNG de cada artboard a doc/v2/design-5/png/
+doc/v2/design-5/*.dc.html        6 artboards interactivos (Main, MovilAjustes, Tablet, Escritorio, UltraWide, Guia)
 doc/v2/design-5/canvas.json      posiciones, títulos y notas del lienzo
-doc/v2/design-5/*.png (arte)     8 assets reducidos a ≤ 256 px para el canvas
-doc/v2/design-5/preview-*.png    6 exportaciones PNG, una por artboard (≤ 430 KB)
-doc/v2/design-5/memorice-cozy-v2.html   canvas completo ya ensamblado (3.4 MB), para republicar sin la sesión
+doc/v2/design-5/png/*.png        6 screenshots PNG, uno por artboard (≤ 500 KB cada uno)
+doc/v2/design-5/*.png (arte)     8 assets de plantas y personajes (snake_plant, michi, etc.)
 ```
