@@ -171,19 +171,20 @@ test('match y miss: flips, bloqueo, racha, puntaje y easter egg', () => {
   bus.emit(EV.CARD_PICK, { index: idx(k1)[0] });
   assert.equal(c.of(EV.CARD_FLIP).length, 2);
   assert.deepEqual(c.last(EV.PAIR_MISS).indices, [idx(k0)[0], idx(k1)[0]]);
-  // bloqueado: un tercer pick no hace nada
+  // selección fluida: un tercer pick cierra la pareja fallida al instante (2 flips a dorso)
+  // y abre la nueva carta (1 flip) sin esperar el temporizador del fallo.
   bus.emit(EV.CARD_PICK, { index: idx(k0)[1] });
-  assert.equal(c.of(EV.CARD_FLIP).length, 2);
-  c.clock.tick(RULES.missDelayMs);
+  assert.equal(c.of(EV.CARD_FLIP).length, 5);
   const downs = c.of(EV.CARD_FLIP).filter((f) => f.faceUp === false);
   assert.equal(downs.length, 2);
   assert.equal(c.game.getState().locked, false);
   assert.equal(c.game.getState().moves, 1);
+  c.clock.tick(RULES.missDelayMs); // el temporizador quedó cancelado: nada cambia
+  assert.equal(c.of(EV.CARD_FLIP).length, 5);
 
-  // match simple → 100
+  // match simple → 100 (idx(k0)[1] sigue abierta)
+  bus.emit(EV.CARD_PICK, { index: idx(k0)[1] }); // misma carta abierta: ignorada
   bus.emit(EV.CARD_PICK, { index: idx(k0)[0] });
-  bus.emit(EV.CARD_PICK, { index: idx(k0)[0] }); // misma carta: ignorada
-  bus.emit(EV.CARD_PICK, { index: idx(k0)[1] });
   let m = c.last(EV.PAIR_MATCH);
   assert.equal(m.streak, 1); assert.equal(m.score, 100); assert.equal(m.pairKey, k0);
   assert.equal(m.easterEgg, undefined);
