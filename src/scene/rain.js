@@ -30,7 +30,7 @@ const FRAG = /* glsl */`
 `;
 
 // 1 = velocidad original; 0.5 = la mitad (valor elegido por el dueño en la primera prueba real).
-const RAIN_SPEED = 0.5;
+const RAIN_SPEED = 0.25;
 
 export function createRain({ scene }) {
   const material = new THREE.ShaderMaterial({
