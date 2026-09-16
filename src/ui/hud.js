@@ -45,7 +45,7 @@ export function initHud(ui) {
     if (!session.dealt || session.over) return;
     bus.emit(session.paused ? EV.GAME_RESUME : EV.GAME_PAUSE, { reason: 'user' });
   }, { aria: { pressed: 'false' } });
-  const bSound = mkBtn('sound', 'soundOn', () => settings.set('ambientOn', !settings.get('ambientOn')), { aria: { pressed: 'true' } });
+  const bSound = mkBtn('sound', 'soundOn', () => settings.set('muted', !settings.get('muted')), { aria: { pressed: 'true' } });
   const bSettings = mkBtn('settings', 'settings', () => ui.openSettings?.());
   const bNew = mkBtn('new', 'new', () => { newGame(ui); toast(t('toast.newGame')); });
   const actions = h('div', { class: 'hud-actions', role: 'group' }, bHint, bPause, bSound, bSettings, bNew);
@@ -123,7 +123,7 @@ export function initHud(ui) {
   }
 
   function renderSound() {
-    const on = !!settings.get('ambientOn');
+    const on = !settings.get('muted');
     clear(bSound); bSound.append(icon(on ? 'soundOn' : 'soundOff'));
     bSound.setAttribute('aria-pressed', String(on));
     bSound.setAttribute('aria-label', on ? t('hud.soundOn') : t('hud.soundOff'));
@@ -153,7 +153,7 @@ export function initHud(ui) {
       case 'win': case 'lose': renderTime(); renderCounters(); renderScore(); renderHint(); renderPause(); break;
     }
   });
-  bus.on(EV.SETTINGS_CHANGED, ({ key }) => { if (key === 'ambientOn' || key === '*') renderSound(); });
+  bus.on(EV.SETTINGS_CHANGED, ({ key }) => { if (key === 'muted' || key === '*') renderSound(); });
   onLangChange(renderLabels);
 
   // ---- colocación por layout ---------------------------------------------------------------
