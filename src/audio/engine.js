@@ -253,8 +253,10 @@ function handleBusEvents() {
   ctx.bus.on(ctx.EV.PAIR_MISS, () => {});
 
   // game:dealt → deal
-  // game:dealt → sin sonido por ahora (el dueño descartó el reparto sintetizado; candidato 'deal-bottle' en el banco)
-  ctx.bus.on(ctx.EV.GAME_DEALT, () => {});
+  // game:dealt → arpegio de kalimba pentatónico (elegido por el dueño entre tres candidatos)
+  ctx.bus.on(ctx.EV.GAME_DEALT, () => {
+    playSfx('deal-kalimba');
+  });
 
   // hint:used → hint
   ctx.bus.on(ctx.EV.HINT_USED, () => {
