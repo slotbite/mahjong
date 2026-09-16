@@ -104,9 +104,11 @@ export function createEnvironment({ scene, camera, renderer, manifest, glassMate
   try {
     const jungleEnvTex = createJungleBackground();
     const pmrem = new THREE.PMREMGenerator(renderer);
-    // Como en el boceto del dueño: el entorno reflejado es la propia selva (bokeh), no una sala gris.
-    scene.environment = pmrem.fromEquirectangular(jungleEnvTex).texture;
-    scene.environmentIntensity = 0.9;
+    // Entorno neutro a baja intensidad: el bokeh verde teñía el cristal esmerilado (rechazado por el dueño);
+    // la sala neutra a 1.0+ lo plateaba. A 0.45 da brillo sin color.
+    void jungleEnvTex;
+    scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    scene.environmentIntensity = 0.45;
     pmrem.dispose();
   } catch (err) { console.warn('[scene/env] sin environment map', err); }
 

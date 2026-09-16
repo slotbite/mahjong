@@ -16,7 +16,7 @@ export const GLASS = Object.freeze({
   transmission: 1.0, roughness: 0.16, thickness: 0.3, ior: 1.35, // roughness 0.16 = esmerilado suave (pedido del dueño)
   attenuationColor: 0xffffff, attenuationDistance: Infinity, // vidrio incoloro: el fondo se ve sin tinte
   clearcoat: 1.0, clearcoatRoughness: 0.1, metalness: 0.0,
-  specularIntensity: 0.8, envMapIntensity: 0.7,
+  specularIntensity: 0.8, envMapIntensity: 0.35,
 });
 const LIME = new THREE.Color(0xb8d96a);
 const SKY = new THREE.Color(0x8fb3c7);

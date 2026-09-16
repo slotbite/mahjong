@@ -1,6 +1,6 @@
 // Layouts §5: clasificación de viewport y área útil del tablero. Puro, sin DOM ni Three.
 
-export const CARD_PITCH = 1.34;        // 1 unidad de ficha + 0.30 de separación (pedido del dueño: más aire)
+export const CARD_PITCH = 1.18;        // 1 unidad de ficha + 0.30 de separación (pedido del dueño: más aire)
 export const ULTRAWIDE_MAX_PX = 1600;  // ancho máximo del tablero en 32:9
 export const CAMERA_TILT = (10 * Math.PI) / 180;
 
