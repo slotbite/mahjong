@@ -187,7 +187,11 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
   function makeCard(data) {
     const group = new THREE.Group();
     const glassMat = baseGlass.clone();
-    const glass = new THREE.Mesh(geo, glassMat);
+    // ExtrudeGeometry: grupo 0 = tapas (cara frontal y trasera), grupo 1 = paredes y biseles.
+    // La tapa frontal no debe reflejar la luz del puntero (pedido del dueño): sin especular ni barniz.
+    const capMat = glassMat.clone();
+    capMat.specularIntensity = 0.0; capMat.clearcoat = 0.0; capMat.envMapIntensity = 0.12; capMat.roughness = GLASS.roughness;
+    const glass = new THREE.Mesh(geo, [capMat, glassMat]);
     glass.castShadow = true;
     glass.userData.index = data.index;
 
@@ -223,7 +227,7 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
     glass.renderOrder = 0;
     const slot = slotPosition(data.index, cols, rows);
     const card = {
-      index: data.index, pairKey: data.pairKey, group, tilt, glass, glassMat, front, frontMat, voxelGroup,
+      index: data.index, pairKey: data.pairKey, group, tilt, glass, glassMat, capMat, front, frontMat, voxelGroup,
       slot, faceUp: false, matched: false, tiltTarget: 0, dropping: false, hoverK: 0, tweens: [], baseZ: 0, bobPhase: Math.random() * 6.283,
     };
     group.rotation.y = FACE_DOWN;
@@ -261,7 +265,7 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
     for (const c of cards) {
       kill(c);
       board.remove(c.group);
-      c.glassMat.dispose(); c.frontMat.dispose();
+      c.glassMat.dispose(); c.capMat?.dispose(); c.frontMat.dispose();
       if (c.voxelGroup) {
         for (const child of c.voxelGroup.children) {
           if (child.material) child.material.dispose();
