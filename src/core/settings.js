@@ -12,6 +12,7 @@ export const DEFAULTS = Object.freeze({
   ambientVolume: 0.6,
   sfxVolume: 0.8,
   ambientOn: true,
+  muted: false,           // silencio general (botón de sonido del HUD)
   pixelScale: 94,         // 0..100, referencia del autor
   palette: 'original',
   dither: 'none',         // none | bayer | floyd

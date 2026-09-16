@@ -10,6 +10,10 @@ let masterGain, ambientGain, sfxGain;
 const ambientGainNodes = {};
 let currentAmbientIds = [];
 let defaultAmbientIds = []; // IDs de ambiente por defecto (loops)
+const ambientBase = {};      // ganancia base por loop desde el manifiesto (gain), ~0.7
+// Curvas perceptuales: el oído es logarítmico; con lineal el 5 % ya suena fuerte.
+const curveAmbient = (v) => Math.pow(v, 2) * 0.5;
+const curveSfx = (v) => Math.pow(v, 1.5);
 const fileHashes = {}; // Cache de hashes por ID para cache-busting
 
 // ─────────────────────────────────────────────────────────────────────────────────
@@ -107,6 +111,7 @@ async function preloadBuffers(manifestAudio) {
       buffers[id] = buf;
       // Guardar IDs de ambiente con loop para arranque automático
       if (entry.loop) defaultAmbientIds.push(id);
+      ambientBase[id] = typeof entry.gain === 'number' ? entry.gain : 0.7;
     }
   }
 
@@ -173,7 +178,7 @@ const ambient = {
       playLoop();
 
       // Fade-in
-      g.gain.linearRampToValueAtTime(1, audioCtx.currentTime + fadeDur);
+      g.gain.linearRampToValueAtTime(ambientBase[id] ?? 0.7, audioCtx.currentTime + fadeDur);
     }
 
     // Truenos aleatorios si están en el manifiesto
@@ -197,8 +202,8 @@ const ambient = {
     // v: 0..1, modula la mezcla de ambientes y aplica pasa-bajos
     // Por simplicidad: multiplicar ganancia del ambiente
     v = Math.max(0, Math.min(1, v));
-    for (const g of Object.values(ambientGainNodes)) {
-      g.gain.linearRampToValueAtTime(v, audioCtx.currentTime + 0.5);
+    for (const [id, g] of Object.entries(ambientGainNodes)) {
+      g.gain.linearRampToValueAtTime(v * (ambientBase[id] ?? 0.7), audioCtx.currentTime + 0.5);
     }
   },
 
@@ -226,8 +231,9 @@ const ambient = {
 
 function setVolume(channel, v) {
   v = Math.max(0, Math.min(1, v));
-  if (channel === 'ambient') ambientGain.gain.value = v;
-  else if (channel === 'sfx') sfxGain.gain.value = v;
+  if (channel === 'ambient') ambientGain.gain.value = curveAmbient(v);
+  else if (channel === 'sfx') sfxGain.gain.value = curveSfx(v);
+  else if (channel === 'master') masterGain.gain.linearRampToValueAtTime(v, audioCtx.currentTime + 0.15);
 }
 
 function handleBusEvents() {
@@ -279,13 +285,14 @@ function handleBusEvents() {
 
   // game:resume → restaurar
   ctx.bus.on(ctx.EV.GAME_RESUME, () => {
-    const target = ctx.settings.get('ambientOn') ? ctx.settings.get('ambientVolume') : 0;
+    const target = ctx.settings.get('ambientOn') ? curveAmbient(ctx.settings.get('ambientVolume') ?? 0.6) : 0;
     ambientGain.gain.linearRampToValueAtTime(target, audioCtx.currentTime + 0.3);
   });
 
   // settings:changed → volúmenes y ambientOn
   ctx.bus.on(ctx.EV.SETTINGS_CHANGED, ({ key, value }) => {
-    if (key === 'ambientVolume') setVolume('ambient', value);
+    if (key === 'muted') setVolume('master', value ? 0 : 1);
+    else if (key === 'ambientVolume') setVolume('ambient', value);
     else if (key === 'sfxVolume') setVolume('sfx', value);
     else if (key === 'ambientOn') {
       if (value) {
@@ -325,6 +332,7 @@ export const audio = {
     if (ctx?.settings?.get) {
       setVolume('ambient', ctx.settings.get('ambientVolume') ?? 0.6);
       setVolume('sfx', ctx.settings.get('sfxVolume') ?? 0.8);
+      setVolume('master', ctx.settings.get('muted') ? 0 : 1);
       if (audioCtx.state === 'running' && ctx.settings.get('ambientOn') && defaultAmbientIds.length > 0 && currentAmbientIds.length === 0) {
         ambient.start(defaultAmbientIds);
       }
