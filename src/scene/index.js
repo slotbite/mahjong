@@ -47,7 +47,7 @@ export function init(ctx) {
   };
 
   const cards = createCards({ scene, bus, EV, isReducedMotion });
-  const env = createEnvironment({ scene, camera, renderer, manifest, glassMaterial: cards.baseGlass });
+  const env = createEnvironment({ scene, camera, renderer, manifest, glassMaterial: cards.baseGlass, settings, bus, EV });
   const rain = createRain({ scene });
   const themes = createThemeLoader({ bus, EV, settings, manifest });
   const input = createInput({

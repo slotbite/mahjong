@@ -4,11 +4,10 @@
   "losslessMaxColors": 256,
   "lossyQuality": 80,
   "backgroundQuality": 78,
-  "backgroundMaxBytes": 256000,
+  "backgroundMaxBytes": 330000,
   "backgroundWidths": [
     1280,
-    1920,
-    2560
+    1920
   ],
   "sources": {
     "own": {
@@ -111,6 +110,86 @@
       "url": "https://github.com/googlefonts/noto-emoji",
       "mode": "vector",
       "pixelate": 32
+    },
+    "pexels_14771897": {
+      "name": "Pexels - foto 14771897",
+      "author": "Quang Nguyen Vinh",
+      "license": "Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar)",
+      "url": "https://www.pexels.com/photo/photo-of-river-during-daytime-14771897/",
+      "download": "https://images.pexels.com/photos/14771897/pexels-photo-14771897.jpeg",
+      "mode": "photo"
+    },
+    "pexels_14023091": {
+      "name": "Pexels - foto 14023091",
+      "author": "Quang Nguyen Vinh",
+      "license": "Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar)",
+      "url": "https://www.pexels.com/photo/green-trees-under-a-foggy-blue-sky-14023091/",
+      "download": "https://images.pexels.com/photos/14023091/pexels-photo-14023091.jpeg",
+      "mode": "photo"
+    },
+    "pexels_28480657": {
+      "name": "Pexels - foto 28480657",
+      "author": "Leefinvrede",
+      "license": "Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar)",
+      "url": "https://www.pexels.com/photo/misty-rainforest-canopy-with-dense-foliage-28480657/",
+      "download": "https://images.pexels.com/photos/28480657/pexels-photo-28480657.jpeg",
+      "mode": "photo"
+    },
+    "pexels_32293234": {
+      "name": "Pexels - foto 32293234",
+      "author": "Amal A. S.",
+      "license": "Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar)",
+      "url": "https://www.pexels.com/photo/misty-tropical-forest-landscape-in-fog-32293234/",
+      "download": "https://images.pexels.com/photos/32293234/pexels-photo-32293234.jpeg",
+      "mode": "photo"
+    },
+    "pexels_975771": {
+      "name": "Pexels - foto 975771",
+      "author": "David Riano",
+      "license": "Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar)",
+      "url": "https://www.pexels.com/photo/rainforest-surrounded-by-fog-975771/",
+      "download": "https://images.pexels.com/photos/975771/pexels-photo-975771.jpeg",
+      "mode": "photo"
+    },
+    "pexels_31706269": {
+      "name": "Pexels - foto 31706269",
+      "author": "Randy Brandy",
+      "license": "Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar)",
+      "url": "https://www.pexels.com/photo/misty-forest-scene-with-lush-greenery-and-clouds-31706269/",
+      "download": "https://images.pexels.com/photos/31706269/pexels-photo-31706269.jpeg",
+      "mode": "photo"
+    },
+    "pexels_23514982": {
+      "name": "Pexels - foto 23514982",
+      "author": "Tung Do",
+      "license": "Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar)",
+      "url": "https://www.pexels.com/photo/cloud-over-forest-23514982/",
+      "download": "https://images.pexels.com/photos/23514982/pexels-photo-23514982.jpeg",
+      "mode": "photo"
+    },
+    "pexels_8294116": {
+      "name": "Pexels - foto 8294116",
+      "author": "Amith Anuradha",
+      "license": "Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar)",
+      "url": "https://www.pexels.com/photo/trees-under-foggy-sky-8294116/",
+      "download": "https://images.pexels.com/photos/8294116/pexels-photo-8294116.jpeg",
+      "mode": "photo"
+    },
+    "pexels_19099520": {
+      "name": "Pexels - foto 19099520",
+      "author": "Terence B",
+      "license": "Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar)",
+      "url": "https://www.pexels.com/photo/moss-covered-trees-in-thick-forest-19099520/",
+      "download": "https://images.pexels.com/photos/19099520/pexels-photo-19099520.jpeg",
+      "mode": "photo"
+    },
+    "pexels_27051166": {
+      "name": "Pexels - foto 27051166",
+      "author": "Photations",
+      "license": "Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar)",
+      "url": "https://www.pexels.com/photo/misty-rainforest-path-in-ecuador-s-buenaventura-reserve-27051166/",
+      "download": "https://images.pexels.com/photos/27051166/pexels-photo-27051166.jpeg",
+      "mode": "photo"
     }
   },
   "themes": [
@@ -818,6 +897,184 @@
       "grade": {
         "brightness": 0.82,
         "saturation": 0.92
+      },
+      "name": {
+        "es": "Selva lluviosa (original)",
+        "en": "Rainy jungle (original)"
+      },
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    {
+      "id": "valle-brumoso",
+      "name": {
+        "es": "Valle brumoso",
+        "en": "Misty valley"
+      },
+      "source": "pexels_14771897",
+      "raw": "pexels-14771897.jpg",
+      "focal": {
+        "x": 0.5,
+        "y": 0.62
+      },
+      "grade": {
+        "brightness": 0.8,
+        "saturation": 0.9
+      }
+    },
+    {
+      "id": "palmeras-niebla",
+      "name": {
+        "es": "Palmeras en la niebla",
+        "en": "Palms in the fog"
+      },
+      "source": "pexels_14023091",
+      "raw": "pexels-14023091.jpg",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "grade": {
+        "brightness": 0.8,
+        "saturation": 0.9
+      }
+    },
+    {
+      "id": "dosel-bruma",
+      "name": {
+        "es": "Dosel entre bruma",
+        "en": "Canopy in mist"
+      },
+      "source": "pexels_28480657",
+      "raw": "pexels-28480657.jpg",
+      "focal": {
+        "x": 0.5,
+        "y": 0.6
+      },
+      "grade": {
+        "brightness": 0.8,
+        "saturation": 0.9
+      }
+    },
+    {
+      "id": "selva-niebla",
+      "name": {
+        "es": "Selva en la niebla",
+        "en": "Jungle in fog"
+      },
+      "source": "pexels_32293234",
+      "raw": "pexels-32293234.jpg",
+      "focal": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "grade": {
+        "brightness": 0.8,
+        "saturation": 0.9
+      }
+    },
+    {
+      "id": "bosque-nube",
+      "name": {
+        "es": "Bosque de nubes",
+        "en": "Cloud forest"
+      },
+      "source": "pexels_975771",
+      "raw": "pexels-975771.jpg",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "grade": {
+        "brightness": 0.8,
+        "saturation": 0.9
+      }
+    },
+    {
+      "id": "ramas-nubes",
+      "name": {
+        "es": "Ramas y nubes",
+        "en": "Branches and clouds"
+      },
+      "source": "pexels_31706269",
+      "raw": "pexels-31706269.jpg",
+      "focal": {
+        "x": 0.45,
+        "y": 0.7
+      },
+      "grade": {
+        "brightness": 0.8,
+        "saturation": 0.9
+      }
+    },
+    {
+      "id": "dosel-aereo",
+      "name": {
+        "es": "Dosel aéreo",
+        "en": "Aerial canopy"
+      },
+      "source": "pexels_23514982",
+      "raw": "pexels-23514982.jpg",
+      "focal": {
+        "x": 0.5,
+        "y": 0.6
+      },
+      "grade": {
+        "brightness": 0.8,
+        "saturation": 0.9
+      }
+    },
+    {
+      "id": "sri-lanka-bruma",
+      "name": {
+        "es": "Bruma en Sri Lanka",
+        "en": "Sri Lanka mist"
+      },
+      "source": "pexels_8294116",
+      "raw": "pexels-8294116.jpg",
+      "focal": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "grade": {
+        "brightness": 0.8,
+        "saturation": 0.9
+      }
+    },
+    {
+      "id": "musgo",
+      "name": {
+        "es": "Árboles de musgo",
+        "en": "Mossy trees"
+      },
+      "source": "pexels_19099520",
+      "raw": "pexels-19099520.jpg",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "grade": {
+        "brightness": 0.8,
+        "saturation": 0.9
+      }
+    },
+    {
+      "id": "sendero-oscuro",
+      "name": {
+        "es": "Sendero oscuro",
+        "en": "Dark trail"
+      },
+      "source": "pexels_27051166",
+      "raw": "pexels-27051166.jpg",
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "grade": {
+        "brightness": 0.8,
+        "saturation": 0.9
       }
     }
   ],
@@ -1001,5 +1258,6 @@
       "#3b6f8a",
       "#1a1a24"
     ]
-  }
+  },
+  "backgroundSoften": 0.6
 }

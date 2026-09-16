@@ -35,7 +35,7 @@ function gradientTexture() {
   const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
 }
 
-export function createEnvironment({ scene, camera, renderer, manifest, glassMaterial }) {
+export function createEnvironment({ scene, camera, renderer, manifest, glassMaterial, settings = null, bus = null, EV = null }) {
   // Luces: para resaltar biseles en gema
   const hemi = new THREE.HemisphereLight(0xf4ead8, 0x1f4d3a, 1.15);
   scene.add(hemi);
@@ -131,10 +131,30 @@ export function createEnvironment({ scene, camera, renderer, manifest, glassMate
   vignette.renderOrder = -9;
   bgGroup.add(vignette);
   let bgAspect = 1.5, bgLoadedSrc = null;
+  let lastView = null;
+  bus?.on?.(EV?.SETTINGS_CHANGED ?? 'settings:changed', ({ key }) => {
+    if ((key === 'backgroundId' || key === '*') && lastView) { bgLoadedSrc = null; loadBackground(lastView); }
+  });
 
+  // Fondo elegido: ?bg=<id> en la URL manda; si no, el ajuste backgroundId; si no, el primero.
+  function currentBackground() {
+    const list = manifest?.backgrounds ?? [];
+    const fromUrl = typeof location !== 'undefined' ? new URLSearchParams(location.search).get('bg') : null;
+    const wanted = fromUrl || settings?.get?.('backgroundId');
+    return list.find((b) => b.id === wanted) ?? list[0];
+  }
+  // Variante por proporción del viewport: 32:9 → ultrawide, vertical → portrait, resto → landscape.
+  function variantFor(view) {
+    const r = view.w / view.h;
+    if (r >= 2.3) return 'ultrawide';
+    if (r < 0.8) return 'portrait';
+    return 'landscape';
+  }
   function loadBackground(view) {
-    const entry = manifest?.backgrounds?.[0];
-    const src = pickSrc(entry?.srcset, view.w, view.dpr);
+    const entry = currentBackground();
+    const variants = entry?.variants ?? {};
+    const set = variants[variantFor(view)] ?? variants.landscape ?? entry?.srcset;
+    const src = pickSrc(set, variantFor(view) === 'portrait' ? view.h : view.w, view.dpr);
     if (!src || src === bgLoadedSrc) return;
     bgLoadedSrc = src;
     new THREE.TextureLoader().load(rel(src), (tex) => {
@@ -223,6 +243,7 @@ export function createEnvironment({ scene, camera, renderer, manifest, glassMate
 
       loadBackground(view);
       fitBackground(view);
+      lastView = view;
 
       if (!plantsBuilt && (view.kind === 'desktop' || view.kind === 'ultrawide')) buildPlants();
       for (const item of plantItems) {

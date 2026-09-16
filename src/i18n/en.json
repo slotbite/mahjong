@@ -1,6 +1,5 @@
 {
   "app.title": "Memorice Cozy",
-
   "hud.time": "Time",
   "hud.timeLeft": "Left",
   "hud.moves": "Moves",
@@ -20,7 +19,6 @@
   "hud.combo": "Combo ×{x}",
   "hud.hurry": "Less than 10 seconds left",
   "hud.zen": "Zen · no rush",
-
   "settings.title": "Settings",
   "settings.tab.theme": "Theme",
   "settings.tab.game": "Game",
@@ -56,7 +54,6 @@
   "settings.applyHint": "You changed theme, grid or mode: it applies on the next game.",
   "settings.close": "Close settings",
   "settings.quick": "Quick settings",
-
   "mode.zen": "Zen",
   "mode.zen.desc": "No timer, no score. Just the rain and you.",
   "mode.classic": "Classic",
@@ -65,7 +62,6 @@
   "mode.timed.desc": "Clear the board before time runs out.",
   "mode.daily": "Daily",
   "mode.daily.desc": "Same board for everyone, every day. Share your result.",
-
   "win.title": "Board complete!",
   "win.subtitle": "{theme} · {grid} · {mode}",
   "win.time": "Time",
@@ -79,19 +75,16 @@
   "win.shared": "Result copied to clipboard",
   "win.shareFail": "Couldn't share",
   "win.close": "Close",
-
   "lose.title": "Time's up",
   "lose.body": "No rush: the jungle is still here. Try the same board again?",
   "lose.retry": "Retry same board",
   "lose.new": "New board",
-
   "records.title": "Records",
   "records.bestTime": "Best time",
   "records.bestMoves": "Fewest moves",
   "records.bestScore": "Top score",
   "records.plays": "Games",
   "records.empty": "No records yet for this combination.",
-
   "a11y.board": "Memory board",
   "a11y.boardHelp": "Use the arrow keys to move between cards and Enter or Space to flip.",
   "a11y.card": "Card {n} of {total}, row {r}, column {c}, {state}",
@@ -101,15 +94,14 @@
   "a11y.scoreboard": "Scoreboard",
   "a11y.actions": "Game actions",
   "a11y.stars": "Stars",
-
   "toast.paused": "Game paused",
   "toast.resumed": "Back on",
   "toast.newGame": "New board",
   "toast.hintNone": "No hints left in this game",
   "toast.themeSoon": "That theme is coming soon",
   "toast.langChanged": "Language: English",
-
   "common.on": "On",
   "common.off": "Off",
-  "common.close": "Close"
+  "common.close": "Close",
+  "settings.background": "Scene background"
 }

@@ -271,26 +271,45 @@ async function renderBack(ramp) {
 }
 
 async function renderBackground(bg, rawPath) {
-  const [aw, ah] = bg.aspect ?? [16, 9];
-  const widths = cfg.backgroundWidths ?? [1280, 1920, 2560];
+  // Variantes por aspecto (elegidas en src/scene/environment.js según w/h del viewport):
+  //   landscape 16:9 en cfg.backgroundWidths · ultrawide 32:9 en 3840 · portrait 9:19.5 en 1080.
+  // El recorte es "cover" alrededor de un punto focal normalizado bg.focal = { x, y } (0..1).
+  const variants = cfg.backgroundVariants ?? {
+    landscape: { aspect: [16, 9], widths: cfg.backgroundWidths ?? [1280, 1920, 2560] },
+    ultrawide: { aspect: [32, 9], widths: [3840] },
+    portrait: { aspect: [9, 19.5], widths: [1080] },
+  };
   const maxBytes = cfg.backgroundMaxBytes ?? 256000;
-  const meta = await sharp(rawPath).metadata();
+  const meta = await sharp(rawPath).rotate().metadata();
+  const focal = { x: bg.focal?.x ?? 0.5, y: bg.focal?.y ?? 0.5 };
   const out = {};
-  for (const w of widths) {
-    const h = Math.round((w * ah) / aw);
-    if (meta.width < w) warn(`fondo ${bg.id}: crudo ${meta.width}px < ${w}px, se escala hacia arriba`);
-    let q = cfg.backgroundQuality ?? 78, buf;
-    for (;;) {
-      let img = sharp(rawPath).rotate().resize(w, h, { fit: 'cover', position: bg.position ?? 'centre' });
-      if (bg.grade) img = img.modulate({ brightness: bg.grade.brightness ?? 1, saturation: bg.grade.saturation ?? 1, hue: bg.grade.hue ?? 0 });
-      buf = await img.webp({ quality: q, effort: 6 }).toBuffer();
-      if (buf.length <= maxBytes || q <= 50) break;
-      q -= 4;
+  for (const [variant, spec] of Object.entries(variants)) {
+    const [aw, ah] = spec.aspect;
+    // Rectángulo fuente máximo con el aspecto pedido, centrado en el focal y acotado a la imagen.
+    const srcAspect = meta.width / meta.height, want = aw / ah;
+    let cw, ch;
+    if (srcAspect > want) { ch = meta.height; cw = Math.round(ch * want); } else { cw = meta.width; ch = Math.round(cw / want); }
+    const left = Math.round(Math.min(Math.max(focal.x * meta.width - cw / 2, 0), meta.width - cw));
+    const top = Math.round(Math.min(Math.max(focal.y * meta.height - ch / 2, 0), meta.height - ch));
+    for (const w of spec.widths) {
+      const h = Math.round((w * ah) / aw);
+      if (cw < w) warn(`fondo ${bg.id}/${variant}: recorte ${cw}px < ${w}px, se escala hacia arriba`);
+      let q = cfg.backgroundQuality ?? 78, buf;
+      for (;;) {
+        let img = sharp(rawPath).rotate().extract({ left, top, width: cw, height: ch }).resize(w, h);
+        // Suavizado leve: el fondo va detrás de cristal esmerilado; baja entropía y peso sin perder lectura.
+        const soften = bg.soften ?? cfg.backgroundSoften ?? 0.6;
+        if (soften > 0) img = img.blur(soften);
+        if (bg.grade) img = img.modulate({ brightness: bg.grade.brightness ?? 1, saturation: bg.grade.saturation ?? 1, hue: bg.grade.hue ?? 0 });
+        buf = await img.webp({ quality: q, effort: 6 }).toBuffer();
+        if (buf.length <= maxBytes || q <= 50) break;
+        q -= 4;
+      }
+      if (buf.length > maxBytes) warn(`fondo ${bg.id}/${variant}-${w}: ${kb(buf.length)} > ${kb(maxBytes)} incluso a q${q}`);
+      const file = path.join(ASSETS, 'bg', `${bg.id}-${variant}-${w}.webp`);
+      const changed = writeIfChanged(file, buf);
+      (out[variant] ??= {})[w] = { file, bytes: buf.length, q, changed };
     }
-    if (buf.length > maxBytes) warn(`fondo ${bg.id}-${w}: ${kb(buf.length)} > ${kb(maxBytes)} incluso a q${q}`);
-    const file = path.join(ASSETS, 'bg', `${bg.id}-${w}.webp`);
-    const changed = writeIfChanged(file, buf);
-    out[w] = { file, bytes: buf.length, q, changed };
   }
   return out;
 }
@@ -383,9 +402,14 @@ function buildManifest(themesOut, bgOut, prevAudio) {
   const backgrounds = cfg.backgrounds.map((bg) => {
     const src = cfg.sources[bg.source];
     const o = bgOut.get(bg.id) ?? {};
-    const srcset = {};
-    for (const w of Object.keys(o).sort((a, b) => a - b)) srcset[w] = rel(o[w].file);
-    return { id: bg.id, srcset, license: src.license, attribution: `${src.name} — ${src.author} — ${src.url}` };
+    const variants = {};
+    for (const [variant, byW] of Object.entries(o)) {
+      variants[variant] = {};
+      for (const w of Object.keys(byW).sort((a, b) => a - b)) variants[variant][w] = rel(byW[w].file);
+    }
+    // `srcset` conserva la variante landscape (compatibilidad con lectores antiguos).
+    return { id: bg.id, name: bg.name ?? { es: bg.id, en: bg.id }, focal: bg.focal ?? { x: 0.5, y: 0.5 }, srcset: variants.landscape ?? {}, variants,
+      license: src.license, attribution: `${src.name} — ${src.author} — ${src.url}` };
   });
   return { version: 2, themes, backgrounds, audio: prevAudio, palettes: cfg.palettes };
 }

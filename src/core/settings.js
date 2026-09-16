@@ -5,6 +5,7 @@ const KEY = 'memorice.v2.settings';
 
 export const DEFAULTS = Object.freeze({
   themeId: 'plantas',
+  backgroundId: 'jungle-rain', // fondo de escena (ver manifest.backgrounds)
   mode: 'classic',        // zen | classic | timed | daily
   cols: 4,
   rows: 4,

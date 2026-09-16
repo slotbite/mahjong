@@ -1154,13 +1154,322 @@
   "backgrounds": [
     {
       "id": "jungle-rain",
+      "name": {
+        "es": "Selva lluviosa (original)",
+        "en": "Rainy jungle (original)"
+      },
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
       "srcset": {
-        "1280": "assets/bg/jungle-rain-1280.webp",
-        "1920": "assets/bg/jungle-rain-1920.webp",
-        "2560": "assets/bg/jungle-rain-2560.webp"
+        "1280": "assets/bg/jungle-rain-landscape-1280.webp",
+        "1920": "assets/bg/jungle-rain-landscape-1920.webp"
+      },
+      "variants": {
+        "landscape": {
+          "1280": "assets/bg/jungle-rain-landscape-1280.webp",
+          "1920": "assets/bg/jungle-rain-landscape-1920.webp"
+        },
+        "ultrawide": {
+          "3840": "assets/bg/jungle-rain-ultrawide-3840.webp"
+        },
+        "portrait": {
+          "1080": "assets/bg/jungle-rain-portrait-1080.webp"
+        }
       },
       "license": "Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar)",
       "attribution": "Pexels - Lush misty tropical rainforest landscape in Tasikmalaya, Indonesia (foto 25306350) — Firman Fatthul — https://www.pexels.com/photo/lush-forests-in-remote-areas-of-tasikmalaya-25306350/"
+    },
+    {
+      "id": "valle-brumoso",
+      "name": {
+        "es": "Valle brumoso",
+        "en": "Misty valley"
+      },
+      "focal": {
+        "x": 0.5,
+        "y": 0.62
+      },
+      "srcset": {
+        "1280": "assets/bg/valle-brumoso-landscape-1280.webp",
+        "1920": "assets/bg/valle-brumoso-landscape-1920.webp"
+      },
+      "variants": {
+        "landscape": {
+          "1280": "assets/bg/valle-brumoso-landscape-1280.webp",
+          "1920": "assets/bg/valle-brumoso-landscape-1920.webp"
+        },
+        "ultrawide": {
+          "3840": "assets/bg/valle-brumoso-ultrawide-3840.webp"
+        },
+        "portrait": {
+          "1080": "assets/bg/valle-brumoso-portrait-1080.webp"
+        }
+      },
+      "license": "Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar)",
+      "attribution": "Pexels - foto 14771897 — Quang Nguyen Vinh — https://www.pexels.com/photo/photo-of-river-during-daytime-14771897/"
+    },
+    {
+      "id": "palmeras-niebla",
+      "name": {
+        "es": "Palmeras en la niebla",
+        "en": "Palms in the fog"
+      },
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "srcset": {
+        "1280": "assets/bg/palmeras-niebla-landscape-1280.webp",
+        "1920": "assets/bg/palmeras-niebla-landscape-1920.webp"
+      },
+      "variants": {
+        "landscape": {
+          "1280": "assets/bg/palmeras-niebla-landscape-1280.webp",
+          "1920": "assets/bg/palmeras-niebla-landscape-1920.webp"
+        },
+        "ultrawide": {
+          "3840": "assets/bg/palmeras-niebla-ultrawide-3840.webp"
+        },
+        "portrait": {
+          "1080": "assets/bg/palmeras-niebla-portrait-1080.webp"
+        }
+      },
+      "license": "Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar)",
+      "attribution": "Pexels - foto 14023091 — Quang Nguyen Vinh — https://www.pexels.com/photo/green-trees-under-a-foggy-blue-sky-14023091/"
+    },
+    {
+      "id": "dosel-bruma",
+      "name": {
+        "es": "Dosel entre bruma",
+        "en": "Canopy in mist"
+      },
+      "focal": {
+        "x": 0.5,
+        "y": 0.6
+      },
+      "srcset": {
+        "1280": "assets/bg/dosel-bruma-landscape-1280.webp",
+        "1920": "assets/bg/dosel-bruma-landscape-1920.webp"
+      },
+      "variants": {
+        "landscape": {
+          "1280": "assets/bg/dosel-bruma-landscape-1280.webp",
+          "1920": "assets/bg/dosel-bruma-landscape-1920.webp"
+        },
+        "ultrawide": {
+          "3840": "assets/bg/dosel-bruma-ultrawide-3840.webp"
+        },
+        "portrait": {
+          "1080": "assets/bg/dosel-bruma-portrait-1080.webp"
+        }
+      },
+      "license": "Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar)",
+      "attribution": "Pexels - foto 28480657 — Leefinvrede — https://www.pexels.com/photo/misty-rainforest-canopy-with-dense-foliage-28480657/"
+    },
+    {
+      "id": "selva-niebla",
+      "name": {
+        "es": "Selva en la niebla",
+        "en": "Jungle in fog"
+      },
+      "focal": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "srcset": {
+        "1280": "assets/bg/selva-niebla-landscape-1280.webp",
+        "1920": "assets/bg/selva-niebla-landscape-1920.webp"
+      },
+      "variants": {
+        "landscape": {
+          "1280": "assets/bg/selva-niebla-landscape-1280.webp",
+          "1920": "assets/bg/selva-niebla-landscape-1920.webp"
+        },
+        "ultrawide": {
+          "3840": "assets/bg/selva-niebla-ultrawide-3840.webp"
+        },
+        "portrait": {
+          "1080": "assets/bg/selva-niebla-portrait-1080.webp"
+        }
+      },
+      "license": "Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar)",
+      "attribution": "Pexels - foto 32293234 — Amal A. S. — https://www.pexels.com/photo/misty-tropical-forest-landscape-in-fog-32293234/"
+    },
+    {
+      "id": "bosque-nube",
+      "name": {
+        "es": "Bosque de nubes",
+        "en": "Cloud forest"
+      },
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "srcset": {
+        "1280": "assets/bg/bosque-nube-landscape-1280.webp",
+        "1920": "assets/bg/bosque-nube-landscape-1920.webp"
+      },
+      "variants": {
+        "landscape": {
+          "1280": "assets/bg/bosque-nube-landscape-1280.webp",
+          "1920": "assets/bg/bosque-nube-landscape-1920.webp"
+        },
+        "ultrawide": {
+          "3840": "assets/bg/bosque-nube-ultrawide-3840.webp"
+        },
+        "portrait": {
+          "1080": "assets/bg/bosque-nube-portrait-1080.webp"
+        }
+      },
+      "license": "Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar)",
+      "attribution": "Pexels - foto 975771 — David Riano — https://www.pexels.com/photo/rainforest-surrounded-by-fog-975771/"
+    },
+    {
+      "id": "ramas-nubes",
+      "name": {
+        "es": "Ramas y nubes",
+        "en": "Branches and clouds"
+      },
+      "focal": {
+        "x": 0.45,
+        "y": 0.7
+      },
+      "srcset": {
+        "1280": "assets/bg/ramas-nubes-landscape-1280.webp",
+        "1920": "assets/bg/ramas-nubes-landscape-1920.webp"
+      },
+      "variants": {
+        "landscape": {
+          "1280": "assets/bg/ramas-nubes-landscape-1280.webp",
+          "1920": "assets/bg/ramas-nubes-landscape-1920.webp"
+        },
+        "ultrawide": {
+          "3840": "assets/bg/ramas-nubes-ultrawide-3840.webp"
+        },
+        "portrait": {
+          "1080": "assets/bg/ramas-nubes-portrait-1080.webp"
+        }
+      },
+      "license": "Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar)",
+      "attribution": "Pexels - foto 31706269 — Randy Brandy — https://www.pexels.com/photo/misty-forest-scene-with-lush-greenery-and-clouds-31706269/"
+    },
+    {
+      "id": "dosel-aereo",
+      "name": {
+        "es": "Dosel aéreo",
+        "en": "Aerial canopy"
+      },
+      "focal": {
+        "x": 0.5,
+        "y": 0.6
+      },
+      "srcset": {
+        "1280": "assets/bg/dosel-aereo-landscape-1280.webp",
+        "1920": "assets/bg/dosel-aereo-landscape-1920.webp"
+      },
+      "variants": {
+        "landscape": {
+          "1280": "assets/bg/dosel-aereo-landscape-1280.webp",
+          "1920": "assets/bg/dosel-aereo-landscape-1920.webp"
+        },
+        "ultrawide": {
+          "3840": "assets/bg/dosel-aereo-ultrawide-3840.webp"
+        },
+        "portrait": {
+          "1080": "assets/bg/dosel-aereo-portrait-1080.webp"
+        }
+      },
+      "license": "Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar)",
+      "attribution": "Pexels - foto 23514982 — Tung Do — https://www.pexels.com/photo/cloud-over-forest-23514982/"
+    },
+    {
+      "id": "sri-lanka-bruma",
+      "name": {
+        "es": "Bruma en Sri Lanka",
+        "en": "Sri Lanka mist"
+      },
+      "focal": {
+        "x": 0.5,
+        "y": 0.55
+      },
+      "srcset": {
+        "1280": "assets/bg/sri-lanka-bruma-landscape-1280.webp",
+        "1920": "assets/bg/sri-lanka-bruma-landscape-1920.webp"
+      },
+      "variants": {
+        "landscape": {
+          "1280": "assets/bg/sri-lanka-bruma-landscape-1280.webp",
+          "1920": "assets/bg/sri-lanka-bruma-landscape-1920.webp"
+        },
+        "ultrawide": {
+          "3840": "assets/bg/sri-lanka-bruma-ultrawide-3840.webp"
+        },
+        "portrait": {
+          "1080": "assets/bg/sri-lanka-bruma-portrait-1080.webp"
+        }
+      },
+      "license": "Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar)",
+      "attribution": "Pexels - foto 8294116 — Amith Anuradha — https://www.pexels.com/photo/trees-under-foggy-sky-8294116/"
+    },
+    {
+      "id": "musgo",
+      "name": {
+        "es": "Árboles de musgo",
+        "en": "Mossy trees"
+      },
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "srcset": {
+        "1280": "assets/bg/musgo-landscape-1280.webp",
+        "1920": "assets/bg/musgo-landscape-1920.webp"
+      },
+      "variants": {
+        "landscape": {
+          "1280": "assets/bg/musgo-landscape-1280.webp",
+          "1920": "assets/bg/musgo-landscape-1920.webp"
+        },
+        "ultrawide": {
+          "3840": "assets/bg/musgo-ultrawide-3840.webp"
+        },
+        "portrait": {
+          "1080": "assets/bg/musgo-portrait-1080.webp"
+        }
+      },
+      "license": "Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar)",
+      "attribution": "Pexels - foto 19099520 — Terence B — https://www.pexels.com/photo/moss-covered-trees-in-thick-forest-19099520/"
+    },
+    {
+      "id": "sendero-oscuro",
+      "name": {
+        "es": "Sendero oscuro",
+        "en": "Dark trail"
+      },
+      "focal": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "srcset": {
+        "1280": "assets/bg/sendero-oscuro-landscape-1280.webp",
+        "1920": "assets/bg/sendero-oscuro-landscape-1920.webp"
+      },
+      "variants": {
+        "landscape": {
+          "1280": "assets/bg/sendero-oscuro-landscape-1280.webp",
+          "1920": "assets/bg/sendero-oscuro-landscape-1920.webp"
+        },
+        "ultrawide": {
+          "3840": "assets/bg/sendero-oscuro-ultrawide-3840.webp"
+        },
+        "portrait": {
+          "1080": "assets/bg/sendero-oscuro-portrait-1080.webp"
+        }
+      },
+      "license": "Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar)",
+      "attribution": "Pexels - foto 27051166 — Photations — https://www.pexels.com/photo/misty-rainforest-path-in-ecuador-s-buenaventura-reserve-27051166/"
     }
   ],
   "audio": {

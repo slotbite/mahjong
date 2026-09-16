@@ -18,6 +18,16 @@ Generado por `node tools/build-assets.mjs` a partir de `assets/src-config.json`.
 | `kenney_input_prompts` | Kenney - Input Prompts 1.5 (Double 128px) | Kenney (Kenney Vleugels) | CC0-1.0 | https://kenney.nl/assets/input-prompts |
 | `pexels_firman_fatthul` | Pexels - Lush misty tropical rainforest landscape in Tasikmalaya, Indonesia (foto 25306350) | Firman Fatthul | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/lush-forests-in-remote-areas-of-tasikmalaya-25306350/ |
 | `noto_emoji` | Noto Emoji (Google) | Google Fonts | Apache-2.0 | https://github.com/googlefonts/noto-emoji |
+| `pexels_14771897` | Pexels - foto 14771897 | Quang Nguyen Vinh | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/photo-of-river-during-daytime-14771897/ |
+| `pexels_14023091` | Pexels - foto 14023091 | Quang Nguyen Vinh | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/green-trees-under-a-foggy-blue-sky-14023091/ |
+| `pexels_28480657` | Pexels - foto 28480657 | Leefinvrede | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/misty-rainforest-canopy-with-dense-foliage-28480657/ |
+| `pexels_32293234` | Pexels - foto 32293234 | Amal A. S. | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/misty-tropical-forest-landscape-in-fog-32293234/ |
+| `pexels_975771` | Pexels - foto 975771 | David Riano | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/rainforest-surrounded-by-fog-975771/ |
+| `pexels_31706269` | Pexels - foto 31706269 | Randy Brandy | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/misty-forest-scene-with-lush-greenery-and-clouds-31706269/ |
+| `pexels_23514982` | Pexels - foto 23514982 | Tung Do | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/cloud-over-forest-23514982/ |
+| `pexels_8294116` | Pexels - foto 8294116 | Amith Anuradha | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/trees-under-foggy-sky-8294116/ |
+| `pexels_19099520` | Pexels - foto 19099520 | Terence B | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/moss-covered-trees-in-thick-forest-19099520/ |
+| `pexels_27051166` | Pexels - foto 27051166 | Photations | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/misty-rainforest-path-in-ecuador-s-buenaventura-reserve-27051166/ |
 
 Licencia `own`: arte propio del proyecto (v1). `CC0-1.0`: dominio público, https://creativecommons.org/publicdomain/zero/1.0/ . Pexels License: https://www.pexels.com/license/ .
 
@@ -166,7 +176,17 @@ Licencia `own`: arte propio del proyecto (v1). `CC0-1.0`: dominio público, http
 
 | id | Tamaños | Fuente | Autor | Licencia | URL |
 |---|---|---|---|---|---|
-| jungle-rain | 1280px 67.8 KB, 1920px 130.6 KB, 2560px 201.5 KB | Pexels - Lush misty tropical rainforest landscape in Tasikmalaya, Indonesia (foto 25306350) | Firman Fatthul | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/lush-forests-in-remote-areas-of-tasikmalaya-25306350/ |
+| jungle-rain | landscapepx NaN KB, ultrawidepx NaN KB, portraitpx NaN KB | Pexels - Lush misty tropical rainforest landscape in Tasikmalaya, Indonesia (foto 25306350) | Firman Fatthul | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/lush-forests-in-remote-areas-of-tasikmalaya-25306350/ |
+| valle-brumoso | landscapepx NaN KB, ultrawidepx NaN KB, portraitpx NaN KB | Pexels - foto 14771897 | Quang Nguyen Vinh | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/photo-of-river-during-daytime-14771897/ |
+| palmeras-niebla | landscapepx NaN KB, ultrawidepx NaN KB, portraitpx NaN KB | Pexels - foto 14023091 | Quang Nguyen Vinh | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/green-trees-under-a-foggy-blue-sky-14023091/ |
+| dosel-bruma | landscapepx NaN KB, ultrawidepx NaN KB, portraitpx NaN KB | Pexels - foto 28480657 | Leefinvrede | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/misty-rainforest-canopy-with-dense-foliage-28480657/ |
+| selva-niebla | landscapepx NaN KB, ultrawidepx NaN KB, portraitpx NaN KB | Pexels - foto 32293234 | Amal A. S. | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/misty-tropical-forest-landscape-in-fog-32293234/ |
+| bosque-nube | landscapepx NaN KB, ultrawidepx NaN KB, portraitpx NaN KB | Pexels - foto 975771 | David Riano | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/rainforest-surrounded-by-fog-975771/ |
+| ramas-nubes | landscapepx NaN KB, ultrawidepx NaN KB, portraitpx NaN KB | Pexels - foto 31706269 | Randy Brandy | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/misty-forest-scene-with-lush-greenery-and-clouds-31706269/ |
+| dosel-aereo | landscapepx NaN KB, ultrawidepx NaN KB, portraitpx NaN KB | Pexels - foto 23514982 | Tung Do | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/cloud-over-forest-23514982/ |
+| sri-lanka-bruma | landscapepx NaN KB, ultrawidepx NaN KB, portraitpx NaN KB | Pexels - foto 8294116 | Amith Anuradha | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/trees-under-foggy-sky-8294116/ |
+| musgo | landscapepx NaN KB, ultrawidepx NaN KB, portraitpx NaN KB | Pexels - foto 19099520 | Terence B | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/moss-covered-trees-in-thick-forest-19099520/ |
+| sendero-oscuro | landscapepx NaN KB, ultrawidepx NaN KB, portraitpx NaN KB | Pexels - foto 27051166 | Photations | Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar) | https://www.pexels.com/photo/misty-rainforest-path-in-ecuador-s-buenaventura-reserve-27051166/ |
 
 ## Audio
 
