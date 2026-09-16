@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gema Transparente Prueba de Refracción</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #000;
+            font-family: 'Inter', sans-serif;
+        }
+        #canvas-container {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        #ui-layer {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: #ffffff;
+            pointer-events: none;
+            text-shadow: 0px 2px 8px rgba(0,0,0,1);
+        }
+        h1 {
+            margin: 0 0 8px 0;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+        p {
+            margin: 0;
+            font-size: 1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    </style>
+    <!-- Import map for Three.js -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="canvas-container"></div>
+    <div id="ui-layer">
+        <h1>PRUEBA DE REFRACCIÓN PURA</h1>
+        <p>La gema no tiene color propio. Todo lo que ves en el cristal es la luz y los colores del entorno refractados a través de los biseles. Arrastra para comprobarlo.</p>
+    </div>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.set(0, 0, 8);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        // Usamos un tone mapping cinematográfico para que los colores brillen mejor
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.0;
+        container.appendChild(renderer.domElement);
+
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+
+        // Creamos una textura de entorno procedimental muy colorida para probar los reflejos
+        function createSunsetEnvironment() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 2048;
+            canvas.height = 1024;
+            const ctx = canvas.getContext('2d');
+            
+            // 1. Cielo (Gradiente Magenta -> Naranja -> Rojo)
+            const skyGradient = ctx.createLinearGradient(0, 0, 0, 512);
+            skyGradient.addColorStop(0, "#8a2be2"); // Morado oscuro
+            skyGradient.addColorStop(0.3, "#ff00ff"); // Magenta
+            skyGradient.addColorStop(0.7, "#ff7f00"); // Naranja
+            skyGradient.addColorStop(1, "#ff0000"); // Rojo
+            ctx.fillStyle = skyGradient;
+            ctx.fillRect(0, 0, 2048, 512);
+
+            // 2. Sol brillante en el centro
+            ctx.fillStyle = "#ffff00";
+            ctx.beginPath();
+            ctx.arc(1024, 350, 150, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Halo del sol
+            const sunHalo = ctx.createRadialGradient(1024, 350, 150, 1024, 350, 300);
+            sunHalo.addColorStop(0, "rgba(255, 255, 0, 0.8)");
+            sunHalo.addColorStop(1, "rgba(255, 255, 0, 0)");
+            ctx.fillStyle = sunHalo;
+            ctx.beginPath();
+            ctx.arc(1024, 350, 300, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 3. Suelo Cuadriculado (Azul y Morado profundo)
+            for(let x = 0; x < 2048; x += 128) {
+                for(let y = 512; y < 1024; y += 128) {
+                    // Distorsión falsa de perspectiva achicando el alto de los cuadros cerca del horizonte
+                    ctx.fillStyle = ((x / 128 + y / 128) % 2 === 0) ? "#00008b" : "#4b0082"; // DarkBlue vs Indigo
+                    ctx.fillRect(x, y, 128, 128);
+                }
+            }
+
+            const texture = new THREE.CanvasTexture(canvas);
+            texture.mapping = THREE.EquirectangularReflectionMapping;
+            texture.colorSpace = THREE.SRGBColorSpace;
+            return texture;
+        }
+
+        const envTexture = createSunsetEnvironment();
+        scene.background = envTexture; // Lo vemos de fondo
+        scene.environment = envTexture; // Provee luz y reflejos al cristal
+
+        // Generamos un canvas pequeño para dibujar un icono vintage
+        function createPixelArtIcon() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 256;
+            canvas.height = 256;
+            const ctx = canvas.getContext('2d');
+            
+            // Fondo transparente
+            ctx.clearRect(0, 0, 256, 256);
+
+            // Dibujar un Signo de Interrogación Blanco Pixelado
+            ctx.fillStyle = "#ffffff";
+            // Bloque superior
+            ctx.fillRect(64, 32, 128, 32);
+            ctx.fillRect(32, 64, 32, 64);
+            ctx.fillRect(192, 64, 32, 64);
+            // Curva central
+            ctx.fillRect(160, 128, 64, 32);
+            ctx.fillRect(128, 160, 64, 32);
+            // Punto
+            ctx.fillRect(128, 224, 32, 32);
+
+            const texture = new THREE.CanvasTexture(canvas);
+            texture.colorSpace = THREE.SRGBColorSpace;
+            return texture;
+        }
+
+        const iconTex = createPixelArtIcon();
+        const iconGeo = new THREE.PlaneGeometry(1.5, 1.5);
+        const iconMat = new THREE.MeshBasicMaterial({ 
+            map: iconTex, 
+            transparent: true,
+            side: THREE.DoubleSide
+        });
+        const iconMesh = new THREE.Mesh(iconGeo, iconMat);
+        // Lo ponemos un poco hacia atrás para que quede dentro/detrás de la gema
+        iconMesh.position.z = -0.5; 
+        scene.add(iconMesh);
+
+        // Creamos la forma del tile (cuadrado)
+        const shape = new THREE.Shape();
+        const size = 1.2;
+        shape.moveTo(-size, -size);
+        shape.lineTo(size, -size);
+        shape.lineTo(size, size);
+        shape.lineTo(-size, size);
+        shape.lineTo(-size, -size);
+
+        // Configuramos los biseles como solicitaste para hacer los cortes angulares
+        const extrudeSettings = {
+            steps: 1,
+            depth: 0.2,          // Grosor del cuerpo central
+            bevelEnabled: true,
+            bevelThickness: 0.4, // Cuánto sale el bisel hacia la cámara
+            bevelSize: 0.4,      // Cuánto entra el bisel hacia el centro
+            bevelSegments: 4     // Segmentos del bisel (suavidad del corte)
+        };
+
+        const gemGeometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+        gemGeometry.center(); // Centrar en el origen
+
+        const gemMaterial = new THREE.MeshPhysicalMaterial({
+            color: 0xffffff,       // INCOLORO TOTALMENTE (Blanco puro)
+            metalness: 0.1,        // Poco metálico
+            roughness: 0.05,       // Superficie muy pulida (baja rugosidad)
+            transmission: 1.0,     // 100% de transmisión (cristal real)
+            ior: 2.4,              // Índice de refracción muy alto (diamante)
+            thickness: 2.0,        // Grosor simulado para aumentar la deformación óptica
+            clearcoat: 1.0,        // Capa de brillo exterior
+            clearcoatRoughness: 0.1,
+            transparent: true,
+            opacity: 1.0,
+            side: THREE.DoubleSide
+        });
+
+        const gemMesh = new THREE.Mesh(gemGeometry, gemMaterial);
+        scene.add(gemMesh);
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
+        scene.add(ambientLight);
+        
+        // Luces para crear reflejos duros en los bordes biselados
+        const light1 = new THREE.DirectionalLight(0xffffff, 2.0);
+        light1.position.set(5, 5, 5);
+        scene.add(light1);
+
+        const light2 = new THREE.DirectionalLight(0xffffff, 1.0);
+        light2.position.set(-5, -5, 2);
+        scene.add(light2);
+
+        window.addEventListener('resize', onWindowResize, false);
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Rotación suave continua para observar cómo la luz interactúa con los biseles
+            gemMesh.rotation.y += 0.005;
+            gemMesh.rotation.x += 0.002;
+            
+            // Hacemos que el icono siga la misma rotación para que se mantenga detrás
+            iconMesh.rotation.y = gemMesh.rotation.y;
+            iconMesh.rotation.x = gemMesh.rotation.x;
+
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        // Iniciar
+        animate();
+    </script>
+</body>
+</html>

@@ -10,10 +10,11 @@ import { BACK_KEY } from './themes.js';
 // attenuationDistance 3.0 con color muy claro #cfe9e0 (casi invisible), clearcoat 1.0,
 // specularIntensity 1.0, envMapIntensity 2.2 para reflejos visibles en bokeh mejorado.
 export const GLASS = Object.freeze({
-  transmission: 0.92, roughness: 0.05, thickness: 0.35, ior: 1.9,
+  // Boceto gema_cristal_transparente.html: cristal sin color propio, todo es refracción del entorno.
+  transmission: 1.0, roughness: 0.05, thickness: 0.5, ior: 2.4,
   attenuationColor: 0xffffff, attenuationDistance: Infinity, // vidrio incoloro: el fondo se ve sin tinte
   clearcoat: 1.0, clearcoatRoughness: 0.1, metalness: 0.1,
-  specularIntensity: 1.0, envMapIntensity: 1.3,
+  specularIntensity: 1.0, envMapIntensity: 1.0,
 });
 const LIME = new THREE.Color(0xb8d96a);
 const SKY = new THREE.Color(0x8fb3c7);
@@ -34,7 +35,7 @@ export function createGlassMaterial() {
     specularIntensity: GLASS.specularIntensity,
     envMapIntensity: GLASS.envMapIntensity,
     emissive: BLACK.clone(), emissiveIntensity: 0,
-    side: THREE.FrontSide,
+    side: THREE.DoubleSide, transparent: true, opacity: 1.0,
   });
 }
 
@@ -76,7 +77,7 @@ function createGemGeometry() {
 
   const extrudeSettings = {
     steps: 1, depth: 0.06, bevelEnabled: true,
-    bevelThickness: 0.06, bevelSize: 0.12, bevelSegments: 2
+    bevelThickness: 0.07, bevelSize: 0.16, bevelSegments: 4
   };
   const geo = new THREE.ExtrudeGeometry(shape, extrudeSettings);
   geo.center();
@@ -127,7 +128,7 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
   const artInside = urlParams.get('art') === 'inside';
 
   const geo = createGemGeometry();
-  const frontGeo = new THREE.PlaneGeometry(0.7, 0.7);
+  const frontGeo = new THREE.PlaneGeometry(0.64, 0.64);
   const symbolGeo = new THREE.PlaneGeometry(0.5, 0.5);
   const shineGeo = new THREE.PlaneGeometry(0.9, 0.9);
   const holeGeo = new THREE.PlaneGeometry(1.15, 1.15);
@@ -178,7 +179,7 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
     const frontMat = new THREE.MeshBasicMaterial({ map: texFor(data.pairKey), alphaTest: 0.5, side: THREE.FrontSide, toneMapped: false });
     const front = new THREE.Mesh(frontGeo, frontMat);
     // Geometría gem: faceta frontal aproximadamente en z = 0.06-0.09; con bevel de 0.06, ponemos front en +0.091
-    front.position.z = artInside ? -0.03 : 0.091;
+    front.position.z = artInside ? -0.03 : 0.101;
     front.renderOrder = 1;
 
     // Brillo especular diagonal en la cara frontal
@@ -199,7 +200,8 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
     shineBack.rotation.y = Math.PI;
     shineBack.renderOrder = 2;
 
-    group.add(glass, front, shine, voxelGroup, shineBack);
+    // Los planos de brillo aditivo (shine/shineBack) quedan fuera: emblanquecían el cristal. El brillo lo dan clearcoat y el entorno.
+    group.add(glass, front, voxelGroup);
     glass.renderOrder = 0;
     const slot = slotPosition(data.index, cols, rows);
     const card = {
