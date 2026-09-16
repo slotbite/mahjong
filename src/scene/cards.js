@@ -264,8 +264,13 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
       else if (Math.abs(fromY) < 0.5 && targetY > Math.PI / 2) startY = 2 * Math.PI;
     }
 
+    // El "?" de cubos es 3D dentro del cristal: se vería a través del arte con la carta boca arriba.
+    // Se oculta al cruzar la mitad del giro hacia arriba y reaparece al cruzarla hacia abajo.
+    const faceUpTarget = targetY < Math.PI / 2;
+    const setVoxels = (visible) => { if (card.voxelGroup) card.voxelGroup.visible = visible; };
     if (dur === 0) {
       card.group.rotation.y = targetY; card.group.rotation.z = card.tiltTarget; card.group.position.z = card.baseZ;
+      setVoxels(!faceUpTarget);
       return null;
     }
     // Movimiento reducido (ajuste "on" o el SO con animaciones desactivadas): el giro es la
@@ -277,8 +282,9 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
       onUpdate: (k, lin) => {
         card.group.rotation.y = startY + (adjustedTargetY - startY) * k;
         if (withLift) card.group.position.z = card.baseZ + Math.sin(lin * Math.PI) * 0.35;
+        setVoxels(faceUpTarget ? k < 0.5 : k >= 0.5);
       },
-      onDone: () => { card.group.rotation.y = targetY; card.group.position.z = card.baseZ; },
+      onDone: () => { card.group.rotation.y = targetY; card.group.position.z = card.baseZ; setVoxels(!faceUpTarget); },
     }));
   }
 
