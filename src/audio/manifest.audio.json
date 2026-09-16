@@ -79,10 +79,10 @@
       "ogg": "assets/audio/hint.ogg",
       "m4a": "assets/audio/hint.m4a",
       "loop": false,
-      "gain": 0.55,
+      "gain": 0.45,
       "license": "CC0-1.0",
-      "attribution": "wind chimes - single 04.wav — Anthousai (https://freesound.org/people/Anthousai/sounds/398496/)",
-      "duration": 2.305
+      "attribution": "Kalimba.wav — PanPiper5 (https://freesound.org/people/PanPiper5/sounds/659909/)",
+      "duration": 2.766
     },
     "combo": {
       "ogg": "assets/audio/combo.ogg",
