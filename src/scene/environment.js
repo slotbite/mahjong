@@ -5,10 +5,10 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { finishTexture } from './themes.js';
 
 const PLANTS = [
-  { src: 'img/mostera.png', side: 'left', y: 0.66, h: 1.0 },
-  { src: 'img/helecho.png', side: 'right', y: 0.62, h: 0.9 },
-  { src: 'img/snake_plant.png', side: 'left', y: 0.30, h: 0.8, onlyUltrawide: true },
-  { src: 'img/mostera.png', side: 'right', y: 0.28, h: 0.75, onlyUltrawide: true, flip: true },
+  { src: 'assets/themes/plantas/monstera.webp', side: 'left', y: 0.66, h: 1.0 },
+  { src: 'assets/themes/plantas/helecho.webp', side: 'right', y: 0.62, h: 0.9 },
+  { src: 'assets/themes/plantas/snake_plant.webp', side: 'left', y: 0.30, h: 0.8, onlyUltrawide: true },
+  { src: 'assets/themes/plantas/monstera.webp', side: 'right', y: 0.28, h: 0.75, onlyUltrawide: true, flip: true },
 ];
 
 function pickSrc(srcset, cssWidth, dpr) {
