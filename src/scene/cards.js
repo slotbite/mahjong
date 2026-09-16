@@ -5,14 +5,15 @@ import { tween, ease } from './anim.js';
 import { slotPosition } from './layout.js';
 import { BACK_KEY } from './themes.js';
 
-// Valores gem-19: Gema de cristal con biseles facetados tipo diamante/zafiro.
-// transmission 1.0 para máxima refracción, ior 2.2 para efecto gema con biseles pronunciados,
-// thickness 0.6, clearcoat 1.0 para reflejos brillantes, metalness 0.1 para facetas reflectivas.
+// Valores gem-19 iteración 2: Gema de cristal con biseles facetados tipo diamante/zafiro.
+// transmission 0.92 (no total, deja ver pixel art), ior 1.9, thickness 0.35,
+// attenuationDistance 3.0 con color muy claro #cfe9e0 (casi invisible), clearcoat 1.0,
+// specularIntensity 1.0, envMapIntensity 2.2 para reflejos visibles en bokeh mejorado.
 export const GLASS = Object.freeze({
-  transmission: 1.0, roughness: 0.05, thickness: 0.6, ior: 2.2,
-  attenuationColor: 0x9fd3c7, attenuationDistance: 1.2,
+  transmission: 0.92, roughness: 0.05, thickness: 0.35, ior: 1.9,
+  attenuationColor: 0xcfe9e0, attenuationDistance: 3.0,
   clearcoat: 1.0, clearcoatRoughness: 0.1, metalness: 0.1,
-  envMapIntensity: 1.5,
+  specularIntensity: 1.0, envMapIntensity: 2.2,
 });
 const LIME = new THREE.Color(0xb8d96a);
 const SKY = new THREE.Color(0x8fb3c7);
@@ -30,6 +31,7 @@ export function createGlassMaterial() {
     attenuationColor: new THREE.Color(GLASS.attenuationColor),
     attenuationDistance: GLASS.attenuationDistance,
     clearcoat: GLASS.clearcoat, clearcoatRoughness: GLASS.clearcoatRoughness,
+    specularIntensity: GLASS.specularIntensity,
     envMapIntensity: GLASS.envMapIntensity,
     emissive: BLACK.clone(), emissiveIntensity: 0,
     side: THREE.FrontSide,
@@ -78,6 +80,7 @@ function createGemGeometry() {
   };
   const geo = new THREE.ExtrudeGeometry(shape, extrudeSettings);
   geo.center();
+  geo.computeVertexNormals();
   return geo;
 }
 
