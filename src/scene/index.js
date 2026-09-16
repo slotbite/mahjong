@@ -27,8 +27,11 @@ export function init(ctx) {
   function isReducedMotion() {
     const s = settings?.get?.('reducedMotion') ?? 'auto';
     if (s === 'on') return true;
-    if (s === 'off') return false;
-    return !!rmQuery?.matches;
+    // 'auto' y 'off' = animación completa. Decisión del dueño (2026-09-16): su sistema reporta
+    // prefers-reduced-motion y el juego perdía giros y efectos sin que lo pidiera; el modo
+    // reducido queda como elección explícita en Ajustes.
+    void rmQuery;
+    return false;
   }
 
   const view = {

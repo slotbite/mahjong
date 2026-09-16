@@ -51,8 +51,8 @@ export function fmtTime(sec) {
 export function prefersReducedMotion(settings) {
   const v = settings?.get?.('reducedMotion') ?? 'auto';
   if (v === 'on') return true;
-  if (v === 'off') return false;
-  return typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // 'auto' y 'off' = animación completa; el modo reducido es elección explícita (ver src/scene/index.js).
+  return false;
 }
 
 // Tween numérico (300 ms por defecto) para el puntaje. Devuelve una función de cancelación.

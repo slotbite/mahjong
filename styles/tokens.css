@@ -75,6 +75,5 @@ html, body {
   max-width: min(90vw, 480px);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  :root { --dur-flip: 0ms; --dur-settle: 200ms; --dur-ui: 0ms; }
-}
+/* El modo reducido es una elección explícita en Ajustes (html[data-motion="reduced"]), no la preferencia del SO. */
+html[data-motion="reduced"] { --dur-flip: 0ms; --dur-settle: 200ms; --dur-ui: 0ms; }
