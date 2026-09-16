@@ -73,18 +73,18 @@
       "m4a": 53489
     },
     "flip": {
-      "hash": "b85e4a21da",
+      "hash": "983947eff1",
       "kind": "sfx",
       "src": "kalimba",
-      "duration": 0.26,
+      "duration": 0.14,
       "channels": 1,
       "kbps": 56,
-      "lufsIn": -17.6,
-      "lufsOut": -18.3,
-      "truePeakOut": -4,
-      "gainDb": -1.4,
-      "ogg": 4678,
-      "m4a": 2943
+      "lufsIn": -17.7,
+      "lufsOut": -17.6,
+      "truePeakOut": -3.9,
+      "gainDb": -1.3,
+      "ogg": 4225,
+      "m4a": 2042
     },
     "match": {
       "hash": "f6bfbd0c91",
@@ -213,7 +213,7 @@
       "m4a": 2986
     }
   },
-  "generatedAt": "2026-09-16T18:59:33.858Z",
+  "generatedAt": "2026-09-16T19:01:13.256Z",
   "targets": {
     "ambientLufs": -23,
     "sfxLufs": -18,
