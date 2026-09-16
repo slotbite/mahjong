@@ -423,8 +423,4 @@ html[data-layout="ultrawide"] dialog.glass { width: min(92vw, 640px); }
 html[data-motion="reduce"] #ui-root *, html[data-motion="reduce"] dialog, html[data-motion="reduce"] dialog * {
   animation-duration: 0.01ms !important; animation-delay: 0ms !important; transition-duration: 0.01ms !important;
 }
-@media (prefers-reduced-motion: reduce) {
-  html:not([data-motion="full"]) #ui-root *, html:not([data-motion="full"]) dialog, html:not([data-motion="full"]) dialog * {
-    animation-duration: 0.01ms !important; animation-delay: 0ms !important; transition-duration: 0.01ms !important;
-  }
-}
+/* Movimiento reducido solo por elección explícita en Ajustes (html[data-motion="reduce"]), no por la preferencia del SO. */
