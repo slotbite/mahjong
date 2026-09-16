@@ -164,11 +164,11 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
     // Ensure consistent flip direction: right edge always toward viewer (like v1)
     // When flipping from π (face-down) to 0 (face-up), interpolate via 2π instead of 0
     // This reverses the rotation direction to match v1's right-edge-toward-viewer motion
-    let adjustedTargetY = targetY;
-    if (Math.abs(fromY - Math.PI) < 0.5 && targetY < Math.PI / 2) {
-      // Going from ~π to ~0: use 2π as intermediate for consistent direction
-      adjustedTargetY = 2 * Math.PI;
-    }
+    // Destapar: π → 2π (borde derecho hacia el espectador, como v1). Tapar: deshace ese giro,
+    // 2π → π (sentido inverso), igual que la transición CSS de v1 al quitar la clase .flip.
+    let startY = fromY, adjustedTargetY = targetY;
+    if (Math.abs(fromY - Math.PI) < 0.5 && targetY < Math.PI / 2) adjustedTargetY = 2 * Math.PI;
+    else if (Math.abs(fromY) < 0.5 && targetY > Math.PI / 2) startY = 2 * Math.PI;
 
     if (dur === 0) {
       card.group.rotation.y = targetY; card.group.rotation.z = card.tiltTarget; card.group.position.z = card.baseZ;
@@ -181,7 +181,7 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
     return track(card, tween({
       dur, ease: ease.cozy,
       onUpdate: (k, lin) => {
-        card.group.rotation.y = fromY + (adjustedTargetY - fromY) * k;
+        card.group.rotation.y = startY + (adjustedTargetY - startY) * k;
         if (withLift) card.group.position.z = card.baseZ + Math.sin(lin * Math.PI) * 0.35;
       },
       onDone: () => { card.group.rotation.y = targetY; card.group.position.z = card.baseZ; },
