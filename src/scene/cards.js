@@ -20,6 +20,7 @@ const LIME = new THREE.Color(0xb8d96a);
 const SKY = new THREE.Color(0x8fb3c7);
 const BLACK = new THREE.Color(0x000000);
 const FACE_DOWN = Math.PI;
+const FLIP_DIR = 1; // 1: destapa hacia el borde izquierdo (elegido por el dueño); -1: hacia el derecho (v1)
 const TILT = (8 * Math.PI) / 180;
 // flip: 320ms with ease.cozy matches v1's 250ms linear. Right edge toward viewer (v1 direction).
 const DUR = { flip: 320, settle: 900, drop: 560, dropStagger: 40, tilt: 220, press: 160, fade: 180 };
@@ -164,11 +165,13 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
     // Ensure consistent flip direction: right edge always toward viewer (like v1)
     // When flipping from π (face-down) to 0 (face-up), interpolate via 2π instead of 0
     // This reverses the rotation direction to match v1's right-edge-toward-viewer motion
-    // Destapar: π → 2π (borde derecho hacia el espectador, como v1). Tapar: deshace ese giro,
-    // 2π → π (sentido inverso), igual que la transición CSS de v1 al quitar la clase .flip.
+    // Sentido pedido por el dueño: destapar π → 0 (borde izquierdo hacia el espectador) y
+    // tapar 0 → π deshaciendo ese giro. FLIP_DIR = -1 invierte ambos si se quiere volver.
     let startY = fromY, adjustedTargetY = targetY;
-    if (Math.abs(fromY - Math.PI) < 0.5 && targetY < Math.PI / 2) adjustedTargetY = 2 * Math.PI;
-    else if (Math.abs(fromY) < 0.5 && targetY > Math.PI / 2) startY = 2 * Math.PI;
+    if (FLIP_DIR < 0) {
+      if (Math.abs(fromY - Math.PI) < 0.5 && targetY < Math.PI / 2) adjustedTargetY = 2 * Math.PI;
+      else if (Math.abs(fromY) < 0.5 && targetY > Math.PI / 2) startY = 2 * Math.PI;
+    }
 
     if (dur === 0) {
       card.group.rotation.y = targetY; card.group.rotation.z = card.tiltTarget; card.group.position.z = card.baseZ;
