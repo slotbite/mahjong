@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gema de Cristal Refractante</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #051007; /* Dark green fallback */
+            font-family: 'Inter', sans-serif;
+        }
+        #canvas-container {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+        #ui-layer {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: #d4f0d4;
+            pointer-events: none;
+            text-shadow: 0px 2px 6px rgba(0,0,0,0.9);
+        }
+        h1 {
+            margin: 0 0 8px 0;
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
+        p {
+            margin: 0;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+    </style>
+    <!-- Import map for Three.js -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="canvas-container"></div>
+    <div id="ui-layer">
+        <h1>CRISTAL BOTÁNICO</h1>
+        <p>Arrastra para rotar y observar la refracción del fondo</p>
+    </div>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        // 1. SETUP BÁSICO
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.set(0, 0, 7);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.2;
+        container.appendChild(renderer.domElement);
+
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+
+        // 2. FONDO PROCEDURAL (NO IMÁGENES EXTERNAS)
+        // Creamos un canvas para simular una selva abstracta desenfocada (efecto Bokeh)
+        function createJungleBackground() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 1024;
+            canvas.height = 1024;
+            const ctx = canvas.getContext('2d');
+            
+            // Fondo base oscuro
+            ctx.fillStyle = '#061709'; 
+            ctx.fillRect(0, 0, 1024, 1024);
+
+            // Generar círculos difuminados simulando hojas y luces
+            for(let i = 0; i < 200; i++) {
+                const x = Math.random() * 1024;
+                const y = Math.random() * 1024;
+                const radius = Math.random() * 60 + 20;
+                
+                const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+                
+                // Variaciones de colores selváticos (verdes esmeralda, olivas, luces amarillas)
+                const g = Math.floor(Math.random() * 150) + 50;
+                const b = Math.floor(Math.random() * 60) + 20;
+                
+                if (Math.random() > 0.9) {
+                    // Pequeñas luces de "luciérnagas" o rayos de sol
+                    gradient.addColorStop(0, 'rgba(200, 255, 150, 0.8)');
+                } else {
+                    // Hojas
+                    gradient.addColorStop(0, `rgba(10, ${g}, ${b}, 0.6)`);
+                }
+                
+                gradient.addColorStop(1, 'rgba(0, 0, 0, 0)'); // Desvanece a transparente
+
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            const texture = new THREE.CanvasTexture(canvas);
+            texture.mapping = THREE.EquirectangularReflectionMapping;
+            texture.colorSpace = THREE.SRGBColorSpace;
+            return texture;
+        }
+
+        const envTexture = createJungleBackground();
+        scene.background = envTexture; // Se ve de fondo
+        scene.environment = envTexture; // Da los reflejos e iluminación a la gema
+
+        // 3. OBJETO INTERNO (Signo de interrogación Pixel Art usando cubos)
+        const pixelGroup = new THREE.Group();
+        
+        const grid = [
+            [0,0,1,1,1,1,0,0],
+            [0,1,1,0,0,1,1,0],
+            [0,1,1,0,0,1,1,0],
+            [0,0,0,0,1,1,0,0],
+            [0,0,0,1,1,0,0,0],
+            [0,0,0,1,1,0,0,0],
+            [0,0,0,0,0,0,0,0],
+            [0,0,0,1,1,0,0,0]
+        ];
+
+        const boxGeo = new THREE.BoxGeometry(0.15, 0.15, 0.15);
+        const boxMat = new THREE.MeshStandardMaterial({ 
+            color: 0x55ff55,
+            emissive: 0x114411, // Ligero brillo propio
+            roughness: 0.3
+        });
+
+        const offsetX = - (8 * 0.15) / 2 + 0.075;
+        const offsetY = (8 * 0.15) / 2 - 0.075;
+
+        for(let y = 0; y < grid.length; y++) {
+            for(let x = 0; x < grid[y].length; x++) {
+                if(grid[y][x] === 1) {
+                    const cube = new THREE.Mesh(boxGeo, boxMat);
+                    cube.position.set(
+                        x * 0.15 + offsetX,
+                        -y * 0.15 + offsetY,
+                        0
+                    );
+                    pixelGroup.add(cube);
+                }
+            }
+        }
+        
+        // Colocamos el signo de interrogación ligeramente hacia atrás para que quede encapsulado
+        pixelGroup.position.z = -0.2; 
+        scene.add(pixelGroup);
+
+        // 4. GEOMETRÍA Y MATERIAL DE LA GEMA DE CRISTAL
+        const shape = new THREE.Shape();
+        const size = 1.3;
+        const radius = 0.25; 
+        
+        // Dibujamos un cuadrado con bordes redondeados
+        shape.moveTo(-size + radius, -size);
+        shape.lineTo(size - radius, -size);
+        shape.quadraticCurveTo(size, -size, size, -size + radius);
+        shape.lineTo(size, size - radius);
+        shape.quadraticCurveTo(size, size, size - radius, size);
+        shape.lineTo(-size + radius, size);
+        shape.quadraticCurveTo(-size, size, -size, size - radius);
+        shape.lineTo(-size, -size + radius);
+        shape.quadraticCurveTo(-size, -size, -size + radius, -size);
+
+        // Configuramos la extrusión para crear BISELES pronunciados (efecto gema)
+        const extrudeSettings = {
+            steps: 1,
+            depth: 0.4,          // Grosor interior plano
+            bevelEnabled: true,
+            bevelThickness: 0.4, // Cuánto sobresale el bisel en Z
+            bevelSize: 0.3,      // Cuánto entra el bisel en X/Y
+            bevelSegments: 2     // Bajos segmentos = cortes rectos tipo diamante/gema
+        };
+
+        const gemGeometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+        gemGeometry.center(); // Centrar en el origen
+
+        // MATERIAL FÍSICO (LA MAGIA DEL CRISTAL)
+        const gemMaterial = new THREE.MeshPhysicalMaterial({
+            color: 0xffffff,
+            metalness: 0.1,
+            roughness: 0.05,       // Casi sin rugosidad, muy pulido
+            transmission: 1.0,     // 100% transmisión de luz (refracta lo de atrás)
+            ior: 2.4,              // Índice de refracción muy alto (tipo diamante/zafiro)
+            thickness: 1.5,        // Grosor simulado para aumentar la distorsión
+            clearcoat: 1.0,        // Barniz exterior para reflejos fuertes
+            clearcoatRoughness: 0.1,
+            transparent: true,
+            opacity: 1.0,          // Con transmission a 1, opacity debe ser 1
+            side: THREE.FrontSide
+        });
+
+        const gemMesh = new THREE.Mesh(gemGeometry, gemMaterial);
+        scene.add(gemMesh);
+
+        // 5. ILUMINACIÓN PARA RESALTAR LOS BORDES
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+        scene.add(ambientLight);
+        
+        // Luz principal (simulando sol o foco)
+        const mainLight = new THREE.DirectionalLight(0xffffff, 2.5);
+        mainLight.position.set(5, 5, 4);
+        scene.add(mainLight);
+
+        // Luz secundaria de contra para resaltar el bisel opuesto
+        const backLight = new THREE.DirectionalLight(0x88ff88, 1.5);
+        backLight.position.set(-5, -5, -4);
+        scene.add(backLight);
+
+        // 6. RESPONSIVE Y ANIMACIÓN
+        window.addEventListener('resize', onWindowResize, false);
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            const elapsedTime = clock.getElapsedTime();
+            
+            // Flotación muy sutil para dar la sensación "Cozy"
+            const floatY = Math.sin(elapsedTime * 1.5) * 0.1;
+            gemMesh.position.y = floatY;
+            pixelGroup.position.y = floatY;
+
+            // Ligera rotación automática para presumir la refracción si el usuario no mueve
+            // gemMesh.rotation.y = Math.sin(elapsedTime * 0.3) * 0.1;
+            // pixelGroup.rotation.y = Math.sin(elapsedTime * 0.3) * 0.1;
+
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        // Iniciar bucle
+        animate();
+    </script>
+</body>
+</html>
