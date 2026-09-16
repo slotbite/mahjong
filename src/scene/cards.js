@@ -25,7 +25,7 @@ const FACE_DOWN = Math.PI;
 const FLIP_DIR = 1; // 1: destapa hacia el borde izquierdo (elegido por el dueño); -1: hacia el derecho (v1)
 const TILT = (8 * Math.PI) / 180;
 // flip: 320ms with ease.cozy matches v1's 250ms linear. Right edge toward viewer (v1 direction).
-const DUR = { flip: 320, settle: 900, drop: 560, dropStagger: 40, tilt: 220, press: 160, fade: 180 };
+const DUR = { flip: 320, settle: 1000, drop: 560, dropStagger: 40, tilt: 220, press: 160, fade: 180 };
 
 export function createGlassMaterial() {
   return new THREE.MeshPhysicalMaterial({
@@ -374,14 +374,19 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
       card.group.rotation.y = 0;
       const z0 = card.group.position.z;
       card.glassMat.emissive.copy(LIME);
+      // Pedido del dueño: la gema gira sobre sí misma (3 vueltas de 180° por segundo) mientras se
+      // aleja en zoom-out hasta desaparecer.
+      const spinDur = reduced ? 300 : DUR.settle;
+      const spinTurns = 3 * (spinDur / 1000);          // flips (180°) durante la animación
       track(card, tween({
-        dur: reduced ? 300 : DUR.settle, delay: reduced ? 0 : 250, ease: ease.cozy,
+        dur: spinDur, delay: reduced ? 0 : 150, ease: ease.linear ?? ((t) => t),
         onUpdate: (k) => {
-          card.group.position.z = z0 + (reduced ? 0 : 0.3 * k);
+          card.group.position.z = z0 + (reduced ? 0 : 0.4 * k);
+          card.group.rotation.y = reduced ? 0 : k * spinTurns * Math.PI;
           card.glassMat.emissiveIntensity = Math.sin(Math.min(1, k * 1.4) * Math.PI) * 0.9;
-          const s = 1 - 0.55 * ease.inOutCubic(k);     // el vidrio se encoge en vez de fundirse
+          const s = Math.max(0.001, 1 - ease.inOutCubic(k));   // zoom-out hasta desaparecer
           card.group.scale.set(s, s, s);
-          setOpacity(card, Math.max(0, 1 - k * 1.25));  // el arte se funde antes de que termine el encogido
+          setOpacity(card, Math.max(0, 1 - k * 1.1));
         },
         onDone: () => { card.group.visible = false; card.glassMat.emissiveIntensity = 0; addHole(card); },
       }));
