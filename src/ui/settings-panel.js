@@ -96,6 +96,28 @@ export function initSettingsPanel(ui) {
     });
   }
 
+  // Fondo de escena: chips con miniatura (variante landscape 1280) y nombre en el idioma actual.
+  function backgroundGroup() {
+    const bgs = Array.isArray(manifest?.backgrounds) ? manifest.backgrounds : [];
+    const bgName = (b) => b.name?.[settings.get('lang')] ?? b.name?.es ?? b.id;
+    return radioChips({
+      cls: 'theme-chips bg-chips',
+      ariaLabel: () => t('settings.background'),
+      options: () => bgs.map((b) => ({ value: b.id, bg: b })),
+      get: () => settings.get('backgroundId'),
+      set: (id) => settings.set('backgroundId', id),
+      isDisabled: () => false,
+      render(btn, { bg }) {
+        const src = bg.variants?.landscape?.['1280'] ?? bg.srcset?.['1280'] ?? Object.values(bg.srcset ?? {})[0];
+        btn.classList.add('theme-chip');
+        const thumb = src
+          ? h('img', { class: 'theme-thumb', src: assetUrl(src), alt: '', decoding: 'async', loading: 'lazy', width: 48, height: 48 })
+          : h('span', { class: 'theme-thumb placeholder', aria: { hidden: 'true' } }, icon('theme', { size: 20 }));
+        btn.append(thumb, h('span', { class: 'chip-text' }, h('span', { class: 'chip-name' }, bgName(bg))));
+      },
+    });
+  }
+
   function gridGroup() {
     return radioChips({
       cls: 'grid-chips',
@@ -283,7 +305,7 @@ export function initSettingsPanel(ui) {
   const secTitle = (key) => { const el = h('h3', { class: 'sec-title' }); controls.add({ relabel: () => { el.textContent = t(key); } }); return el; };
 
   // Tema
-  tabPanels.theme.append(secTitle('settings.theme'), register(themeGroup()), register(applyBar()));
+  tabPanels.theme.append(secTitle('settings.theme'), register(themeGroup()), register(applyBar()), secTitle('settings.background'), register(backgroundGroup()));
   // Partida
   tabPanels.game.append(secTitle('settings.grid'), register(gridGroup()), secTitle('settings.mode'), register(modeGroup()), register(applyBar()));
   // Sonido
