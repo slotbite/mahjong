@@ -104,8 +104,10 @@ export function createEnvironment({ scene, camera, renderer, manifest, glassMate
   try {
     const jungleEnvTex = createJungleBackground();
     const pmrem = new THREE.PMREMGenerator(renderer);
-    scene.environment = pmrem.fromEquirectangular(jungleEnvTex).texture;
-    scene.environmentIntensity = 1.6;
+    // Reflejos neutros (RoomEnvironment) para que el vidrio no se tiña de verde; el bokeh de selva queda disponible.
+    void jungleEnvTex;
+    scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    scene.environmentIntensity = 1.2;
     pmrem.dispose();
   } catch (err) { console.warn('[scene/env] sin environment map', err); }
 

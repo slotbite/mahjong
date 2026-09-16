@@ -11,9 +11,9 @@ import { BACK_KEY } from './themes.js';
 // specularIntensity 1.0, envMapIntensity 2.2 para reflejos visibles en bokeh mejorado.
 export const GLASS = Object.freeze({
   transmission: 0.92, roughness: 0.05, thickness: 0.35, ior: 1.9,
-  attenuationColor: 0xcfe9e0, attenuationDistance: 3.0,
+  attenuationColor: 0xffffff, attenuationDistance: Infinity, // vidrio incoloro: el fondo se ve sin tinte
   clearcoat: 1.0, clearcoatRoughness: 0.1, metalness: 0.1,
-  specularIntensity: 1.0, envMapIntensity: 2.2,
+  specularIntensity: 1.0, envMapIntensity: 1.3,
 });
 const LIME = new THREE.Color(0xb8d96a);
 const SKY = new THREE.Color(0x8fb3c7);
