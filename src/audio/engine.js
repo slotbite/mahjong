@@ -35,14 +35,14 @@ function resume() {
     audioCtx.resume().then(() => {
       console.info('[audio] contexto reanudado');
       // Arrancar ambiente tras desbloquear si está habilitado
-      if (ctx && ctx.settings && ctx.settings.ambientOn && defaultAmbientIds.length > 0) {
+      if (ctx && ctx.settings && ctx.settings.get('ambientOn') && defaultAmbientIds.length > 0) {
         ambient.start(defaultAmbientIds);
       }
       ctx.bus.emit(ctx.EV.AUDIO_UNLOCKED, {});
     });
   } else {
     // Si contexto ya está running, también arrancar
-    if (ctx && ctx.settings && ctx.settings.ambientOn && defaultAmbientIds.length > 0) {
+    if (ctx && ctx.settings && ctx.settings.get('ambientOn') && defaultAmbientIds.length > 0) {
       ambient.start(defaultAmbientIds);
     }
   }
@@ -261,7 +261,7 @@ function handleBusEvents() {
   ctx.bus.on(ctx.EV.GAME_WIN, () => {
     playSfx('win');
     ambient.setIntensity(0.7);
-    setTimeout(() => ambient.setIntensity(ctx.settings.ambientOn ? 1 : 0), 8000);
+    setTimeout(() => ambient.setIntensity(ctx.settings.get('ambientOn') ? 1 : 0), 8000);
   });
 
   // game:lose → lose (opcional, aún sin sonido definido)
@@ -279,7 +279,7 @@ function handleBusEvents() {
 
   // game:resume → restaurar
   ctx.bus.on(ctx.EV.GAME_RESUME, () => {
-    const target = ctx.settings.ambientOn ? ctx.settings.ambientVolume : 0;
+    const target = ctx.settings.get('ambientOn') ? ctx.settings.get('ambientVolume') : 0;
     ambientGain.gain.linearRampToValueAtTime(target, audioCtx.currentTime + 0.3);
   });
 
@@ -321,6 +321,14 @@ export const audio = {
 
     await preloadBuffers(manifestAudio);
     console.info('[audio] motor listo, buffers precargados');
+    // Volúmenes iniciales desde ajustes y arranque del ambiente si el contexto ya está desbloqueado
+    if (ctx?.settings?.get) {
+      setVolume('ambient', ctx.settings.get('ambientVolume') ?? 0.6);
+      setVolume('sfx', ctx.settings.get('sfxVolume') ?? 0.8);
+      if (audioCtx.state === 'running' && ctx.settings.get('ambientOn') && defaultAmbientIds.length > 0 && currentAmbientIds.length === 0) {
+        ambient.start(defaultAmbientIds);
+      }
+    }
   },
 
   unlock() {
