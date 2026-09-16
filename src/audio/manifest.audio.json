@@ -57,6 +57,15 @@
       "attribution": "Kalimba.wav — PanPiper5 (https://freesound.org/people/PanPiper5/sounds/659909/)",
       "duration": 0.925
     },
+    "flip-note": {
+      "ogg": "assets/audio/flip-note.ogg",
+      "m4a": "assets/audio/flip-note.m4a",
+      "loop": false,
+      "gain": 0.5,
+      "license": "CC0-1.0",
+      "attribution": "Kalimba.wav — PanPiper5 (https://freesound.org/people/PanPiper5/sounds/659909/)",
+      "duration": 0.5
+    },
     "flip-v1": {
       "ogg": "assets/audio/flip-v1.ogg",
       "m4a": "assets/audio/flip-v1.m4a",

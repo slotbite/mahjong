@@ -10,6 +10,7 @@ let masterGain, ambientGain, sfxGain;
 const ambientGainNodes = {};
 let currentAmbientIds = [];
 let defaultAmbientIds = []; // IDs de ambiente por defecto (loops)
+let lastFlipNote = -1;       // última nota de la escala tocada al seleccionar
 const ambientBase = {};      // ganancia base por loop desde el manifiesto (gain), ~0.7
 // Curvas perceptuales: el oído es logarítmico; con lineal el 5 % ya suena fuerte.
 const curveAmbient = (v) => Math.pow(v, 2) * 0.5;
@@ -239,7 +240,14 @@ function setVolume(channel, v) {
 function handleBusEvents() {
   // card:flip → flip (solo si faceUp: true)
   ctx.bus.on(ctx.EV.CARD_FLIP, ({ faceUp }) => {
-    if (faceUp) playSfx('flip', { rate: 0.99 + Math.random() * 0.02 }); // marimba: tono base con ±1 %
+    if (faceUp) {
+      // Nota de kalimba al azar en pentatónica mayor (pedido del dueño), evitando repetir la anterior.
+      const SCALE = [1, 1.125, 1.25, 1.5, 1.6667, 2];
+      let n = Math.floor(Math.random() * SCALE.length);
+      if (n === lastFlipNote) n = (n + 1 + Math.floor(Math.random() * (SCALE.length - 1))) % SCALE.length;
+      lastFlipNote = n;
+      playSfx(buffers['flip-note'] ? 'flip-note' : 'flip', { rate: SCALE[n] });
+    }
   });
 
   // pair:match → match con rate variable según racha

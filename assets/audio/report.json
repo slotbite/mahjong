@@ -239,9 +239,23 @@
       "gainDb": -11.7,
       "ogg": 7587,
       "m4a": 7521
+    },
+    "flip-note": {
+      "hash": "adb7bfc052",
+      "kind": "sfx",
+      "src": "kalimba",
+      "duration": 0.5,
+      "channels": 1,
+      "kbps": 56,
+      "lufsIn": -14.5,
+      "lufsOut": -17.9,
+      "truePeakOut": -4.3,
+      "gainDb": -3.5,
+      "ogg": 5526,
+      "m4a": 4661
     }
   },
-  "generatedAt": "2026-09-16T19:06:53.581Z",
+  "generatedAt": "2026-09-16T19:09:37.855Z",
   "targets": {
     "ambientLufs": -23,
     "sfxLufs": -18,

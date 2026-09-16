@@ -142,6 +142,8 @@ const SOUNDS = [
       return `${split};${chains};${mix}`;
     })(),
     note: 'candidato para el reparto (evaluar en el banco); no suena en el juego' },
+  { id: 'flip-note', kind: 'sfx', src: 'kalimba', lufs: -18, gain: 0.5, af: `asetrate=${Math.round(SR * 1.2)},aresample=${SR},lowpass=f=5200,afade=t=in:d=0.003`, maxDur: 0.5, fadeOut: 0.22,
+    note: 'nota base de kalimba; el motor la toca a una altura al azar de la pentatónica (1, 9/8, 5/4, 3/2, 5/3, 2) al seleccionar' },
   { id: 'flip-v1', kind: 'sfx', src: 'glass', lufs: -18, gain: 0.5, af: 'lowpass=f=9000', maxDur: 0.5,
     note: 'tap de vidrio v1 (comparación en el banco)' },
   { id: 'match', kind: 'sfx', src: 'kalimba', lufs: -18, gain: 0.7, maxDur: 1.8, fadeOut: 0.5,
