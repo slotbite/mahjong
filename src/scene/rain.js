@@ -53,7 +53,7 @@ export function createRain({ scene }) {
       pos[i * 3] = bounds.cx + (Math.random() - 0.5) * bounds.w;
       pos[i * 3 + 1] = 0;
       pos[i * 3 + 2] = -8 + d * 6;                   // z entre -8 y -2 (detrás de las fichas)
-      speed[i] = (0.35 + d * 0.45) * 0.25;            // alturas de pantalla por segundo; a la mitad (pedido del dueÃ±o: lluvia mÃ¡s lenta)
+      speed[i] = (0.35 + d * 0.45) * 0.12;            // alturas de pantalla por segundo; a la mitad (pedido del dueÃ±o: lluvia mÃ¡s lenta)
       size[i] = 10 + d * 16;                         // px de alto del sprite
       phase[i] = Math.random();
       depth[i] = d;
