@@ -9,6 +9,7 @@ Generado por `tools/build-audio.mjs`. Todos los archivos externos son **CC0 1.0*
 | `thunder-1` | oneshot | [Distant rumbles](https://freesound.org/people/richwise/sounds/584946/) | richwise | CC0-1.0 | 4s–14s |
 | `flip` | sfx | [Kalimba.wav](https://freesound.org/people/PanPiper5/sounds/659909/) | PanPiper5 | CC0-1.0 | golpe de cristal agudo tipo xilófono (pedido del dueño): el cuenco de match ~1.6 octavas arriba, corto; el motor varía ±4 % el rate |
 | `deal-bottle` | sfx | [Interface Sounds — glass_001](https://kenney.nl/assets/interface-sounds) | Kenney (kenney.nl) | CC0-1.0 | candidato para el reparto (evaluar en el banco); no suena en el juego |
+| `deal-kalimba` | sfx | [Kalimba.wav](https://freesound.org/people/PanPiper5/sounds/659909/) | PanPiper5 | CC0-1.0 | candidato para el reparto (evaluar en el banco); no suena en el juego |
 | `flip-v1` | sfx | [Interface Sounds — glass_001](https://kenney.nl/assets/interface-sounds) | Kenney (kenney.nl) | CC0-1.0 | tap de vidrio v1 (comparación en el banco) |
 | `match` | sfx | [Kalimba.wav](https://freesound.org/people/PanPiper5/sounds/659909/) | PanPiper5 | CC0-1.0 | nota de kalimba (A3) que acompaña el desvanecido de la ficha; rate 1+racha·0.03 en el motor |
 | `miss` | sfx | [water drop](https://freesound.org/people/florianreichelt/sounds/683102/) | florianreichelt | CC0-1.0 | gota de agua transpuesta −4 semitonos: grave, sin castigo |

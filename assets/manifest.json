@@ -1213,6 +1213,15 @@
         "attribution": "Interface Sounds — glass_001 — Kenney (kenney.nl) (https://kenney.nl/assets/interface-sounds)",
         "duration": 0.994
       },
+      "deal-kalimba": {
+        "ogg": "assets/audio/deal-kalimba.ogg",
+        "m4a": "assets/audio/deal-kalimba.m4a",
+        "loop": false,
+        "gain": 0.55,
+        "license": "CC0-1.0",
+        "attribution": "Kalimba.wav — PanPiper5 (https://freesound.org/people/PanPiper5/sounds/659909/)",
+        "duration": 0.925
+      },
       "flip-v1": {
         "ogg": "assets/audio/flip-v1.ogg",
         "m4a": "assets/audio/flip-v1.m4a",

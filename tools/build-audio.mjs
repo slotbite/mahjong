@@ -131,6 +131,17 @@ const SOUNDS = [
       return `${split};${chains};${mix}`;
     })(),
     note: 'candidato para el reparto (evaluar en el banco); no suena en el juego' },
+  { id: 'deal-kalimba', kind: 'sfx', src: 'kalimba', lufs: -18, gain: 0.55, maxDur: 1.3, fadeOut: 0.35,
+    // Candidato: arpegio de kalimba en pentatónica mayor (1, 9/8, 5/4, 3/2, 5/3, 2), ascendente, estilo Zuma.
+    af: (() => {
+      const notes = [[0, 1.0], [75, 1.125], [150, 1.25], [225, 1.5], [300, 1.6667], [375, 2.0]];
+      const n = notes.length;
+      const split = `asplit=${n}` + notes.map((_, i) => `[h${i}]`).join('');
+      const chains = notes.map(([ms, r], i) => `[h${i}]asetrate=${Math.round(SR * r)},aresample=${SR},atrim=0:0.55,afade=t=out:st=0.3:d=0.25,lowpass=f=5200,adelay=${ms}|${ms}[o${i}]`).join(';');
+      const mix = notes.map((_, i) => `[o${i}]`).join('') + `amix=inputs=${n}:normalize=0:dropout_transition=0`;
+      return `${split};${chains};${mix}`;
+    })(),
+    note: 'candidato para el reparto (evaluar en el banco); no suena en el juego' },
   { id: 'flip-v1', kind: 'sfx', src: 'glass', lufs: -18, gain: 0.5, af: 'lowpass=f=9000', maxDur: 0.5,
     note: 'tap de vidrio v1 (comparación en el banco)' },
   { id: 'match', kind: 'sfx', src: 'kalimba', lufs: -18, gain: 0.7, maxDur: 1.8, fadeOut: 0.5,

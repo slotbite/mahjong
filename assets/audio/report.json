@@ -225,9 +225,23 @@
       "gainDb": -2.6,
       "ogg": 7244,
       "m4a": 8016
+    },
+    "deal-kalimba": {
+      "hash": "59414ec098",
+      "kind": "sfx",
+      "src": "kalimba",
+      "duration": 0.925,
+      "channels": 1,
+      "kbps": 56,
+      "lufsIn": -6.3,
+      "lufsOut": -18,
+      "truePeakOut": -5.1,
+      "gainDb": -11.7,
+      "ogg": 7587,
+      "m4a": 7521
     }
   },
-  "generatedAt": "2026-09-16T19:04:01.552Z",
+  "generatedAt": "2026-09-16T19:06:53.581Z",
   "targets": {
     "ambientLufs": -23,
     "sfxLufs": -18,
