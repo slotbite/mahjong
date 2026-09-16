@@ -14,3 +14,6 @@ assets/raw/
 
 # crudos de audio (audio-4), fuera de git
 assets/raw-audio/
+
+# estado de sesiones de navegador de QA
+.playwright-cli/
