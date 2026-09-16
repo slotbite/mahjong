@@ -17,7 +17,8 @@ Write-Host ""
 
 Set-Location $root
 if (Get-Command python -ErrorAction SilentlyContinue) {
-  python -m http.server $Port --bind 0.0.0.0
+  # Servidor propio sin cache: el http.server estandar deja que el navegador reutilice los modulos JS viejos.
+  python tools/serve.py $Port
 } elseif (Get-Command npx -ErrorAction SilentlyContinue) {
   npx --yes serve -l tcp://0.0.0.0:$Port .
 } else {
