@@ -277,9 +277,13 @@ export function createGame(deps) {
   // --- card:pick ---
   function onPick(p = {}) {
     const i = Number(p.index);
-    if (S.phase !== 'playing' || S.locked) return;
+    if (S.phase !== 'playing') return;
     if (!Number.isInteger(i) || i < 0 || i >= S.cards.length) return;
     if (S.matched[i] || S.faceUp[i] || S.open.includes(i)) return;
+    // Fluidez (pedido del dueño): con una pareja fallida aún abierta, tocar una tercera carta la
+    // cierra de inmediato y arranca la nueva selección, en vez de esperar el temporizador.
+    if (S.locked && missHandle != null) closeMiss();
+    if (S.locked) return;
 
     startTimerIfNeeded();
     S.faceUp[i] = true;
@@ -313,17 +317,20 @@ export function createGame(deps) {
     S.streak = 0;
     S.locked = true;
     bus.emit(EV.PAIR_MISS, { indices: [a, b], moves: S.moves });
-    missHandle = setT(() => {
-      missHandle = null;
-      if (S.phase === 'idle') return;
-      for (const i of [a, b]) {
-        if (S.matched[i]) continue;
-        S.faceUp[i] = false;
-        bus.emit(EV.CARD_FLIP, { index: i, faceUp: false });
-      }
-      S.open = [];
-      S.locked = false;
-    }, RULES.missDelayMs);
+    missHandle = setT(() => { missHandle = null; closeMiss(); }, RULES.missDelayMs);
+  }
+
+  /** Tapa la pareja fallida abierta y desbloquea. Idempotente; cancela el temporizador si sigue vivo. */
+  function closeMiss() {
+    if (missHandle != null) { clearT(missHandle); missHandle = null; }
+    if (S.phase === 'idle') return;
+    for (const i of S.open) {
+      if (S.matched[i]) continue;
+      S.faceUp[i] = false;
+      bus.emit(EV.CARD_FLIP, { index: i, faceUp: false });
+    }
+    S.open = [];
+    S.locked = false;
   }
 
   // --- pista ---
