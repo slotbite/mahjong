@@ -51,7 +51,7 @@ export function init(ctx) {
     canvas, camera, bus, EV,
     getPickables: () => cards.pickables(),
     onHover: (i) => cards.setHover(i),
-    onPointer: (nx, ny) => env.setPointer(nx, ny),
+    onPointer: (nx, ny) => { env.setPointer(nx, ny); cards.setPointer(nx, ny); },
   });
 
   function applyLayout(emit = true) {

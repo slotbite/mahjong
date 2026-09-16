@@ -51,6 +51,7 @@ export function createInput({ canvas, camera, bus, EV, getPickables, onHover, on
 
   canvas.addEventListener('pointerleave', () => {
     last = null; moved = true;
+    onPointer?.(0, 0); // el tablero vuelve a su inclinación neutra
   });
 
   return {

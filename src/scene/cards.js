@@ -146,6 +146,10 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
   let cols = 4, rows = 4;
   let phase = 'idle';    // idle | dealing | playing | hint | won | lost
   let hovered = -1;
+  // Tilt sutil del tablero siguiendo el puntero (±4.5°), para que los biseles cambien de brillo.
+  const pointer = { x: 0, y: 0 };
+  const TILT_X = 0.075, TILT_Y = 0.09;
+  function setPointer(nx, ny) { pointer.x = Math.max(-1, Math.min(1, nx)); pointer.y = Math.max(-1, Math.min(1, ny)); }
   let time = 0;
   let backVoxelGroups = [];  // grupos de voxels por carta
 
@@ -468,6 +472,11 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
 
   function update(dt, t) {
     time = t;
+    if (!isReducedMotion()) {
+      const tx = -pointer.y * TILT_X, ty = pointer.x * TILT_Y;
+      board.rotation.x += (tx - board.rotation.x) * Math.min(1, dt * 4);
+      board.rotation.y += (ty - board.rotation.y) * Math.min(1, dt * 4);
+    } else if (board.rotation.x !== 0 || board.rotation.y !== 0) { board.rotation.set(0, 0, 0); }
     for (const card of cards) {
       if (card.matched && phase !== 'won') continue;
       if (!card.dropping && phase !== 'won') {
@@ -497,7 +506,7 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
 
   return {
     board, baseGlass,
-    deal, flip, press, match, miss, hint, celebrate, dim, setTheme, setHover, update,
+    deal, flip, press, match, miss, hint, celebrate, dim, setTheme, setHover, setPointer, update,
     get phase() { return phase; },
     get hovered() { return hovered; },
     pickables() {
