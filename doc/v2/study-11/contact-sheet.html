@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hojas de contacto - Memorice Cozy v2 study-11</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0f2a22;
+      color: #f4ead8;
+      font-family: 'Pixelify Sans', monospace;
+      padding: 20px;
+    }
+    .page-break {
+      page-break-after: always;
+      margin-bottom: 40px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #b8d96a;
+    }
+    .sheet {
+      background: #1f4d3a;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .sheet h2 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #b8d96a;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .grid-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .grid-item img {
+      width: 120px;
+      height: 120px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 4px;
+      background: rgba(31, 77, 58, 0.8);
+      padding: 4px;
+    }
+    .grid-item.large img {
+      width: 240px;
+      height: 240px;
+    }
+    .grid-item label {
+      font-size: 10px;
+      color: #b8d96a;
+      text-align: center;
+      max-width: 120px;
+      word-break: break-all;
+    }
+    .grid-item.large label {
+      max-width: 240px;
+    }
+    @media print {
+      body { padding: 0; }
+      .page-break { margin: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Memorice Cozy v2 — Hojas de contacto (study-11)</h1>
+  <p style="text-align: center; margin-bottom: 30px; font-size: 12px;">
+    Emojis Noto (Google, Apache-2.0) | Pixelado a grado 94 | Fondo #1f4d3a
+  </p>
+
+  <!-- Se generarán dinámicamente con JavaScript -->
+  <div id="sheets"></div>
+
+  <script>
+    // Mapeo de temas a emojis para mostrar
+    const THEME_MAP = {
+      'plantas_interior': ['potted_plant', 'leaf', 'herb', 'flower', 'bouquet', 'shamrock', 'four_leaf_clover', 'sunflower', 'rose', 'wilted_flower'],
+      'selva_tropical': ['frog', 'parrot', 'butterfly', 'leaf', 'flower', 'tropical_fish', 'snake', 'toucan', 'monkey_face', 'tiger_face'],
+      'cozy': ['mug_hot', 'candle', 'book', 'cat_face', 'couch', 'lamp', 'teacup', 'rose', 'butterfly', 'herb'],
+      'cafe_te': ['mug_hot', 'teacup', 'water_wave', 'herb', 'flower'],
+      'cielo_nocturno': ['full_moon', 'crescent_moon', 'star', 'sparkles', 'telescope', 'cloud_with_rain', 'water_wave'],
+      'acuario': ['tropical_fish', 'fish', 'blowfish', 'coral', 'water_wave', 'octopus', 'squid', 'shrimp'],
+      'pasatiempos_geek': ['video_game', 'dice', 'cd', 'computer', 'keyboard', 'robot', 'star', 'sparkles'],
+    };
+
+    const BASE_PATH = '../../../assets/raw/study-11/noto';
+    const container = document.getElementById('sheets');
+
+    Object.entries(THEME_MAP).forEach(([theme, emojis]) => {
+      const sheet = document.createElement('div');
+      sheet.className = 'sheet page-break';
+
+      const title = document.createElement('h2');
+      title.textContent = `${theme} (miniaturas 128px)`;
+      sheet.appendChild(title);
+
+      const grid = document.createElement('div');
+      grid.className = 'grid';
+
+      emojis.forEach(emoji => {
+        const item = document.createElement('div');
+        item.className = 'grid-item';
+
+        const img = document.createElement('img');
+        img.src = `${BASE_PATH}/${theme}/${emoji}.png`;
+        img.alt = emoji;
+
+        const label = document.createElement('label');
+        label.textContent = emoji.substring(0, 12);
+
+        item.appendChild(img);
+        item.appendChild(label);
+        grid.appendChild(item);
+      });
+
+      sheet.appendChild(grid);
+      container.appendChild(sheet);
+
+      // Pixel sheet
+      const sheet2 = document.createElement('div');
+      sheet2.className = 'sheet page-break';
+
+      const title2 = document.createElement('h2');
+      title2.textContent = `${theme} (pixelada 256×256) — Nota: mira esta con zoom al 100%`;
+      sheet2.appendChild(title2);
+
+      const grid2 = document.createElement('div');
+      grid2.className = 'grid';
+      grid2.style.gridTemplateColumns = 'repeat(3, 1fr)';
+
+      emojis.slice(0, 6).forEach(emoji => {
+        const item = document.createElement('div');
+        item.className = 'grid-item large';
+
+        const img = document.createElement('img');
+        img.src = `${BASE_PATH}/${theme}/${emoji}.png`;
+        img.alt = emoji;
+        img.style.imageRendering = 'pixelated';
+
+        const label = document.createElement('label');
+        label.textContent = `${emoji} (pixelado 64×64)`;
+
+        item.appendChild(img);
+        item.appendChild(label);
+        grid2.appendChild(item);
+      });
+
+      sheet2.appendChild(grid2);
+      container.appendChild(sheet2);
+    });
+  </script>
+</body>
+</html>
