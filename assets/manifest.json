@@ -1067,33 +1067,111 @@
     }
   ],
   "audio": {
-    "ambient": {},
+    "ambient": {
+      "rain-tropical": {
+        "ogg": "assets/audio/rain-tropical.ogg",
+        "m4a": "assets/audio/rain-tropical.m4a",
+        "loop": true,
+        "gain": 0.8,
+        "license": "CC0-1.0",
+        "attribution": "Light rain in a field of bananas trees — felix.blume (https://freesound.org/people/felix.blume/sounds/512334/)",
+        "duration": 52
+      },
+      "jungle-birds": {
+        "ogg": "assets/audio/jungle-birds.ogg",
+        "m4a": "assets/audio/jungle-birds.m4a",
+        "loop": true,
+        "gain": 0.55,
+        "license": "CC0-1.0",
+        "attribution": "Peruvian Amazon birds frogs daytime — nonamethefish (https://freesound.org/people/nonamethefish/sounds/653743/)",
+        "duration": 46
+      },
+      "thunder-1": {
+        "ogg": "assets/audio/thunder-1.ogg",
+        "m4a": "assets/audio/thunder-1.m4a",
+        "loop": false,
+        "gain": 0.6,
+        "license": "CC0-1.0",
+        "attribution": "Distant rumbles — richwise (https://freesound.org/people/richwise/sounds/584946/)",
+        "duration": 10,
+        "oneshot": true
+      }
+    },
     "sfx": {
       "flip": {
-        "mp3": "sound/flip_card.mp3",
-        "gain": 0.6
+        "ogg": "assets/audio/flip.ogg",
+        "m4a": "assets/audio/flip.m4a",
+        "loop": false,
+        "gain": 0.5,
+        "license": "CC0-1.0",
+        "attribution": "Interface Sounds — glass_001 — Kenney (kenney.nl) (https://kenney.nl/assets/interface-sounds)",
+        "duration": 0.276
       },
       "match": {
-        "mp3": "sound/match.mp3",
-        "gain": 0.7
+        "ogg": "assets/audio/match.ogg",
+        "m4a": "assets/audio/match.m4a",
+        "loop": false,
+        "gain": 0.7,
+        "license": "CC0-1.0",
+        "attribution": "Kalimba.wav — PanPiper5 (https://freesound.org/people/PanPiper5/sounds/659909/)",
+        "duration": 1.8
       },
       "miss": {
-        "mp3": "sound/bad_match.mp3",
-        "gain": 0.5
+        "ogg": "assets/audio/miss.ogg",
+        "m4a": "assets/audio/miss.m4a",
+        "loop": false,
+        "gain": 0.5,
+        "license": "CC0-1.0",
+        "attribution": "water drop — florianreichelt (https://freesound.org/people/florianreichelt/sounds/683102/)",
+        "duration": 0.717
       },
       "deal": {
-        "mp3": "sound/card_shuffle.mp3",
-        "gain": 0.6
+        "ogg": "assets/audio/deal.ogg",
+        "m4a": "assets/audio/deal.m4a",
+        "loop": false,
+        "gain": 0.6,
+        "license": "own",
+        "attribution": "card_shuffle.mp3 (Memorice v1) — proyecto (v1) (legacy/v1)",
+        "duration": 0.794
       },
       "win": {
-        "mp3": "sound/clean_win.mp3",
-        "gain": 0.8
+        "ogg": "assets/audio/win.ogg",
+        "m4a": "assets/audio/win.m4a",
+        "loop": false,
+        "gain": 0.8,
+        "license": "CC0-1.0",
+        "attribution": "Kalimba.wav — PanPiper5 (https://freesound.org/people/PanPiper5/sounds/659909/)",
+        "duration": 2.512
+      },
+      "hint": {
+        "ogg": "assets/audio/hint.ogg",
+        "m4a": "assets/audio/hint.m4a",
+        "loop": false,
+        "gain": 0.55,
+        "license": "CC0-1.0",
+        "attribution": "wind chimes - single 04.wav — Anthousai (https://freesound.org/people/Anthousai/sounds/398496/)",
+        "duration": 2.305
+      },
+      "combo": {
+        "ogg": "assets/audio/combo.ogg",
+        "m4a": "assets/audio/combo.m4a",
+        "loop": false,
+        "gain": 0.6,
+        "license": "CC0-1.0",
+        "attribution": "wind chimes - single 04.wav — Anthousai (https://freesound.org/people/Anthousai/sounds/398496/)",
+        "duration": 1.306
       },
       "cat_purr": {
-        "mp3": "sound/cat_purr.mp3",
-        "gain": 0.7
+        "ogg": "assets/audio/cat_purr.ogg",
+        "m4a": "assets/audio/cat_purr.m4a",
+        "loop": false,
+        "gain": 0.7,
+        "license": "own",
+        "attribution": "cat_purr.mp3 (Memorice v1) — proyecto (v1) (legacy/v1)",
+        "duration": 2.058
       }
-    }
+    },
+    "_generated": "tools/build-audio.mjs — no editar a mano; el director fusiona esta sección en assets/manifest.json"
   },
   "palettes": {
     "gameboy": [
