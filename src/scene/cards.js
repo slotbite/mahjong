@@ -6,11 +6,14 @@ import { tween, ease } from './anim.js';
 import { slotPosition } from './layout.js';
 import { BACK_KEY } from './themes.js';
 
-// Valores de §2.2. `roughness` se baja de 0.18 a 0.07: en Three la rugosidad también
-// desenfoca lo que se ve a través del vidrio y con 0.18 el pixel art de la carta salía borroso.
+// Valores de §2.2. Vidrio translúcido: transmission 0.97 para ver el fondo a través,
+// roughness 0.13 para suavidad sin desenfocar demasiado, atenuación con color verde-azul
+// para tinte con profundidad, clearcoat 0.85 para reflejos luminosos del borde.
 export const GLASS = Object.freeze({
-  transmission: 0.85, roughness: 0.07, thickness: 0.35, ior: 1.45, clearcoat: 0.6,
-  clearcoatRoughness: 0.15, tint: 0x8fb3c7, tintAmount: 0.12,
+  transmission: 0.97, roughness: 0.13, thickness: 0.35, ior: 1.48,
+  attenuationColor: 0x8fb3c7, attenuationDistance: 1.2,
+  clearcoat: 0.85, clearcoatRoughness: 0.08,
+  tint: 0x8fb3c7, tintAmount: 0.12,
 });
 const LIME = new THREE.Color(0xb8d96a);
 const SKY = new THREE.Color(0x8fb3c7);
@@ -24,8 +27,10 @@ export function createGlassMaterial() {
   return new THREE.MeshPhysicalMaterial({
     color, metalness: 0, roughness: GLASS.roughness,
     transmission: GLASS.transmission, thickness: GLASS.thickness, ior: GLASS.ior,
+    attenuationColor: new THREE.Color(GLASS.attenuationColor),
+    attenuationDistance: GLASS.attenuationDistance,
     clearcoat: GLASS.clearcoat, clearcoatRoughness: GLASS.clearcoatRoughness,
-    specularIntensity: 0.6, envMapIntensity: 0.45,
+    specularIntensity: 1, envMapIntensity: 1.1,
     emissive: BLACK.clone(), emissiveIntensity: 0,
     side: THREE.FrontSide,
   });
@@ -48,11 +53,9 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
 
   const geo = new RoundedBoxGeometry(1, 1, 0.12, 4, 0.08);
   const frontGeo = new THREE.PlaneGeometry(0.84, 0.84);
-  const frostGeo = new THREE.PlaneGeometry(0.96, 0.96);
   const symbolGeo = new THREE.PlaneGeometry(0.5, 0.5);
   const holeGeo = new THREE.PlaneGeometry(1.15, 1.15);
   const baseGlass = createGlassMaterial();
-  const frostMat = new THREE.MeshStandardMaterial({ color: 0x6b93a4, roughness: 1, metalness: 0 });
   const holeTex = radialTexture();
 
   let textures = null;   // Map id → Texture
@@ -75,18 +78,21 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
 
     const frontMat = new THREE.MeshBasicMaterial({ map: texFor(data.pairKey), alphaTest: 0.5, side: THREE.FrontSide, toneMapped: false });
     const front = new THREE.Mesh(frontGeo, frontMat);
-    front.position.z = 0.04;
+    front.position.z = 0.055;  // acercado para más claridad a través del vidrio
 
-    const frost = new THREE.Mesh(frostGeo, frostMat);
-    frost.position.z = -0.035;
-    frost.material.side = THREE.DoubleSide;
+    // Velo muy translúcido optativo para esmerilado sutil (casi invisible)
+    // const frost = new THREE.Mesh(frostGeo, new THREE.MeshBasicMaterial({
+    //   color: 0x8fb3c7, transparent: true, opacity: 0.12, depthWrite: false, side: THREE.DoubleSide
+    // }));
+    // frost.position.z = -0.035;
+    // group.add(frost);
 
     const backMat = new THREE.MeshBasicMaterial({ map: texFor(BACK_KEY), alphaTest: 0.5, side: THREE.FrontSide, toneMapped: false });
     const back = new THREE.Mesh(symbolGeo, backMat);
     back.position.z = -0.05;
     back.rotation.y = Math.PI;
 
-    group.add(glass, front, frost, back);
+    group.add(glass, front, back);
     const slot = slotPosition(data.index, cols, rows);
     const card = {
       index: data.index, pairKey: data.pairKey, group, glass, glassMat, front, frontMat, back, backMat,
