@@ -43,7 +43,9 @@ function resume() {
 
 async function loadBuffer(path) {
   try {
-    const resp = await fetch(path);
+    // Resolver la ruta contra la raíz del sitio (document.baseURI)
+    const url = new URL(path, document.baseURI).href;
+    const resp = await fetch(url);
     if (!resp.ok) return null;
     const ab = await resp.arrayBuffer();
     const decoded = await audioCtx.decodeAudioData(ab);

@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="../">
   <title>Audio Bench — Memorice Cozy v2</title>
   <style>
     body {
@@ -67,6 +68,31 @@
       margin: 0.5rem 0;
       font-size: 0.85rem;
     }
+    .status-indicator {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      background: #b8d96a;
+    }
+    .status-indicator.suspended { background: #c8744a; }
+    .status-indicator.running { background: #6a9a5b; }
+    .log {
+      background: #0f2a22;
+      border: 1px solid #6a9a5b;
+      border-radius: 4px;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      max-height: 120px;
+      overflow-y: auto;
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: #b8d96a;
+    }
+    .log-entry { margin: 0.25rem 0; }
+    .log-entry.error { color: #c8744a; }
+    .log-entry.success { color: #6a9a5b; }
   </style>
 </head>
 <body>
@@ -77,7 +103,14 @@
   <div class="section">
     <h2>Inicialización</h2>
     <button id="unlockBtn">Desbloquear Audio (pointerdown)</button>
-    <div id="status" class="info">Estado: esperando gesto del usuario</div>
+    <div id="status" class="info">
+      <span class="status-indicator suspended" id="contextIndicator"></span>
+      Estado: esperando gesto del usuario
+    </div>
+    <div id="contextInfo" class="info" style="font-size: 0.8rem; color: #999;">
+      Contexto: -, Buffers: -
+    </div>
+    <div id="log" class="log"></div>
   </div>
 
   <!-- SFX -->
@@ -140,22 +173,68 @@
     import { audio } from '../src/audio/engine.js';
 
     let isUnlocked = false;
+    let audioCtx = null;
+    let analyser = null;
+    const logBuffer = [];
+    const maxLogs = 15;
 
-    // Inicializar motor (pero no unlock() aún)
+    // Logging en pantalla
+    function addLog(msg, type = 'info') {
+      logBuffer.push({ msg, type, time: new Date().toLocaleTimeString() });
+      if (logBuffer.length > maxLogs) logBuffer.shift();
+      updateLogDisplay();
+    }
+
+    function updateLogDisplay() {
+      const logDiv = document.getElementById('log');
+      logDiv.innerHTML = logBuffer.map(e =>
+        `<div class="log-entry ${e.type}">[${e.time}] ${e.msg}</div>`
+      ).join('');
+      logDiv.scrollTop = logDiv.scrollHeight;
+    }
+
+    // Monitoreo del contexto de audio
+    function updateContextStatus() {
+      if (!audioCtx) {
+        document.getElementById('contextIndicator').className = 'status-indicator suspended';
+        document.getElementById('contextInfo').textContent = 'Contexto: no iniciado';
+        return;
+      }
+      const state = audioCtx.state;
+      const ind = document.getElementById('contextIndicator');
+      if (state === 'running') {
+        ind.className = 'status-indicator running';
+      } else {
+        ind.className = 'status-indicator suspended';
+      }
+      const buffers = window.__audioBench?.audio?.buffers || {};
+      const bufferCount = Object.keys(buffers).length;
+      document.getElementById('contextInfo').textContent =
+        `Contexto: ${state}, Buffers: ${bufferCount}`;
+    }
+
+    // Monitoreo periódico del contexto
+    setInterval(updateContextStatus, 500);
+
+    // Inicializar motor
     async function init() {
       try {
-        // Cargar el manifiesto de audio
+        addLog('Inicializando motor...', 'info');
         const manifestResp = await fetch('../assets/manifest.json');
         if (!manifestResp.ok) {
           throw new Error(`No se pudo cargar el manifiesto (${manifestResp.status})`);
         }
         const manifest = await manifestResp.json();
         await audio.init(manifest.audio);
-        document.getElementById('status').textContent = 'Estado: listo para desbloquear';
-        console.info('[test] motor de audio inicializado');
+        addLog('Motor inicializado, buffers precargados', 'success');
+        updateContextStatus();
+
+        // Obtener AudioContext si está disponible
+        if (audio && audio.audioCtx !== undefined) {
+          audioCtx = audio.audioCtx;
+        }
       } catch (err) {
-        const errDiv = document.getElementById('errors');
-        errDiv.innerHTML += `<div class="warn">Error: ${err.message}</div>`;
+        addLog(`Error: ${err.message}`, 'error');
         console.error('[test] error al inicializar:', err);
       }
     }
@@ -165,8 +244,9 @@
       if (!isUnlocked) {
         audio.unlock();
         isUnlocked = true;
-        document.getElementById('status').textContent = 'Estado: audio desbloqueado';
+        addLog('Audio desbloqueado', 'success');
         document.getElementById('unlockBtn').disabled = true;
+        updateContextStatus();
       }
     };
     document.getElementById('unlockBtn').onclick = unlockAudio;
@@ -174,26 +254,40 @@
     // SFX
     window.playSfx = function(id) {
       if (!isUnlocked) {
+        addLog(`playSfx('${id}') bloqueado: desbloquea primero`, 'error');
         alert('Debloquea audio primero');
         return;
       }
-      audio.playSfx(id, { rate: 1 });
-      console.log(`[test] playSfx('${id}')`);
+      try {
+        audio.playSfx(id, { rate: 1 });
+        addLog(`playSfx('${id}') OK`, 'success');
+      } catch (err) {
+        addLog(`playSfx('${id}') error: ${err.message}`, 'error');
+      }
     };
 
     // Ambiente
     window.startAmbient = async function(ids) {
       if (!isUnlocked) {
+        addLog(`ambiente bloqueado: desbloquea primero`, 'error');
         alert('Debloquea audio primero');
         return;
       }
-      await audio.ambient.start(ids);
-      console.log(`[test] ambiente iniciado: ${ids.join(', ')}`);
+      try {
+        await audio.ambient.start(ids);
+        addLog(`ambiente iniciado: ${ids.join(', ')}`, 'success');
+      } catch (err) {
+        addLog(`error inicio ambiente: ${err.message}`, 'error');
+      }
     };
 
     window.stopAmbient = function() {
-      audio.ambient.stop();
-      console.log('[test] ambiente detenido');
+      try {
+        audio.ambient.stop();
+        addLog('ambiente detenido', 'success');
+      } catch (err) {
+        addLog(`error detener ambiente: ${err.message}`, 'error');
+      }
     };
 
     window.setIntensity = function() {
@@ -215,24 +309,59 @@
       document.getElementById('sfxVolValue').textContent = Math.round(v * 100) + '%';
     };
 
-    // Analizador (FFT simple)
+    // Analizador con RMS
     function setupAnalyser() {
       const canvas = document.getElementById('analyser');
       const ctx = canvas.getContext('2d');
-      let analyser = null;
+      let lastRms = 0;
 
-      // Intentar acceder al nodo analyser; si no está disponible, dibujamos una línea simple
       const draw = () => {
         ctx.fillStyle = '#0f2a22';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.strokeStyle = '#b8d96a';
+
+        // Dibujar eje
+        ctx.strokeStyle = '#6a9a5b';
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.moveTo(0, canvas.height / 2);
         ctx.lineTo(canvas.width, canvas.height / 2);
         ctx.stroke();
+
+        // Dibujar indicador RMS
+        ctx.fillStyle = lastRms > 0.01 ? '#6a9a5b' : '#999';
+        const rmsX = Math.min(canvas.width, lastRms * canvas.width * 10);
+        ctx.fillRect(0, canvas.height / 2 - 5, rmsX, 10);
+
+        // Texto RMS
+        ctx.fillStyle = '#b8d96a';
+        ctx.font = '10px monospace';
+        ctx.textAlign = 'right';
+        ctx.fillText(`RMS: ${(lastRms * 100).toFixed(1)}%`, canvas.width - 5, canvas.height - 5);
+
         requestAnimationFrame(draw);
       };
+
+      // Estimar RMS cada 100ms
+      const estimateRms = () => {
+        if (audioCtx && audioCtx.destination) {
+          try {
+            const analyser = audioCtx.createAnalyser();
+            analyser.fftSize = 256;
+            audioCtx.destination.maxChannelCount; // Trigger connection if possible
+            const data = new Uint8Array(analyser.frequencyBinCount);
+            analyser.getByteFrequencyData(data);
+            let sum = 0;
+            for (let i = 0; i < data.length; i++) {
+              sum += (data[i] / 255) ** 2;
+            }
+            lastRms = Math.sqrt(sum / data.length);
+          } catch (e) {
+            // Ignore errors from analyser access
+          }
+        }
+        setTimeout(estimateRms, 100);
+      };
+      estimateRms();
       draw();
     }
     setupAnalyser();
@@ -241,7 +370,7 @@
     init();
 
     // Exponer globalmente para consola
-    window.__audioBench = { audio, init, unlockAudio };
+    window.__audioBench = { audio, init, unlockAudio, addLog };
   </script>
 </body>
 </html>
