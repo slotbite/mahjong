@@ -104,8 +104,8 @@ function makeCanvas(w, h, likeOffscreen) {
 /**
  * Pixela `source` y devuelve un canvas `size×size` con transparencia.
  *
- * Pasos: 1) encuadre contain en un lienzo de trabajo W×W (W = N·k, k = round(size/N)) para que las
- * celdas midan k px exactos; 2) promedio por celda respetando alfa → rejilla N×N (N = cellsFor);
+ * Pasos: 1) encuadre contain en un lienzo size×size, downsampling alineado con rejilla N×N;
+ * 2) promedio por celda respetando alfa → rejilla N×N (N = cellsFor(pixelScale));
  * 3) alfa binario; 4) dithering opcional (bayer antes de cuantizar; floyd difunde el error mientras
  * cuantiza); 5) cuantización: `original` = median-cut+k-means a `colors` colores, nombre de paleta =
  * color más cercano en Lab; 6) upscale nearest a `size`.
@@ -120,8 +120,7 @@ export function pixelate(source, {
   if (!sw || !sh) throw new Error('pixelate: fuente sin dimensiones (¿imagen no cargada?)');
   size = clamp(Math.round(size) || 256, 8, 2048);
   const N = cellsFor(pixelScale);
-  const k = Math.max(1, Math.round(size / N));
-  const W = N * k;
+  const W = size;  // fix center-10: usar size exacto para evitar mismatch downsampling→upsampling
   const isOffscreen = typeof OffscreenCanvas !== 'undefined' && source instanceof OffscreenCanvas;
 
   // 1) contain en W×W
