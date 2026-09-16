@@ -266,244 +266,220 @@
       "backSymbol": "assets/themes/selva/_back.webp",
       "cards": [
         {
+          "id": "frog",
+          "src": "assets/themes/selva/frog.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
           "id": "parrot",
           "src": "assets/themes/selva/parrot.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Animal Pack (Round) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/animal-pack"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "monkey",
-          "src": "assets/themes/selva/monkey.webp",
+          "id": "butterfly",
+          "src": "assets/themes/selva/butterfly.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Animal Pack (Round) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/animal-pack"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "leaf",
+          "src": "assets/themes/selva/leaf.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "flower",
+          "src": "assets/themes/selva/flower.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "tropical_fish",
+          "src": "assets/themes/selva/tropical_fish.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
           "id": "snake",
           "src": "assets/themes/selva/snake.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Animal Pack (Round) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/animal-pack"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "hippo",
-          "src": "assets/themes/selva/hippo.webp",
+          "id": "toucan",
+          "src": "assets/themes/selva/toucan.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Animal Pack (Round) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/animal-pack"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "monkey_face",
+          "src": "assets/themes/selva/monkey_face.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "tiger_face",
+          "src": "assets/themes/selva/tiger_face.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
           "id": "elephant",
           "src": "assets/themes/selva/elephant.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Animal Pack (Round) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/animal-pack"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "giraffe",
-          "src": "assets/themes/selva/giraffe.webp",
+          "id": "crocodile",
+          "src": "assets/themes/selva/crocodile.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Animal Pack (Round) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/animal-pack"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "tree_frog",
-          "src": "assets/themes/selva/tree_frog.webp",
+          "id": "turtle",
+          "src": "assets/themes/selva/turtle.webp",
           "w": 256,
           "h": 256,
-          "license": "own",
-          "attribution": ""
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "mushroom",
+          "src": "assets/themes/selva/mushroom.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
           "id": "snail",
           "src": "assets/themes/selva/snail.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Platformer Art Deluxe (Base pack) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/platformer-art-deluxe"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "fly",
-          "src": "assets/themes/selva/fly.webp",
+          "id": "bee",
+          "src": "assets/themes/selva/bee.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Platformer Art Deluxe (Base pack) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/platformer-art-deluxe"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "river_fish",
-          "src": "assets/themes/selva/river_fish.webp",
+          "id": "palm_tree",
+          "src": "assets/themes/selva/palm_tree.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Platformer Art Deluxe (Base pack) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/platformer-art-deluxe"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "mushroom_red",
-          "src": "assets/themes/selva/mushroom_red.webp",
+          "id": "potted_plant",
+          "src": "assets/themes/selva/potted_plant.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Platformer Art Deluxe (Base pack) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/platformer-art-deluxe"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "mushroom_brown",
-          "src": "assets/themes/selva/mushroom_brown.webp",
+          "id": "banana",
+          "src": "assets/themes/selva/banana.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Platformer Art Deluxe (Base pack) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/platformer-art-deluxe"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "grass_tuft",
-          "src": "assets/themes/selva/grass_tuft.webp",
+          "id": "pineapple",
+          "src": "assets/themes/selva/pineapple.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Platformer Art Deluxe (Base pack) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/platformer-art-deluxe"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "orchid_purple",
-          "src": "assets/themes/selva/orchid_purple.webp",
+          "id": "hibiscus",
+          "src": "assets/themes/selva/hibiscus.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Platformer Art Deluxe (Base pack) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/platformer-art-deluxe"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "bush",
-          "src": "assets/themes/selva/bush.webp",
+          "id": "lizard",
+          "src": "assets/themes/selva/lizard.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Platformer Art Deluxe (Base pack) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/platformer-art-deluxe"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "tree_round",
-          "src": "assets/themes/selva/tree_round.webp",
+          "id": "ant",
+          "src": "assets/themes/selva/ant.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Tiny Town (16px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/tiny-town"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "sprout",
-          "src": "assets/themes/selva/sprout.webp",
+          "id": "ladybug",
+          "src": "assets/themes/selva/ladybug.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Tiny Town (16px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/tiny-town"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "beehive",
-          "src": "assets/themes/selva/beehive.webp",
+          "id": "beetle",
+          "src": "assets/themes/selva/beetle.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Tiny Town (16px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/tiny-town"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "reeds",
-          "src": "assets/themes/selva/reeds.webp",
+          "id": "spider",
+          "src": "assets/themes/selva/spider.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "bulb_plant",
-          "src": "assets/themes/selva/bulb_plant.webp",
+          "id": "scorpion",
+          "src": "assets/themes/selva/scorpion.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
-        },
-        {
-          "id": "wildflowers",
-          "src": "assets/themes/selva/wildflowers.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
-        },
-        {
-          "id": "agave",
-          "src": "assets/themes/selva/agave.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
-        },
-        {
-          "id": "leaf_simple",
-          "src": "assets/themes/selva/leaf_simple.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
-        },
-        {
-          "id": "leaf_serrated",
-          "src": "assets/themes/selva/leaf_serrated.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
-        },
-        {
-          "id": "leaf_maple",
-          "src": "assets/themes/selva/leaf_maple.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
-        },
-        {
-          "id": "leaf_palmate",
-          "src": "assets/themes/selva/leaf_palmate.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
-        },
-        {
-          "id": "leaf_oval",
-          "src": "assets/themes/selva/leaf_oval.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
-        },
-        {
-          "id": "bush_round",
-          "src": "assets/themes/selva/bush_round.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
-        },
-        {
-          "id": "fern_branch",
-          "src": "assets/themes/selva/fern_branch.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
-        },
-        {
-          "id": "twig_berries",
-          "src": "assets/themes/selva/twig_berries.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         }
       ]
     },
@@ -521,244 +497,196 @@
       },
       "cards": [
         {
-          "id": "cat",
-          "src": "assets/themes/cozy/cat.webp",
+          "id": "mug_hot",
+          "src": "assets/themes/cozy/mug_hot.webp",
           "w": 256,
           "h": 256,
-          "license": "own",
-          "attribution": ""
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "mug",
-          "src": "assets/themes/cozy/mug.webp",
+          "id": "candle",
+          "src": "assets/themes/cozy/candle.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "candle_blue",
-          "src": "assets/themes/cozy/candle_blue.webp",
+          "id": "book",
+          "src": "assets/themes/cozy/book.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "candle_red",
-          "src": "assets/themes/cozy/candle_red.webp",
+          "id": "cat_face",
+          "src": "assets/themes/cozy/cat_face.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "goblet",
-          "src": "assets/themes/cozy/goblet.webp",
+          "id": "couch",
+          "src": "assets/themes/cozy/couch.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "glass_water",
-          "src": "assets/themes/cozy/glass_water.webp",
+          "id": "lamp",
+          "src": "assets/themes/cozy/lamp.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "cup",
-          "src": "assets/themes/cozy/cup.webp",
+          "id": "rose",
+          "src": "assets/themes/cozy/rose.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "donut_pink",
-          "src": "assets/themes/cozy/donut_pink.webp",
+          "id": "butterfly",
+          "src": "assets/themes/cozy/butterfly.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "cookie",
-          "src": "assets/themes/cozy/cookie.webp",
+          "id": "herb",
+          "src": "assets/themes/cozy/herb.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "lollipop",
-          "src": "assets/themes/cozy/lollipop.webp",
+          "id": "tea",
+          "src": "assets/themes/cozy/tea.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
-        },
-        {
-          "id": "candy_wrapped",
-          "src": "assets/themes/cozy/candy_wrapped.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
-        },
-        {
-          "id": "candy_cane",
-          "src": "assets/themes/cozy/candy_cane.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
-        },
-        {
-          "id": "pie_slice",
-          "src": "assets/themes/cozy/pie_slice.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
-        },
-        {
-          "id": "pudding",
-          "src": "assets/themes/cozy/pudding.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
-        },
-        {
-          "id": "ice_cream",
-          "src": "assets/themes/cozy/ice_cream.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
-        },
-        {
-          "id": "sandwich",
-          "src": "assets/themes/cozy/sandwich.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
-        },
-        {
-          "id": "pizza_slice",
-          "src": "assets/themes/cozy/pizza_slice.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
           "id": "cake",
           "src": "assets/themes/cozy/cake.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "biscuit",
+          "src": "assets/themes/cozy/biscuit.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
           "id": "heart",
           "src": "assets/themes/cozy/heart.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Emotes Pack (Pixel, Style 8 sin globo) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/emotes-pack"
-        },
-        {
-          "id": "sleep_z",
-          "src": "assets/themes/cozy/sleep_z.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Emotes Pack (Pixel, Style 8 sin globo) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/emotes-pack"
-        },
-        {
-          "id": "music_note",
-          "src": "assets/themes/cozy/music_note.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Emotes Pack (Pixel, Style 8 sin globo) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/emotes-pack"
-        },
-        {
-          "id": "idea_bulb",
-          "src": "assets/themes/cozy/idea_bulb.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Emotes Pack (Pixel, Style 8 sin globo) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/emotes-pack"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
           "id": "star",
           "src": "assets/themes/cozy/star.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Emotes Pack (Pixel, Style 8 sin globo) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/emotes-pack"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "rain_drop",
-          "src": "assets/themes/cozy/rain_drop.webp",
+          "id": "sparkles",
+          "src": "assets/themes/cozy/sparkles.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Emotes Pack (Pixel, Style 8 sin globo) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/emotes-pack"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "book_open",
-          "src": "assets/themes/cozy/book_open.webp",
+          "id": "cookie",
+          "src": "assets/themes/cozy/cookie.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "book_red",
-          "src": "assets/themes/cozy/book_red.webp",
+          "id": "chocolate",
+          "src": "assets/themes/cozy/chocolate.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "teapot",
-          "src": "assets/themes/cozy/teapot.webp",
+          "id": "donut",
+          "src": "assets/themes/cozy/donut.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "coffee_pot",
-          "src": "assets/themes/cozy/coffee_pot.webp",
+          "id": "pancakes",
+          "src": "assets/themes/cozy/pancakes.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "bowl",
-          "src": "assets/themes/cozy/bowl.webp",
+          "id": "cupcake",
+          "src": "assets/themes/cozy/cupcake.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "mug_big",
-          "src": "assets/themes/cozy/mug_big.webp",
+          "id": "yarn",
+          "src": "assets/themes/cozy/yarn.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "pillow",
+          "src": "assets/themes/cozy/pillow.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "bed",
+          "src": "assets/themes/cozy/bed.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "chair",
+          "src": "assets/themes/cozy/chair.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         }
       ]
     },
@@ -772,244 +700,212 @@
       "backSymbol": "assets/themes/geek/_back.webp",
       "cards": [
         {
-          "id": "laptop",
-          "src": "assets/themes/geek/laptop.webp",
+          "id": "video_game",
+          "src": "assets/themes/geek/video_game.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
-        },
-        {
-          "id": "retro_pc",
-          "src": "assets/themes/geek/retro_pc.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
-        },
-        {
-          "id": "monitor",
-          "src": "assets/themes/geek/monitor.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
-        },
-        {
-          "id": "pc_tower",
-          "src": "assets/themes/geek/pc_tower.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
-        },
-        {
-          "id": "cellphone_retro",
-          "src": "assets/themes/geek/cellphone_retro.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
-        },
-        {
-          "id": "mp3_player",
-          "src": "assets/themes/geek/mp3_player.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
-        },
-        {
-          "id": "tablet",
-          "src": "assets/themes/geek/tablet.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
-        },
-        {
-          "id": "usb_drive",
-          "src": "assets/themes/geek/usb_drive.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
-        },
-        {
-          "id": "motherboard",
-          "src": "assets/themes/geek/motherboard.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
-        },
-        {
-          "id": "ram_stick",
-          "src": "assets/themes/geek/ram_stick.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
-        },
-        {
-          "id": "gpu",
-          "src": "assets/themes/geek/gpu.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
           "id": "joystick",
           "src": "assets/themes/geek/joystick.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
-        },
-        {
-          "id": "arcade_stick",
-          "src": "assets/themes/geek/arcade_stick.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
-        },
-        {
-          "id": "gamepad_retro",
-          "src": "assets/themes/geek/gamepad_retro.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
-        },
-        {
-          "id": "gamepad",
-          "src": "assets/themes/geek/gamepad.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
-        },
-        {
-          "id": "microphone",
-          "src": "assets/themes/geek/microphone.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
-        },
-        {
-          "id": "headphones",
-          "src": "assets/themes/geek/headphones.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
-        },
-        {
-          "id": "cd",
-          "src": "assets/themes/geek/cd.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
-        },
-        {
-          "id": "camera",
-          "src": "assets/themes/geek/camera.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
-        },
-        {
-          "id": "microscope",
-          "src": "assets/themes/geek/microscope.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
-        },
-        {
-          "id": "d20",
-          "src": "assets/themes/geek/d20.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Board Game Icons (128px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/board-game-icons"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
           "id": "dice",
           "src": "assets/themes/geek/dice.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Board Game Icons (128px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/board-game-icons"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "chess_knight",
-          "src": "assets/themes/geek/chess_knight.webp",
+          "id": "cd",
+          "src": "assets/themes/geek/cd.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Board Game Icons (128px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/board-game-icons"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "puzzle",
-          "src": "assets/themes/geek/puzzle.webp",
+          "id": "laptop",
+          "src": "assets/themes/geek/laptop.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Board Game Icons (128px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/board-game-icons"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
-          "id": "cards_fan",
-          "src": "assets/themes/geek/cards_fan.webp",
+          "id": "desktop",
+          "src": "assets/themes/geek/desktop.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Board Game Icons (128px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/board-game-icons"
-        },
-        {
-          "id": "controller_xbox",
-          "src": "assets/themes/geek/controller_xbox.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Input Prompts 1.5 (Double 128px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/input-prompts"
-        },
-        {
-          "id": "controller_playstation",
-          "src": "assets/themes/geek/controller_playstation.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Input Prompts 1.5 (Double 128px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/input-prompts"
-        },
-        {
-          "id": "controller_switch",
-          "src": "assets/themes/geek/controller_switch.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Input Prompts 1.5 (Double 128px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/input-prompts"
-        },
-        {
-          "id": "steam_deck",
-          "src": "assets/themes/geek/steam_deck.webp",
-          "w": 256,
-          "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Input Prompts 1.5 (Double 128px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/input-prompts"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         },
         {
           "id": "keyboard",
           "src": "assets/themes/geek/keyboard.webp",
           "w": 256,
           "h": 256,
-          "license": "CC0-1.0",
-          "attribution": "Kenney - Input Prompts 1.5 (Double 128px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/input-prompts"
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "computer_mouse",
+          "src": "assets/themes/geek/computer_mouse.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "floppy",
+          "src": "assets/themes/geek/floppy.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "vhs",
+          "src": "assets/themes/geek/vhs.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "headphones",
+          "src": "assets/themes/geek/headphones.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "robot",
+          "src": "assets/themes/geek/robot.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "alien",
+          "src": "assets/themes/geek/alien.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "space_invader",
+          "src": "assets/themes/geek/space_invader.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "rocket",
+          "src": "assets/themes/geek/rocket.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "telescope",
+          "src": "assets/themes/geek/telescope.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "satellite",
+          "src": "assets/themes/geek/satellite.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "chess_pawn",
+          "src": "assets/themes/geek/chess_pawn.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "puzzle",
+          "src": "assets/themes/geek/puzzle.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "magnet",
+          "src": "assets/themes/geek/magnet.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "gear",
+          "src": "assets/themes/geek/gear.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "battery",
+          "src": "assets/themes/geek/battery.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "test_tube",
+          "src": "assets/themes/geek/test_tube.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "microscope",
+          "src": "assets/themes/geek/microscope.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "crystal_ball",
+          "src": "assets/themes/geek/crystal_ball.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "dna",
+          "src": "assets/themes/geek/dna.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
         }
       ]
     },
@@ -1051,7 +947,208 @@
       },
       "palette": "sweetie16",
       "backSymbol": "assets/themes/acuario/_back.webp",
-      "cards": []
+      "cards": [
+        {
+          "id": "tropical_fish",
+          "src": "assets/themes/acuario/tropical_fish.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "fish",
+          "src": "assets/themes/acuario/fish.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "blowfish",
+          "src": "assets/themes/acuario/blowfish.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "coral",
+          "src": "assets/themes/acuario/coral.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "water_wave",
+          "src": "assets/themes/acuario/water_wave.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "octopus",
+          "src": "assets/themes/acuario/octopus.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "squid",
+          "src": "assets/themes/acuario/squid.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "shrimp",
+          "src": "assets/themes/acuario/shrimp.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "lobster",
+          "src": "assets/themes/acuario/lobster.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "crab",
+          "src": "assets/themes/acuario/crab.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "dolphin",
+          "src": "assets/themes/acuario/dolphin.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "whale",
+          "src": "assets/themes/acuario/whale.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "shark",
+          "src": "assets/themes/acuario/shark.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "seal",
+          "src": "assets/themes/acuario/seal.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "otter",
+          "src": "assets/themes/acuario/otter.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "penguin",
+          "src": "assets/themes/acuario/penguin.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "jellyfish",
+          "src": "assets/themes/acuario/jellyfish.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "spiral_shell",
+          "src": "assets/themes/acuario/spiral_shell.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "oyster",
+          "src": "assets/themes/acuario/oyster.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "bubbles",
+          "src": "assets/themes/acuario/bubbles.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "anchor",
+          "src": "assets/themes/acuario/anchor.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "droplet",
+          "src": "assets/themes/acuario/droplet.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "frog",
+          "src": "assets/themes/acuario/frog.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "duck",
+          "src": "assets/themes/acuario/duck.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        },
+        {
+          "id": "turtle",
+          "src": "assets/themes/acuario/turtle.webp",
+          "w": 256,
+          "h": 256,
+          "license": "Apache-2.0",
+          "attribution": "Noto Emoji (Google) — Google Fonts — https://github.com/googlefonts/noto-emoji"
+        }
+      ]
     }
   ],
   "backgrounds": [
