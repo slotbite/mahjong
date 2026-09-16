@@ -36,28 +36,76 @@ function gradientTexture() {
 }
 
 export function createEnvironment({ scene, camera, renderer, manifest, glassMaterial }) {
-  // Luces
+  // Luces: para resaltar biseles en gema
   const hemi = new THREE.HemisphereLight(0xf4ead8, 0x1f4d3a, 1.15);
   scene.add(hemi);
-  const sun = new THREE.DirectionalLight(0xffe9c9, 1.6);
+
+  // Luz principal (frontal-superior)
+  const sun = new THREE.DirectionalLight(0xffe9c9, 2.4);
   sun.position.set(5, 8, 12);
   sun.target.position.set(0, 0, 0);
-  sun.castShadow = false;
-  sun.shadow.mapSize.set(1024, 1024);
-  sun.shadow.bias = -0.0006;
-  sun.shadow.normalBias = 0.02;
-  sun.shadow.radius = 4;
-  sun.shadow.camera.near = 1; sun.shadow.camera.far = 40;
   scene.add(sun, sun.target);
+
+  // Luz de contra (verde desde abajo-izquierda-atrás)
+  const backLight = new THREE.DirectionalLight(0x88ff88, 1.2);
+  backLight.position.set(-5, -3, -8);
+  scene.add(backLight);
+
+  // Punto cálido (para captar brillos en biseles)
+  const pointLight = new THREE.PointLight(0xffe9c9, 1.5);
+  pointLight.position.set(2, 3, 3);
+  scene.add(pointLight);
 
   // Niebla exponencial --bg-mid
   scene.fog = new THREE.FogExp2(0x1f4d3a, 0.012);
 
-  // Entorno PMREM para reflejos del vidrio
+  // Entorno procedural bokeh (selva) mejorado para reflejos del vidrio tipo gema
+  function createJungleBackground() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 1024; canvas.height = 1024;
+    const ctx = canvas.getContext('2d');
+
+    // Degradado de fondo: oscuro abajo, claro arriba (cielo)
+    const gradFondo = ctx.createLinearGradient(0, 0, 0, 1024);
+    gradFondo.addColorStop(0, '#9fd3c7');    // cielo claro arriba
+    gradFondo.addColorStop(0.33, '#6a9d8f'); // transición
+    gradFondo.addColorStop(1, '#2a4a30');    // tierra oscura abajo
+    ctx.fillStyle = gradFondo;
+    ctx.fillRect(0, 0, 1024, 1024);
+
+    // Círculos difuminados: hojas oscuras y luces bokeh claras (80% oscuras, 20% claras)
+    for (let i = 0; i < 300; i++) {
+      const x = Math.random() * 1024, y = Math.random() * 1024;
+      const radius = Math.random() * 70 + 15;
+      const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+
+      const isLight = Math.random() < 0.2; // 20% luces claras
+      if (isLight) {
+        gradient.addColorStop(0, 'rgba(230, 255, 200, 0.95)');
+        gradient.addColorStop(1, 'rgba(150, 200, 100, 0.2)');
+      } else {
+        const g = Math.floor(Math.random() * 100) + 40;
+        const b = Math.floor(Math.random() * 40) + 15;
+        gradient.addColorStop(0, `rgba(20, ${g}, ${b}, 0.8)`);
+        gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      }
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.mapping = THREE.EquirectangularReflectionMapping;
+    texture.colorSpace = THREE.SRGBColorSpace;
+    return texture;
+  }
+
   try {
+    const jungleEnvTex = createJungleBackground();
     const pmrem = new THREE.PMREMGenerator(renderer);
-    scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-    scene.environmentIntensity = 0.55;   // reflejos visibles en vidrio translúcido sin lavar el pixel art
+    scene.environment = pmrem.fromEquirectangular(jungleEnvTex).texture;
+    scene.environmentIntensity = 1.6;
     pmrem.dispose();
   } catch (err) { console.warn('[scene/env] sin environment map', err); }
 
