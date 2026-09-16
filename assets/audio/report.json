@@ -1,0 +1,198 @@
+{
+  "sounds": {
+    "rain-tropical": {
+      "hash": "56ff9f8d15",
+      "kind": "ambient",
+      "src": "rain",
+      "duration": 52,
+      "channels": 2,
+      "kbps": 64,
+      "lufsIn": -26.6,
+      "lufsOut": -23.1,
+      "truePeakOut": -0.9,
+      "gainDb": 3.6,
+      "ogg": 466941,
+      "m4a": 429858,
+      "loop": {
+        "xfade": 1.5,
+        "seam": {
+          "lfJumpRatio": 0.42,
+          "levelDeltaDb": -0.04,
+          "specDistDb": 2.36,
+          "samples": 2496000
+        },
+        "hardCut": {
+          "lfJumpRatio": 1.07,
+          "levelDeltaDb": -0.38,
+          "specDistDb": 2.92,
+          "samples": 2496000
+        }
+      }
+    },
+    "jungle-birds": {
+      "hash": "e5a7a45fd9",
+      "kind": "ambient",
+      "src": "jungle",
+      "duration": 46,
+      "channels": 2,
+      "kbps": 64,
+      "lufsIn": -30.4,
+      "lufsOut": -23.1,
+      "truePeakOut": -7,
+      "gainDb": 7.4,
+      "ogg": 357939,
+      "m4a": 378941,
+      "loop": {
+        "xfade": 2,
+        "seam": {
+          "lfJumpRatio": 0.28,
+          "levelDeltaDb": -0.26,
+          "specDistDb": 2.53,
+          "samples": 2208000
+        },
+        "hardCut": {
+          "lfJumpRatio": 5.62,
+          "levelDeltaDb": -5.78,
+          "specDistDb": 4.45,
+          "samples": 2208000
+        }
+      }
+    },
+    "thunder-1": {
+      "hash": "2635af3d39",
+      "kind": "oneshot",
+      "src": "thunder",
+      "duration": 10,
+      "channels": 1,
+      "kbps": 40,
+      "lufsIn": -36.5,
+      "lufsOut": -26.1,
+      "truePeakOut": -4.6,
+      "gainDb": 10.5,
+      "ogg": 49684,
+      "m4a": 53489
+    },
+    "flip": {
+      "hash": "dc7f3daef4",
+      "kind": "sfx",
+      "src": "glass",
+      "duration": 0.276,
+      "channels": 1,
+      "kbps": 56,
+      "lufsIn": -19.5,
+      "lufsOut": -19.2,
+      "truePeakOut": -1.4,
+      "gainDb": 1.5,
+      "ogg": 4672,
+      "m4a": 2986
+    },
+    "match": {
+      "hash": "f6bfbd0c91",
+      "kind": "sfx",
+      "src": "kalimba",
+      "duration": 1.8,
+      "channels": 1,
+      "kbps": 56,
+      "lufsIn": -16.8,
+      "lufsOut": -17.6,
+      "truePeakOut": -1.5,
+      "gainDb": -1.2,
+      "ogg": 12938,
+      "m4a": 13976
+    },
+    "miss": {
+      "hash": "40354a0296",
+      "kind": "sfx",
+      "src": "drop",
+      "duration": 0.717,
+      "channels": 1,
+      "kbps": 56,
+      "lufsIn": -17.9,
+      "lufsOut": -20.9,
+      "truePeakOut": -1.4,
+      "gainDb": -2.1,
+      "ogg": 6151,
+      "m4a": 6155
+    },
+    "deal": {
+      "hash": "c4911d3d8e",
+      "kind": "sfx",
+      "src": "shuffle",
+      "duration": 0.794,
+      "channels": 1,
+      "kbps": 56,
+      "lufsIn": -27.6,
+      "lufsOut": -20.1,
+      "truePeakOut": -1.4,
+      "gainDb": 9.6,
+      "ogg": 12082,
+      "m4a": 6925
+    },
+    "win": {
+      "hash": "c33682ebee",
+      "kind": "sfx",
+      "src": "kalimba",
+      "duration": 2.512,
+      "channels": 1,
+      "kbps": 56,
+      "lufsIn": -13.2,
+      "lufsOut": -17,
+      "truePeakOut": -2.2,
+      "gainDb": -3.8,
+      "ogg": 18464,
+      "m4a": 19188
+    },
+    "hint": {
+      "hash": "3efb3c3d40",
+      "kind": "sfx",
+      "src": "chime",
+      "duration": 2.305,
+      "channels": 1,
+      "kbps": 56,
+      "lufsIn": -50.1,
+      "lufsOut": -18.4,
+      "truePeakOut": 0,
+      "gainDb": 31.1,
+      "ogg": 19591,
+      "m4a": 17711
+    },
+    "combo": {
+      "hash": "933dfa91d6",
+      "kind": "sfx",
+      "src": "chime",
+      "duration": 1.306,
+      "channels": 1,
+      "kbps": 56,
+      "lufsIn": -49.7,
+      "lufsOut": -17.6,
+      "truePeakOut": -1,
+      "gainDb": 31.7,
+      "ogg": 12716,
+      "m4a": 10566
+    },
+    "cat_purr": {
+      "hash": "ec7e652bf9",
+      "kind": "sfx",
+      "src": "purr",
+      "duration": 2.058,
+      "channels": 1,
+      "kbps": 56,
+      "lufsIn": -30.3,
+      "lufsOut": -20,
+      "truePeakOut": -5.2,
+      "gainDb": 10.3,
+      "ogg": 15514,
+      "m4a": 15865
+    }
+  },
+  "generatedAt": "2026-09-16T12:30:19.860Z",
+  "targets": {
+    "ambientLufs": -23,
+    "sfxLufs": -18,
+    "ambientKbps": 64,
+    "sfxKbps": 56,
+    "oneshotKbps": 40,
+    "sampleRate": 48000,
+    "budgetBytes": 2621440
+  }
+}
