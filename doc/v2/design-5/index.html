@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Memorice Cozy v2 — Previews</title>
+  <style>
+    :root {
+      --bg-deep: #0f2a22;
+      --bg-mid: #1f4d3a;
+      --moss: #6a9a5b;
+      --lime: #b8d96a;
+      --cream: #f4ead8;
+      --terracotta: #c8744a;
+      --sky-rain: #8fb3c7;
+      --radius-panel: 20px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg-deep);
+      color: var(--cream);
+      font-family: 'Nunito', system-ui, sans-serif;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+      font-family: 'Pixelify Sans', monospace;
+    }
+
+    .subtitle {
+      color: rgba(244, 234, 216, 0.68);
+      font-size: 14px;
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+
+    .nav-section {
+      background: rgba(31, 77, 58, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 32px;
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 12px;
+    }
+
+    .nav-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      padding: 12px 14px;
+      border-radius: 8px;
+      background: rgba(15, 42, 34, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      cursor: pointer;
+      transition: all 200ms ease;
+      text-decoration: none;
+      color: var(--cream);
+    }
+
+    .nav-item:hover {
+      background: rgba(184, 217, 106, 0.16);
+      border-color: rgba(184, 217, 106, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .nav-item.active {
+      background: rgba(184, 217, 106, 0.22);
+      border-color: rgba(184, 217, 106, 0.8);
+    }
+
+    .nav-item-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .nav-item-size {
+      font-size: 11px;
+      color: rgba(244, 234, 216, 0.62);
+    }
+
+    .viewer-section {
+      background: rgba(31, 77, 58, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-panel);
+      padding: 24px;
+      backdrop-filter: blur(12px);
+    }
+
+    .viewer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .viewer-title {
+      font-size: 18px;
+      font-weight: 600;
+      font-family: 'Pixelify Sans', monospace;
+    }
+
+    .viewer-size {
+      font-size: 12px;
+      color: rgba(244, 234, 216, 0.62);
+    }
+
+    .iframe-container {
+      position: relative;
+      background: var(--bg-deep);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      overflow: auto;
+      max-height: 90vh;
+    }
+
+    iframe {
+      border: none;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .empty-state {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 400px;
+      color: rgba(244, 234, 216, 0.5);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .info-box {
+      background: rgba(143, 179, 199, 0.1);
+      border: 1px solid rgba(143, 179, 199, 0.3);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 24px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .info-box strong {
+      color: var(--sky-rain);
+    }
+
+    .grid-view {
+      display: none;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .grid-view.active {
+      display: grid;
+    }
+
+    .grid-card {
+      background: rgba(31, 77, 58, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 200ms ease;
+    }
+
+    .grid-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .grid-card-image {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--bg-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: rgba(244, 234, 216, 0.4);
+    }
+
+    .grid-card-info {
+      padding: 16px;
+    }
+
+    .grid-card-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 13px;
+    }
+
+    .grid-card-size {
+      font-size: 11px;
+      color: rgba(244, 234, 216, 0.62);
+      margin-bottom: 10px;
+    }
+
+    .grid-card-button {
+      display: inline-block;
+      padding: 8px 12px;
+      background: rgba(184, 217, 106, 0.2);
+      border: 1px solid rgba(184, 217, 106, 0.5);
+      border-radius: 6px;
+      color: var(--lime);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 200ms ease;
+    }
+
+    .grid-card-button:hover {
+      background: rgba(184, 217, 106, 0.3);
+      border-color: rgba(184, 217, 106, 0.8);
+    }
+
+    .table-section {
+      margin-top: 32px;
+    }
+
+    .table-title {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(15, 42, 34, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th {
+      background: rgba(31, 77, 58, 0.6);
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: rgba(244, 234, 216, 0.68);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 13px;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .size-value {
+      font-family: 'Pixelify Sans', monospace;
+      font-weight: 600;
+      color: var(--lime);
+    }
+
+    .file-value {
+      font-family: monospace;
+      font-size: 11px;
+      color: rgba(244, 234, 216, 0.72);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Memorice Cozy v2</h1>
+    <div class="subtitle">Previews de diseño · Entrega local · design-5</div>
+
+    <div class="info-box">
+      <strong>Cómo ver las previews:</strong> Haz click en un artboard en la lista de abajo para verlo en tamaño real. Para ver los PNG renderizados, consulta la tabla al final o abre los archivos directamente desde <code>doc/v2/design-5/png/</code>.
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-label">Artboards</div>
+      <div class="nav-list">
+        <a href="#" class="nav-item active" data-id="0">
+          <div class="nav-item-title">Móvil · partida</div>
+          <div class="nav-item-size">390 × 844</div>
+        </a>
+        <a href="#" class="nav-item" data-id="1">
+          <div class="nav-item-title">Móvil · ajustes</div>
+          <div class="nav-item-size">390 × 844</div>
+        </a>
+        <a href="#" class="nav-item" data-id="2">
+          <div class="nav-item-title">Tablet</div>
+          <div class="nav-item-size">1024 × 768</div>
+        </a>
+        <a href="#" class="nav-item" data-id="3">
+          <div class="nav-item-title">Escritorio</div>
+          <div class="nav-item-size">1920 × 1080</div>
+        </a>
+        <a href="#" class="nav-item" data-id="4">
+          <div class="nav-item-title">Ultra-wide 32:9</div>
+          <div class="nav-item-size">2048 × 576</div>
+        </a>
+        <a href="#" class="nav-item" data-id="5">
+          <div class="nav-item-title">Guía de estilo</div>
+          <div class="nav-item-size">1600 × 2760</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="viewer-section">
+      <div class="viewer-header">
+        <div>
+          <div class="viewer-title" id="viewer-title">Móvil · partida</div>
+          <div class="viewer-size" id="viewer-size">390 × 844</div>
+        </div>
+      </div>
+      <div class="iframe-container">
+        <iframe id="viewer-iframe"></iframe>
+      </div>
+    </div>
+
+    <div class="table-section">
+      <div class="table-title">Artboards disponibles</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Archivo HTML</th>
+            <th>Tamaño</th>
+            <th>PNG</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Móvil · partida</td>
+            <td class="file-value">Main.dc.html</td>
+            <td class="size-value">390 × 844</td>
+            <td class="file-value">Main.png</td>
+          </tr>
+          <tr>
+            <td>Móvil · ajustes</td>
+            <td class="file-value">MovilAjustes.dc.html</td>
+            <td class="size-value">390 × 844</td>
+            <td class="file-value">MovilAjustes.png</td>
+          </tr>
+          <tr>
+            <td>Tablet</td>
+            <td class="file-value">Tablet.dc.html</td>
+            <td class="size-value">1024 × 768</td>
+            <td class="file-value">Tablet.png</td>
+          </tr>
+          <tr>
+            <td>Escritorio · victoria</td>
+            <td class="file-value">Escritorio.dc.html</td>
+            <td class="size-value">1920 × 1080</td>
+            <td class="file-value">Escritorio.png</td>
+          </tr>
+          <tr>
+            <td>Ultra-wide 32:9 (escala 0,4)</td>
+            <td class="file-value">UltraWide.dc.html</td>
+            <td class="size-value">2048 × 576</td>
+            <td class="file-value">UltraWide.png</td>
+          </tr>
+          <tr>
+            <td>Guía de estilo</td>
+            <td class="file-value">Guia.dc.html</td>
+            <td class="size-value">1600 × 2760</td>
+            <td class="file-value">Guia.png</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const ARTBOARDS = [
+      { file: 'Main.dc.html', title: 'Móvil · partida', w: 390, h: 844 },
+      { file: 'MovilAjustes.dc.html', title: 'Móvil · ajustes', w: 390, h: 844 },
+      { file: 'Tablet.dc.html', title: 'Tablet', w: 1024, h: 768 },
+      { file: 'Escritorio.dc.html', title: 'Escritorio', w: 1920, h: 1080 },
+      { file: 'UltraWide.dc.html', title: 'Ultra-wide 32:9', w: 2048, h: 576 },
+      { file: 'Guia.dc.html', title: 'Guía de estilo', w: 1600, h: 2760 },
+    ];
+
+    const navItems = document.querySelectorAll('.nav-item');
+    const viewerIframe = document.getElementById('viewer-iframe');
+    const viewerTitle = document.getElementById('viewer-title');
+    const viewerSize = document.getElementById('viewer-size');
+
+    function loadArtboard(index) {
+      const board = ARTBOARDS[index];
+      viewerIframe.src = board.file;
+      viewerTitle.textContent = board.title;
+      viewerSize.textContent = `${board.w} × ${board.h}`;
+
+      navItems.forEach((item, i) => {
+        item.classList.toggle('active', i === index);
+      });
+
+      // Adjust iframe container height for responsiveness
+      const container = viewerIframe.parentElement;
+      const maxHeight = window.innerHeight - 300;
+      const scale = Math.min(1, (window.innerWidth - 60) / board.w);
+      container.style.height = Math.min(board.h * scale, maxHeight) + 'px';
+    }
+
+    navItems.forEach((item, i) => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        loadArtboard(i);
+      });
+    });
+
+    window.addEventListener('resize', () => {
+      const activeIndex = Array.from(navItems).findIndex(item => item.classList.contains('active'));
+      if (activeIndex !== -1) {
+        const board = ARTBOARDS[activeIndex];
+        const container = viewerIframe.parentElement;
+        const maxHeight = window.innerHeight - 300;
+        const scale = Math.min(1, (window.innerWidth - 60) / board.w);
+        container.style.height = Math.min(board.h * scale, maxHeight) + 'px';
+      }
+    });
+
+    // Load first artboard by default
+    loadArtboard(0);
+  </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+{
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "title": "Móvil 390×844 · partida",
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844
+    },
+    {
+      "file": "MovilAjustes.dc.html",
+      "title": "Móvil · ajustes (cajón)",
+      "x": 480,
+      "y": 0,
+      "w": 390,
+      "h": 844
+    },
+    {
+      "file": "Tablet.dc.html",
+      "title": "Tablet 1024×768",
+      "x": 960,
+      "y": 0,
+      "w": 1024,
+      "h": 768
+    },
+    {
+      "file": "Escritorio.dc.html",
+      "title": "Escritorio 1920×1080 · victoria",
+      "x": 0,
+      "y": 1000,
+      "w": 1920,
+      "h": 1080
+    },
+    {
+      "file": "UltraWide.dc.html",
+      "title": "Ultra-wide 5120×1440 · escala 0,4",
+      "x": 0,
+      "y": 2240,
+      "w": 2048,
+      "h": 576
+    },
+    {
+      "file": "Guia.dc.html",
+      "title": "Guía de estilo",
+      "x": 2100,
+      "y": 0,
+      "w": 1600,
+      "h": 2760
+    }
+  ],
+  "annotations": [
+    {
+      "id": "transiciones",
+      "x": 0,
+      "y": -210,
+      "w": 440,
+      "text": "Transiciones (todas con --ease-cozy):\n• Flip 600 ms · rotación Y con canto visible\n• Match: sube 0.3 u + brillo lime, se desvanece 900 ms y deja hueco con luz\n• Miss: inclina 8° y vuelve a dorso a 1 100 ms, sin sacudida\n• Reparto: caída escalonada 40 ms/ficha desde 2 u, rebote mínimo\n• UI (cajón, chips, botones): 260 ms\n• prefers-reduced-motion: flips instantáneos con fade, sin caída"
+    },
+    {
+      "id": "movil-nota",
+      "x": 480,
+      "y": -130,
+      "w": 380,
+      "text": "Móvil: gutter 16 px, cartas 82 px, HUD como bottom sheet (pulgar). El cajón de ajustes sube 760 px y hace scroll interno; orden: Partida → Sonido → Imagen."
+    },
+    {
+      "id": "tablet-nota",
+      "x": 960,
+      "y": -130,
+      "w": 420,
+      "text": "Tablet: HUD superior de 68 px con marca · marcadores · pista/pausa. Ajustes y sonido flotantes 56 px abajo a la derecha. Repisas de vidrio con plantas reales a los lados."
+    },
+    {
+      "id": "desktop-nota",
+      "x": 1960,
+      "y": 1000,
+      "w": 300,
+      "text": "Escritorio: al ganar, el tablero queda en huecos con luz; la victoria es un panel de vidrio 560 px centrado. Récords a la derecha sobre el mismo eje. Botón primario terracotta con texto --bg-deep (AA)."
+    },
+    {
+      "id": "uw-nota",
+      "x": 0,
+      "y": 2130,
+      "w": 640,
+      "text": "Ultra-wide 32:9 dibujado a escala 0,4 (2048×576 = 5120×1440). Tablero 6×6 de 1286 px (cartas 196 px), islas de vidrio de 560 px a 70 px del tablero: el HUD queda a menos de 1 000 px del centro de la vista. Laterales: repisas en 2 profundidades (parallax) + helechos colgantes, lluvia 2 400 gotas, DPR 1.0."
+    },
+    {
+      "id": "guia-nota",
+      "x": 2100,
+      "y": -130,
+      "w": 520,
+      "text": "Guía de estilo: paleta, glass, tipografía, anatomía y estados de la ficha, iconografía pixel 16×16 y los 4 temas. Placeholders de selva/cozy/geek son de design-5, se reemplazan por los CC0 de assets-2."
+    }
+  ],
+  "launch": {
+    "view": "canvas"
+  }
+}
