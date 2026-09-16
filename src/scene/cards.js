@@ -150,7 +150,15 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
   const pointer = { x: 0, y: 0 };
   const pointerSmooth = { x: 0, y: 0 };
   const TILT_X = 0.075, TILT_Y = 0.09;
-  function setPointer(nx, ny) { pointer.x = Math.max(-1, Math.min(1, nx)); pointer.y = Math.max(-1, Math.min(1, ny)); }
+  function setPointer(nx, ny, world) {
+    pointer.x = Math.max(-1, Math.min(1, nx)); pointer.y = Math.max(-1, Math.min(1, ny));
+    if (world) { pointerWorld.set(world.x, world.y); pointerWorld.valid = true; }
+  }
+  const pointerWorld = Object.assign(new THREE.Vector2(), { valid: false });
+  // Luz de puntero: ilumina solo la zona de la gema bajo el cursor (alcance corto, caída cuadrática).
+  const hoverLight = new THREE.PointLight(0xfff4e0, 0, 1.15, 2);
+  hoverLight.position.z = 0.6;
+  scene.add(hoverLight);
   let time = 0;
   let backVoxelGroups = [];  // grupos de voxels por carta
 
@@ -497,12 +505,14 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
       if (card.hoverK !== target) {
         card.hoverK += (target - card.hoverK) * Math.min(1, dt * 9);
         if (Math.abs(card.hoverK - target) < 0.01) card.hoverK = target;
-        if (phase !== 'won') {
-          card.glassMat.emissive.copy(SKY);
-          card.glassMat.emissiveIntensity = card.hoverK * 0.22;
-        }
+        card.glassMat.emissiveIntensity = 0; // sin tinte: el hover lo hace la luz de puntero
       }
     }
+    // Luz de puntero: sigue al cursor sobre el plano del tablero y se enciende solo sobre una gema.
+    const lightOn = hovered >= 0 && phase !== 'won' && pointerWorld.valid;
+    const targetI = lightOn ? 9 : 0;
+    hoverLight.intensity += (targetI - hoverLight.intensity) * Math.min(1, dt * 10);
+    if (pointerWorld.valid) { hoverLight.position.x = pointerWorld.x; hoverLight.position.y = pointerWorld.y; }
     if (phase === 'won') {
       for (const h of holes) h.mesh.position.y = h.base.y + Math.sin(t + h.phase) * 0.03;
     }

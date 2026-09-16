@@ -54,7 +54,16 @@ export function init(ctx) {
     canvas, camera, bus, EV,
     getPickables: () => cards.pickables(),
     onHover: (i) => cards.setHover(i),
-    onPointer: (nx, ny) => { env.setPointer(nx, ny); cards.setPointer(nx, ny); },
+    onPointer: (nx, ny) => {
+      env.setPointer(nx, ny);
+      // Rayo de la cámara por el puntero, intersectado con el plano del tablero (z = 0).
+      const a = new THREE.Vector3(nx, ny, -1).unproject(camera);
+      const b = new THREE.Vector3(nx, ny, 1).unproject(camera);
+      const dir = b.sub(a);
+      const tHit = Math.abs(dir.z) > 1e-6 ? -a.z / dir.z : 0;
+      const hit = a.add(dir.multiplyScalar(tHit));
+      cards.setPointer(nx, ny, hit);
+    },
   });
 
   function applyLayout(emit = true) {
