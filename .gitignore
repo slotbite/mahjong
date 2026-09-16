@@ -11,3 +11,6 @@ Thumbs.db
 
 # assets crudos descargados (los procesados sí se versionan)
 assets/raw/
+
+# crudos de audio (audio-4), fuera de git
+assets/raw-audio/
