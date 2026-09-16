@@ -472,11 +472,13 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
 
   function update(dt, t) {
     time = t;
-    if (!isReducedMotion()) {
+    // Guiado por el propio puntero y de poca amplitud: se aplica también con movimiento reducido
+    // (el sistema del dueño lo reporta activo y el efecto desaparecía).
+    {
       const tx = -pointer.y * TILT_X, ty = pointer.x * TILT_Y;
       board.rotation.x += (tx - board.rotation.x) * Math.min(1, dt * 4);
       board.rotation.y += (ty - board.rotation.y) * Math.min(1, dt * 4);
-    } else if (board.rotation.x !== 0 || board.rotation.y !== 0) { board.rotation.set(0, 0, 0); }
+    }
     for (const card of cards) {
       if (card.matched && phase !== 'won') continue;
       if (!card.dropping && phase !== 'won') {
