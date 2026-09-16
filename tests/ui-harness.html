@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Memorice Cozy · harness UI (ui-6)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/tokens.css">
+  <link rel="stylesheet" href="../styles/ui.css">
+  <style>
+    /* Fondo y tablero de mentira: sustituyen a la escena Three.js de core-1 solo para probar la UI. */
+    #fake-bg { position: fixed; inset: 0; background:
+      radial-gradient(1200px 600px at 50% -10%, rgba(143,179,199,.18), transparent 60%),
+      linear-gradient(180deg, #123329 0%, var(--bg-deep) 45%, #0a1d17 100%); }
+    #fake-bg::after { content: ""; position: absolute; inset: 0; background-image: url("../img/plants_wallpaper.jpg"); background-size: cover; background-position: center; opacity: .22; filter: blur(2px) saturate(.8); }
+    #fake-board { position: fixed; display: grid; gap: 2%; z-index: 1; }
+    .fcard { position: relative; border: 1px solid var(--glass-border); border-radius: var(--radius-card); background: var(--glass-fill);
+      backdrop-filter: blur(8px); box-shadow: 0 8px 20px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.3); padding: 0; overflow: hidden;
+      transition: transform .5s var(--ease-cozy), opacity .9s var(--ease-cozy); cursor: pointer; }
+    .fcard .back { position: absolute; inset: 0; display: grid; place-items: center; font: 700 clamp(18px, 40%, 48px) var(--font-display); color: var(--sky-rain); opacity: .8; }
+    .fcard .front { position: absolute; inset: 8%; width: 84%; height: 84%; object-fit: contain; image-rendering: pixelated; opacity: 0; transition: opacity .3s; }
+    .fcard.up .front, #fake-board.hinting .fcard .front { opacity: 1; }
+    .fcard.up .back, #fake-board.hinting .fcard .back { opacity: 0; }
+    .fcard.matched { opacity: 0; transform: translateY(-12px) scale(.96); pointer-events: none; box-shadow: 0 0 24px var(--lime); }
+    #fake-panel { position: fixed; left: 8px; top: 8px; z-index: 60; display: flex; flex-wrap: wrap; gap: 4px; max-width: 320px; padding: 6px; border-radius: 10px;
+      background: rgba(0,0,0,.55); font: 11px/1.2 monospace; color: #ddd; }
+    #fake-panel button { font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid #555; background: #222; color: #eee; cursor: pointer; }
+    #fake-log { margin: 0; padding: 0 0 0 12px; width: 100%; max-height: 120px; overflow: hidden; color: #9c9; }
+    #fake-panel.hidden { display: none; }
+    html[data-layout="mobile"] #fake-panel { top: auto; bottom: 26vh; left: 4px; max-width: 45vw; }
+  </style>
+</head>
+<body>
+  <div id="fake-bg" aria-hidden="true"></div>
+  <div id="fake-board" aria-hidden="true"></div>
+
+  <div id="ui-root">
+    <header id="hud" class="glass" aria-live="polite"></header>
+    <aside id="hud-left" class="glass island" hidden></aside>
+    <aside id="hud-right" class="glass island" hidden></aside>
+    <div id="board-a11y" role="grid" aria-label="Tablero de memorice"></div>
+    <dialog id="settings-dialog" class="glass"></dialog>
+    <dialog id="win-dialog" class="glass"></dialog>
+    <div id="toast" role="status" aria-live="polite"></div>
+  </div>
+
+  <div id="fake-panel" aria-hidden="true">
+    <button data-do="matchOne">match</button>
+    <button data-do="missOne">miss</button>
+    <button data-do="streak">streak×6</button>
+    <button data-do="addTime">+30 s</button>
+    <button data-do="nearTimeout">≤10 s</button>
+    <button data-do="winNow">win</button>
+    <button data-do="loseNow">lose</button>
+    <button data-do="hide">ocultar</button>
+    <ul id="fake-log"></ul>
+  </div>
+
+  <script type="module">
+    import { bus, EV } from '../src/core/bus.js';
+    import { settings } from '../src/core/settings.js';
+    import { startFakeCore } from './fake-core.js';
+
+    const q = new URLSearchParams(location.search);
+    if (q.has('reset')) { localStorage.removeItem('memorice.v2.settings'); localStorage.removeItem('memorice.v2.records'); }
+    for (const k of ['mode', 'cols', 'rows', 'themeId', 'lang']) if (q.has(k)) settings.set(k, /^\d+$/.test(q.get(k)) ? Number(q.get(k)) : q.get(k));
+    if (q.has('nopanel')) document.getElementById('fake-panel').classList.add('hidden');
+
+    const manifest = await (await fetch('../assets/manifest.json', { cache: 'no-cache' })).json();
+    const ctx = { bus, EV, settings, manifest };
+    const fake = startFakeCore(ctx);
+    window.__fake = fake; window.__bus = bus; window.__EV = EV; window.__settings = settings;
+
+    const ui = await import('../src/ui/index.js');
+    window.__ui = await ui.init(ctx);
+
+    const s = settings.all;
+    bus.emit(EV.THEME_LOAD, { themeId: s.themeId });
+    bus.once(EV.THEME_READY, () => bus.emit(EV.GAME_NEW, { mode: s.mode, cols: s.cols, rows: s.rows, themeId: s.themeId, seed: null }));
+
+    document.getElementById('fake-panel').addEventListener('click', (e) => {
+      const act = e.target.dataset.do; if (!act) return;
+      if (act === 'hide') { e.currentTarget.classList.add('hidden'); return; }
+      if (act === 'addTime') fake.addTime(30); else fake[act]?.();
+    });
+  </script>
+</body>
+</html>
