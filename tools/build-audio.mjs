@@ -117,7 +117,7 @@ const SOUNDS = [
   // --- truenos lejanos (one-shots esporádicos, los dispara el motor) ---
   { id: 'thunder-1', kind: 'oneshot', src: 'thunder', ss: 4, t: 10, fade: [0.8, 3.0], lufs: -26, gain: 0.6, mono: true },
   // --- sfx ---
-  { id: 'flip', kind: 'sfx', src: 'kalimba', lufs: -19, gain: 0.5, af: `asetrate=${SR * 1.3},aresample=${SR},lowpass=f=3600,bass=g=3:f=250:w=0.7,afade=t=in:d=0.005`, maxDur: 0.28, fadeOut: 0.14,
+  { id: 'flip', kind: 'sfx', src: 'kalimba', lufs: -19, gain: 0.5, af: `asetrate=${SR * 1.75},aresample=${SR},highpass=f=350,lowpass=f=6500,afade=t=in:d=0.003`, maxDur: 0.26, fadeOut: 0.12,
     note: 'golpe de cristal agudo tipo xilófono (pedido del dueño): el cuenco de match ~1.6 octavas arriba, corto; el motor varía ±4 % el rate' },
   { id: 'flip-v1', kind: 'sfx', src: 'glass', lufs: -18, gain: 0.5, af: 'lowpass=f=9000', maxDur: 0.5,
     note: 'tap de vidrio v1 (comparación en el banco)' },
