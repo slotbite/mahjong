@@ -21,7 +21,8 @@ const SKY = new THREE.Color(0x8fb3c7);
 const BLACK = new THREE.Color(0x000000);
 const FACE_DOWN = Math.PI;
 const TILT = (8 * Math.PI) / 180;
-const DUR = { flip: 600, settle: 900, drop: 560, dropStagger: 40, tilt: 220, press: 160, fade: 180 };
+// flip: 320ms with ease.cozy matches v1's 250ms linear. Right edge toward viewer (v1 direction).
+const DUR = { flip: 320, settle: 900, drop: 560, dropStagger: 40, tilt: 220, press: 160, fade: 180 };
 
 export function createGlassMaterial() {
   const color = new THREE.Color(0xffffff).lerp(new THREE.Color(GLASS.tint), GLASS.tintAmount);
@@ -159,6 +160,16 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
   // --- animaciones ---
   function rotateTo(card, targetY, dur, withLift = true) {
     const fromY = card.group.rotation.y;
+
+    // Ensure consistent flip direction: right edge always toward viewer (like v1)
+    // When flipping from π (face-down) to 0 (face-up), interpolate via 2π instead of 0
+    // This reverses the rotation direction to match v1's right-edge-toward-viewer motion
+    let adjustedTargetY = targetY;
+    if (Math.abs(fromY - Math.PI) < 0.5 && targetY < Math.PI / 2) {
+      // Going from ~π to ~0: use 2π as intermediate for consistent direction
+      adjustedTargetY = 2 * Math.PI;
+    }
+
     if (isReducedMotion() || dur === 0) {
       // Giro instantáneo + "fade" por escala (0.86→1). No se usa opacidad: un material
       // transparente sale del pase de transmisión y el vidrio mostraría solo el esmerilado.
@@ -169,7 +180,7 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
     return track(card, tween({
       dur, ease: ease.cozy,
       onUpdate: (k, lin) => {
-        card.group.rotation.y = fromY + (targetY - fromY) * k;
+        card.group.rotation.y = fromY + (adjustedTargetY - fromY) * k;
         if (withLift) card.group.position.z = card.baseZ + Math.sin(lin * Math.PI) * 0.35;
       },
       onDone: () => { card.group.rotation.y = targetY; card.group.position.z = card.baseZ; },
