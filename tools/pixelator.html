@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pixelador · Memorice Cozy (dev)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/tokens.css">
+  <style>
+    /* tokens.css fija overflow:hidden para el juego; la herramienta necesita scroll. */
+    html, body { overflow: auto; height: auto; min-height: 100%; }
+    body { padding: var(--gutter); background: radial-gradient(1200px 600px at 20% -10%, var(--bg-mid), var(--bg-deep) 70%); }
+    h1 { font-family: var(--font-display); font-weight: 600; font-size: 1.6rem; margin: 0 0 4px; color: var(--lime); }
+    h1 small { font-family: var(--font-body); font-weight: 400; font-size: .85rem; color: var(--sky-rain); margin-left: 8px; }
+    .sub { margin: 0 0 16px; opacity: .8; font-size: .9rem; }
+    .layout { display: grid; grid-template-columns: 320px 1fr; gap: 16px; align-items: start; }
+    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+    .panel { padding: 16px; }
+    .drop { display: block; border: 2px dashed var(--glass-border); border-radius: var(--radius-card); padding: 22px 12px; text-align: center; cursor: pointer; transition: background var(--dur-ui) var(--ease-cozy), border-color var(--dur-ui); }
+    .drop.over, .drop:hover { background: rgba(184,217,106,.12); border-color: var(--lime); }
+    .drop input { display: none; }
+    label.ctl { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 10px; margin: 14px 0 0; font-size: .82rem; font-weight: 600; color: var(--sky-rain); }
+    label.ctl > input, label.ctl > select, label.ctl > .swatches { flex-basis: 100%; }
+    label.ctl span.val { color: var(--cream); font-weight: 400; font-variant-numeric: tabular-nums; text-align: right; }
+    input[type=range] { width: 100%; accent-color: var(--lime); }
+    select, input[type=text], input[type=number] { width: 100%; margin-top: 4px; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--glass-border); background: rgba(0,0,0,.25); color: var(--cream); font: inherit; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .btns { display: grid; gap: 8px; margin-top: 16px; }
+    button { min-height: var(--tap-min); padding: 8px 14px; border-radius: 12px; border: 1px solid var(--glass-border); background: var(--glass-fill); color: var(--cream); font: inherit; font-weight: 600; cursor: pointer; transition: transform var(--dur-ui) var(--ease-cozy), background var(--dur-ui); }
+    button:hover { background: rgba(255,255,255,.22); }
+    button:active { transform: scale(.98); }
+    button.primary { background: var(--terracotta); border-color: transparent; }
+    button.primary:hover { background: #d9865c; }
+    button:disabled { opacity: .45; cursor: default; }
+    .swatches { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 6px; min-height: 14px; }
+    .swatches i { width: 14px; height: 14px; border-radius: 3px; border: 1px solid rgba(0,0,0,.4); }
+    .cards { display: grid; gap: 14px; }
+    .card { padding: 12px; display: grid; grid-template-columns: auto auto 1fr; gap: 14px; align-items: start; }
+    @media (max-width: 700px) { .card { grid-template-columns: 1fr; } }
+    .card figure { margin: 0; }
+    .card figcaption { font-size: .75rem; opacity: .75; margin-top: 4px; text-align: center; }
+    .card canvas, .card img { display: block; image-rendering: pixelated; image-rendering: crisp-edges; background: repeating-conic-gradient(rgba(255,255,255,.08) 0 25%, transparent 0 50%) 0 0 / 16px 16px; border-radius: 8px; border: 1px solid var(--glass-border); }
+    .meta { font-size: .85rem; }
+    .meta input[type=text] { margin: 4px 0 8px; }
+    .meta .small { opacity: .7; font-size: .78rem; }
+    .meta .acts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .meta .acts button { min-height: 36px; padding: 6px 12px; font-size: .85rem; }
+    #status { font-size: .8rem; color: var(--sky-rain); margin-top: 10px; min-height: 1.2em; }
+    .empty { opacity: .6; text-align: center; padding: 40px 16px; }
+    kbd { font-family: var(--font-display); background: rgba(0,0,0,.35); padding: 1px 6px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <h1>Pixelador <small>herramienta dev · exporta cartas 256×256 para <code>assets/raw/&lt;tema&gt;/</code></small></h1>
+  <p class="sub">Arrastra imágenes crudas, ajusta grado, paleta y dithering, y exporta <code>&lt;cardId&gt;.webp</code>. Mismo motor que usa el juego (<code>src/pixel/pixelator.js</code>).</p>
+
+  <div class="layout">
+    <aside class="panel glass">
+      <label class="drop" id="drop">
+        <strong>Suelta imágenes aquí</strong><br><span class="small">o haz clic para elegir (varias a la vez)</span>
+        <input type="file" id="file" accept="image/*" multiple>
+      </label>
+
+      <label class="ctl">Grado de pixelado <span class="val"><b id="scaleVal">94</b> · <span id="cellsVal">128×128 celdas</span></span>
+        <input type="range" id="scale" min="0" max="100" step="1" value="94">
+      </label>
+
+      <label class="ctl">Paleta
+        <select id="palette"></select>
+        <div class="swatches" id="swatches"></div>
+      </label>
+
+      <div class="row">
+        <label class="ctl">Colores (original) <span class="val" id="colorsVal">16</span>
+          <input type="range" id="colors" min="4" max="32" step="1" value="16">
+        </label>
+        <label class="ctl">Dithering
+          <select id="dither">
+            <option value="none">Ninguno</option>
+            <option value="bayer">Bayer 4×4</option>
+            <option value="floyd">Floyd-Steinberg</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="row">
+        <label class="ctl">Tamaño de salida
+          <select id="size"><option>128</option><option selected>256</option><option>512</option></select>
+        </label>
+        <label class="ctl">Zoom vista <span class="val" id="zoomVal">×1</span>
+          <input type="range" id="zoom" min="1" max="3" step="1" value="1">
+        </label>
+      </div>
+
+      <label class="ctl">Tema destino
+        <select id="theme"></select>
+      </label>
+      <label class="ctl">Nombre de carta (para la selección / última cargada)
+        <input type="text" id="cardName" placeholder="ej. helecho_colgante" spellcheck="false">
+      </label>
+
+      <div class="btns">
+        <button class="primary" id="exportAll" disabled>Exportar todo (.webp, secuencial)</button>
+        <button id="exportAllPng" disabled>Exportar todo (.png)</button>
+        <button id="bench" title="36 imágenes 512→256 pico8">Medir rendimiento ×36</button>
+        <button id="clear" disabled>Vaciar lista</button>
+      </div>
+      <div id="status"></div>
+    </aside>
+
+    <main class="cards" id="cards">
+      <div class="empty glass panel">Sin imágenes todavía. Sugerencia: prueba con <kbd>img/snake_plant.png</kbd> del repo para comparar con las cartas v1.</div>
+    </main>
+  </div>
+
+  <script type="module">
+    import { pixelate, listPalettes, registerPalettes, cellsFor, cellPxFor } from '../src/pixel/pixelator.js';
+
+    const $ = (id) => document.getElementById(id);
+    const state = { items: [], manifest: null };
+    const ui = {
+      scale: $('scale'), scaleVal: $('scaleVal'), cellsVal: $('cellsVal'), palette: $('palette'), swatches: $('swatches'),
+      colors: $('colors'), colorsVal: $('colorsVal'), dither: $('dither'), size: $('size'), zoom: $('zoom'), zoomVal: $('zoomVal'),
+      theme: $('theme'), cardName: $('cardName'), cards: $('cards'), status: $('status'),
+      exportAll: $('exportAll'), exportAllPng: $('exportAllPng'), bench: $('bench'), clear: $('clear'), drop: $('drop'), file: $('file'),
+    };
+
+    // --- manifiesto: temas y paletas -------------------------------------------------------
+    try {
+      const res = await fetch('../assets/manifest.json', { cache: 'no-cache' });
+      state.manifest = await res.json();
+      registerPalettes(state.manifest.palettes);
+    } catch (e) { setStatus(`Sin manifiesto (${e.message}); uso paletas internas.`); }
+
+    for (const t of state.manifest?.themes ?? [{ id: 'plantas', name: { es: 'Plantas' } }]) {
+      const o = document.createElement('option');
+      o.value = t.id; o.textContent = `${t.name?.es ?? t.id} (${t.id})`;
+      ui.theme.append(o);
+    }
+    for (const p of listPalettes()) {
+      const o = document.createElement('option');
+      o.value = p.id; o.textContent = p.name;
+      ui.palette.append(o);
+    }
+
+    // --- opciones actuales ------------------------------------------------------------------
+    function opts() {
+      return {
+        pixelScale: Number(ui.scale.value), palette: ui.palette.value, dither: ui.dither.value,
+        size: Number(ui.size.value), colors: Number(ui.colors.value),
+      };
+    }
+    function slug(name) {
+      return name.replace(/\.[^.]+$/, '').normalize('NFD').replace(/[̀-ͯ]/g, '')
+        .toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '').replace(/-pixelicious.*$/, '') || 'carta';
+    }
+    function setStatus(msg) { ui.status.textContent = msg; }
+
+    function refreshControls() {
+      const s = Number(ui.scale.value), n = cellsFor(s);
+      ui.scaleVal.textContent = s;
+      ui.cellsVal.textContent = `${n}×${n} celdas · ${cellPxFor(s).toFixed(1)} px @512`;
+      ui.colorsVal.textContent = ui.colors.value;
+      ui.colors.disabled = ui.palette.value !== 'original';
+      ui.zoomVal.textContent = `×${ui.zoom.value}`;
+      const pal = listPalettes().find((p) => p.id === ui.palette.value);
+      ui.swatches.innerHTML = (pal?.colors ?? []).map((c) => `<i style="background:${c}" title="${c}"></i>`).join('');
+      const has = state.items.length > 0;
+      ui.exportAll.disabled = ui.exportAllPng.disabled = ui.clear.disabled = !has;
+    }
+
+    // --- render de cada carta ---------------------------------------------------------------
+    function renderItem(item) {
+      const o = opts();
+      const t0 = performance.now();
+      item.out = pixelate(item.img, o);
+      item.ms = performance.now() - t0;
+      const z = Number(ui.zoom.value);
+      const view = item.el.querySelector('canvas.after');
+      view.width = item.out.width; view.height = item.out.height;
+      view.style.width = view.style.height = `${Math.min(o.size * z, 512)}px`;
+      view.getContext('2d').drawImage(item.out, 0, 0);
+      const before = item.el.querySelector('img.before');
+      before.style.width = before.style.height = view.style.width;
+      item.el.querySelector('.info').textContent =
+        `${item.img.naturalWidth}×${item.img.naturalHeight} → ${o.size}px · ${cellsFor(o.pixelScale)} celdas · ${o.palette}${o.palette === 'original' ? ` (${o.colors})` : ''} · ${o.dither} · ${item.ms.toFixed(1)} ms`;
+    }
+    function renderAll() { for (const it of state.items) renderItem(it); }
+
+    function addItem(file, img) {
+      const item = { file, img, id: slug(file.name), out: null, ms: 0 };
+      const el = document.createElement('article');
+      el.className = 'card glass';
+      el.innerHTML = `
+        <figure><img class="before" alt="original"><figcaption>antes (contain)</figcaption></figure>
+        <figure><canvas class="after" width="256" height="256"></canvas><figcaption>después (nearest)</figcaption></figure>
+        <div class="meta">
+          <label>cardId <input type="text" class="id" spellcheck="false"></label>
+          <div class="small info"></div>
+          <div class="small path"></div>
+          <div class="acts">
+            <button class="png">Exportar PNG</button>
+            <button class="webp">Exportar WebP</button>
+            <button class="rm">Quitar</button>
+          </div>
+        </div>`;
+      const before = el.querySelector('img.before');
+      before.src = img.src; before.style.objectFit = 'contain';
+      const idInput = el.querySelector('input.id');
+      idInput.value = item.id;
+      idInput.addEventListener('input', () => { item.id = slug(idInput.value) || item.id; updatePath(item); });
+      el.querySelector('.png').addEventListener('click', () => download(item, 'png'));
+      el.querySelector('.webp').addEventListener('click', () => download(item, 'webp'));
+      el.querySelector('.rm').addEventListener('click', () => { state.items = state.items.filter((i) => i !== item); el.remove(); refreshControls(); if (!state.items.length) showEmpty(); });
+      el.addEventListener('click', () => { state.selected = item; ui.cardName.value = item.id; });
+      item.el = el;
+      ui.cards.querySelector('.empty')?.remove();
+      ui.cards.append(el);
+      state.items.push(item);
+      state.selected = item;
+      ui.cardName.value = item.id;
+      updatePath(item);
+      renderItem(item);
+      refreshControls();
+    }
+    function showEmpty() { ui.cards.innerHTML = '<div class="empty glass panel">Sin imágenes.</div>'; }
+    function updatePath(item) {
+      item.el.querySelector('.path').textContent = `→ assets/raw/${ui.theme.value}/${item.id}.webp`;
+      item.el.querySelector('input.id').value = item.id;
+    }
+
+    // --- exportación ------------------------------------------------------------------------
+    function toBlob(canvas, type, quality) {
+      return new Promise((res, rej) => canvas.toBlob((b) => (b ? res(b) : rej(new Error('toBlob falló'))), type, quality));
+    }
+    async function download(item, fmt) {
+      if (!item.out) renderItem(item);
+      const type = fmt === 'webp' ? 'image/webp' : 'image/png';
+      const blob = await toBlob(item.out, type, fmt === 'webp' ? 0.92 : undefined);
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `${item.id}.${fmt}`;
+      document.body.append(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+      setStatus(`${a.download} · ${(blob.size / 1024).toFixed(1)} KB · tema ${ui.theme.value}`);
+    }
+    async function exportAll(fmt) {
+      // Descarga secuencial (sin zip): el navegador puede pedir permiso para múltiples descargas.
+      for (const it of state.items) { await download(it, fmt); await new Promise((r) => setTimeout(r, 350)); }
+      setStatus(`Exportadas ${state.items.length} cartas .${fmt} para assets/raw/${ui.theme.value}/`);
+    }
+
+    // --- carga de archivos ------------------------------------------------------------------
+    function loadFiles(files) {
+      for (const f of [...files]) {
+        if (!f.type.startsWith('image/')) continue;
+        const img = new Image();
+        img.onload = () => addItem(f, img);
+        img.onerror = () => setStatus(`No pude leer ${f.name}`);
+        img.src = URL.createObjectURL(f);
+      }
+    }
+    ui.file.addEventListener('change', () => { loadFiles(ui.file.files); ui.file.value = ''; });
+    for (const ev of ['dragenter', 'dragover']) ui.drop.addEventListener(ev, (e) => { e.preventDefault(); ui.drop.classList.add('over'); });
+    for (const ev of ['dragleave', 'drop']) ui.drop.addEventListener(ev, (e) => { e.preventDefault(); ui.drop.classList.remove('over'); });
+    ui.drop.addEventListener('drop', (e) => loadFiles(e.dataTransfer.files));
+    document.addEventListener('dragover', (e) => e.preventDefault());
+    document.addEventListener('drop', (e) => { e.preventDefault(); loadFiles(e.dataTransfer.files); });
+
+    // --- controles --------------------------------------------------------------------------
+    for (const c of ['scale', 'palette', 'colors', 'dither', 'size']) ui[c].addEventListener('input', () => { refreshControls(); renderAll(); });
+    ui.zoom.addEventListener('input', () => { refreshControls(); renderAll(); });
+    ui.theme.addEventListener('change', () => state.items.forEach(updatePath));
+    ui.cardName.addEventListener('input', () => { if (state.selected) { state.selected.id = slug(ui.cardName.value) || state.selected.id; updatePath(state.selected); } });
+    ui.exportAll.addEventListener('click', () => exportAll('webp'));
+    ui.exportAllPng.addEventListener('click', () => exportAll('png'));
+    ui.clear.addEventListener('click', () => { state.items = []; showEmpty(); refreshControls(); });
+
+    // Medición §8: 36 imágenes de 512 px → 256 px con pico8. Usa la primera carta cargada o un
+    // degradado sintético con ruido si no hay ninguna.
+    ui.bench.addEventListener('click', async () => {
+      const src = document.createElement('canvas'); src.width = src.height = 512;
+      const c = src.getContext('2d');
+      if (state.items[0]) c.drawImage(state.items[0].img, 0, 0, 512, 512);
+      else {
+        const g = c.createLinearGradient(0, 0, 512, 512); g.addColorStop(0, '#0f2a22'); g.addColorStop(.5, '#b8d96a'); g.addColorStop(1, '#c8744a');
+        c.fillStyle = g; c.fillRect(0, 0, 512, 512);
+        for (let i = 0; i < 3000; i++) { c.fillStyle = `hsl(${Math.random() * 360} 60% 50%)`; c.fillRect(Math.random() * 512, Math.random() * 512, 6, 6); }
+      }
+      const o = { pixelScale: Number(ui.scale.value), palette: 'pico8', dither: ui.dither.value, size: 256 };
+      pixelate(src, o); // calentamiento
+      const t0 = performance.now();
+      for (let i = 0; i < 36; i++) pixelate(src, o);
+      const ms = performance.now() - t0;
+      const msg = `36 × pixelate(512→256, pico8, grado ${o.pixelScale}, ${o.dither}): ${ms.toFixed(0)} ms total · ${(ms / 36).toFixed(1)} ms/img`;
+      setStatus(msg); console.info('[bench]', msg);
+      window.__benchResult = { ms, per: ms / 36, ...o };
+    });
+
+    refreshControls();
+    window.__tool = { state, opts, loadFiles, renderAll };
+  </script>
+</body>
+</html>
