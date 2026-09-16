@@ -117,8 +117,10 @@ const SOUNDS = [
   // --- truenos lejanos (one-shots esporádicos, los dispara el motor) ---
   { id: 'thunder-1', kind: 'oneshot', src: 'thunder', ss: 4, t: 10, fade: [0.8, 3.0], lufs: -26, gain: 0.6, mono: true },
   // --- sfx ---
-  { id: 'flip', kind: 'sfx', src: 'glass', lufs: -18, gain: 0.5, af: 'lowpass=f=9000', maxDur: 0.5,
-    note: 'tap de vidrio suave; el motor varía ±4 % el rate para que no suene mecánico' },
+  { id: 'flip', kind: 'sfx', src: 'kalimba', lufs: -19, gain: 0.5, af: `asetrate=${SR * 3},aresample=${SR},highpass=f=900,afade=t=in:d=0.004`, maxDur: 0.45, fadeOut: 0.22,
+    note: 'golpe de cristal agudo tipo xilófono (pedido del dueño): el cuenco de match ~1.6 octavas arriba, corto; el motor varía ±4 % el rate' },
+  { id: 'flip-v1', kind: 'sfx', src: 'glass', lufs: -18, gain: 0.5, af: 'lowpass=f=9000', maxDur: 0.5,
+    note: 'tap de vidrio v1 (comparación en el banco)' },
   { id: 'match', kind: 'sfx', src: 'kalimba', lufs: -18, gain: 0.7, maxDur: 1.8, fadeOut: 0.5,
     note: 'nota de kalimba (A3) que acompaña el desvanecido de la ficha; rate 1+racha·0.03 en el motor' },
   { id: 'miss', kind: 'sfx', src: 'drop', lufs: -20, gain: 0.5, af: `asetrate=${SR * 0.78},aresample=${SR},lowpass=f=4000`, maxDur: 1.0, fadeOut: 0.25,

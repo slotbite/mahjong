@@ -7,7 +7,8 @@ Generado por `tools/build-audio.mjs`. Todos los archivos externos son **CC0 1.0*
 | `rain-tropical` | ambient | [Light rain in a field of bananas trees](https://freesound.org/people/felix.blume/sounds/512334/) | felix.blume | CC0-1.0 | 5s–58.5s; loop xfade 1.5s; lluvia suave sobre hojas de plátano (Veracruz), tramo 5–58.5 s del original, loop 52 s |
 | `jungle-birds` | ambient | [Peruvian Amazon birds frogs daytime](https://freesound.org/people/nonamethefish/sounds/653743/) | nonamethefish | CC0-1.0 | 0.5s–48.5s; loop xfade 2s; ranas e insectos con aves (Amazonía peruana), tramo 0.5–48.5 s, loop 46 s |
 | `thunder-1` | oneshot | [Distant rumbles](https://freesound.org/people/richwise/sounds/584946/) | richwise | CC0-1.0 | 4s–14s |
-| `flip` | sfx | [Interface Sounds — glass_001](https://kenney.nl/assets/interface-sounds) | Kenney (kenney.nl) | CC0-1.0 | tap de vidrio suave; el motor varía ±4 % el rate para que no suene mecánico |
+| `flip` | sfx | [Kalimba.wav](https://freesound.org/people/PanPiper5/sounds/659909/) | PanPiper5 | CC0-1.0 | golpe de cristal agudo tipo xilófono (pedido del dueño): el cuenco de match ~1.6 octavas arriba, corto; el motor varía ±4 % el rate |
+| `flip-v1` | sfx | [Interface Sounds — glass_001](https://kenney.nl/assets/interface-sounds) | Kenney (kenney.nl) | CC0-1.0 | tap de vidrio v1 (comparación en el banco) |
 | `match` | sfx | [Kalimba.wav](https://freesound.org/people/PanPiper5/sounds/659909/) | PanPiper5 | CC0-1.0 | nota de kalimba (A3) que acompaña el desvanecido de la ficha; rate 1+racha·0.03 en el motor |
 | `miss` | sfx | [water drop](https://freesound.org/people/florianreichelt/sounds/683102/) | florianreichelt | CC0-1.0 | gota de agua transpuesta −4 semitonos: grave, sin castigo |
 | `deal` | sfx | [card_shuffle.mp3 (Memorice v1)](legacy/v1) | proyecto (v1) | own | barajar (card_shuffle v1 reutilizado) |
