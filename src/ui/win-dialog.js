@@ -101,7 +101,8 @@ export function initWinDialog(ui) {
   }
 
   // Ligero retraso para dejar terminar la animación de la última ficha (§2.2, 900 ms).
-  const delay = () => (prefersReducedMotion(settings) ? 150 : 700);
+  // Espera a que termine la salida del último match (giro + zoom-out ≈ 1150 ms) antes de abrir.
+  const delay = () => (prefersReducedMotion(settings) ? 350 : 1600);
   bus.on(EV.GAME_WIN, (p) => setTimeout(() => show('win', p), delay()));
   bus.on(EV.GAME_LOSE, (p) => setTimeout(() => show('lose', p), 200));
   bus.on(EV.GAME_NEW, () => { if (dlg.open) dlg.close(); current = null; });

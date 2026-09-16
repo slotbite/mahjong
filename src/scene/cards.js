@@ -429,26 +429,12 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
     } });
   }
 
-  /** Victoria: las fichas reaparecen como vidrio traslúcido flotando; los huecos se apagan. */
+  /** Victoria: las gemas emparejadas ya se fueron y no vuelven (pedido del dueño: reaparecían
+   *  blanquecinas, como seleccionadas). Solo los huecos de luz se atenúan y quedan flotando. */
   function celebrate() {
     phase = 'won';
     hovered = -1;
-    for (const h of holes) tween({ dur: 1200, onUpdate: (k) => { h.mesh.material.opacity = 0.42 * (1 - k); } });
-    cards.forEach((card, i) => {
-      kill(card);
-      card.group.visible = true;
-      card.group.rotation.set(0, 0, 0);
-      card.group.scale.set(1, 1, 1);
-      card.glassMat.emissive.copy(LIME);
-      card.glassMat.emissiveIntensity = 0;
-      setOpacity(card, 0);
-      card.baseZ = 0.3;
-      track(card, tween({ dur: 1400, delay: 200 + i * 30, ease: ease.cozy, onUpdate: (k) => {
-        setOpacity(card, 0.55 * k);
-        card.group.position.z = 0.3 * k;
-        card.glassMat.emissiveIntensity = 0.25 * k;
-      } }));
-    });
+    for (const h of holes) tween({ dur: 1600, delay: 1200, onUpdate: (k) => { h.mesh.material.opacity = 0.42 * (1 - 0.6 * k); } });
   }
 
   function dim() {
@@ -495,7 +481,7 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
     pointerSmooth.y += (pointer.y - pointerSmooth.y) * Math.min(1, dt * 4);
     const tiltX = -pointerSmooth.y * TILT_X, tiltY = pointerSmooth.x * TILT_Y;
     for (const card of cards) {
-      if (card.matched && phase !== 'won') continue;
+      if (card.matched) continue;   // las emparejadas no se tocan (ni en la victoria)
       if (!card.dropping && phase !== 'won') {
         // Inclinación de 8° del fallo (≈220 ms) y su vuelta a 0, independiente del flip.
         const dz = card.tiltTarget - card.group.rotation.z;
@@ -515,10 +501,6 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
           card.glassMat.emissive.copy(SKY);
           card.glassMat.emissiveIntensity = card.hoverK * 0.22;
         }
-      }
-      if (phase === 'won') {
-        card.group.position.z = card.baseZ + Math.sin(t * 1.1 + card.bobPhase) * 0.06;
-        card.group.rotation.z = Math.sin(t * 0.7 + card.bobPhase) * 0.03;
       }
     }
     if (phase === 'won') {
