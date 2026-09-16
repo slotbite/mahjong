@@ -117,7 +117,7 @@ const SOUNDS = [
   // --- truenos lejanos (one-shots esporádicos, los dispara el motor) ---
   { id: 'thunder-1', kind: 'oneshot', src: 'thunder', ss: 4, t: 10, fade: [0.8, 3.0], lufs: -26, gain: 0.6, mono: true },
   // --- sfx ---
-  { id: 'flip', kind: 'sfx', src: 'kalimba', lufs: -19, gain: 0.5, af: `asetrate=${SR * 1.3},aresample=${SR},lowpass=f=2600,bass=g=3:f=250:w=0.7,afade=t=in:d=0.005`, maxDur: 0.28, fadeOut: 0.14,
+  { id: 'flip', kind: 'sfx', src: 'kalimba', lufs: -19, gain: 0.5, af: `asetrate=${SR * 1.3},aresample=${SR},lowpass=f=3600,bass=g=3:f=250:w=0.7,afade=t=in:d=0.005`, maxDur: 0.28, fadeOut: 0.14,
     note: 'golpe de cristal agudo tipo xilófono (pedido del dueño): el cuenco de match ~1.6 octavas arriba, corto; el motor varía ±4 % el rate' },
   { id: 'flip-v1', kind: 'sfx', src: 'glass', lufs: -18, gain: 0.5, af: 'lowpass=f=9000', maxDur: 0.5,
     note: 'tap de vidrio v1 (comparación en el banco)' },
@@ -125,8 +125,19 @@ const SOUNDS = [
     note: 'nota de kalimba (A3) que acompaña el desvanecido de la ficha; rate 1+racha·0.03 en el motor' },
   { id: 'miss', kind: 'sfx', src: 'drop', lufs: -20, gain: 0.5, af: `asetrate=${SR * 0.78},aresample=${SR},lowpass=f=4000`, maxDur: 1.0, fadeOut: 0.25,
     note: 'gota de agua transpuesta −4 semitonos: grave, sin castigo' },
-  { id: 'deal', kind: 'sfx', src: 'shuffle', lufs: -18, gain: 0.6, maxDur: 1.0,
-    note: 'barajar (card_shuffle v1 reutilizado)' },
+  { id: 'deal', kind: 'sfx', src: 'glass', lufs: -18, gain: 0.55, maxDur: 1.1, fadeOut: 0.3,
+    // 8 golpes de vidrio escalonados (~0.5 s, como el reparto de 40 ms por ficha) con tonos distintos,
+    // y una capa grave filtrada que hace de superficie de vidrio templado.
+    af: (() => {
+      const hits = [[0, 1.0], [55, 1.08], [120, 0.94], [170, 1.15], [240, 1.03], [300, 0.9], [380, 1.1], [450, 1.2]];
+      const n = hits.length;
+      const split = `asplit=${n + 1}` + hits.map((_, i) => `[h${i}]`).join('') + '[surf]';
+      const chains = hits.map(([ms, r], i) => `[h${i}]asetrate=${Math.round(SR * r)},aresample=${SR},adelay=${ms}|${ms}[o${i}]`).join(';');
+      const surf = `[surf]asetrate=${Math.round(SR * 0.5)},aresample=${SR},lowpass=f=500,volume=0.5,adelay=20|20[os]`;
+      const mix = hits.map((_, i) => `[o${i}]`).join('') + `[os]amix=inputs=${n + 1}:normalize=0:dropout_transition=0`;
+      return `${split};${chains};${surf};${mix}`;
+    })(),
+    note: 'gemas cayendo sobre vidrio templado (pedido del dueño); sustituye el barajado v1' },
   { id: 'win', kind: 'sfx', src: 'kalimba', lufs: -17, gain: 0.8, maxDur: 3.2, fadeOut: 0.8,
     complex: arpeggio([1, 1.2599, 1.4983, 2.0], 0.14),
     note: 'acorde ascendente A3–C#4–E4–A4 construido con la misma kalimba (4 capas transpuestas, 140 ms entre notas)' },

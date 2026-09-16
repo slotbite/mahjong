@@ -1235,10 +1235,10 @@
         "ogg": "assets/audio/deal.ogg",
         "m4a": "assets/audio/deal.m4a",
         "loop": false,
-        "gain": 0.6,
-        "license": "own",
-        "attribution": "card_shuffle.mp3 (Memorice v1) — proyecto (v1) (legacy/v1)",
-        "duration": 0.794
+        "gain": 0.55,
+        "license": "CC0-1.0",
+        "attribution": "Interface Sounds — glass_001 — Kenney (kenney.nl) (https://kenney.nl/assets/interface-sounds)",
+        "duration": 0.68
       },
       "win": {
         "ogg": "assets/audio/win.ogg",

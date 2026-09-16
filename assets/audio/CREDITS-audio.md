@@ -11,7 +11,7 @@ Generado por `tools/build-audio.mjs`. Todos los archivos externos son **CC0 1.0*
 | `flip-v1` | sfx | [Interface Sounds — glass_001](https://kenney.nl/assets/interface-sounds) | Kenney (kenney.nl) | CC0-1.0 | tap de vidrio v1 (comparación en el banco) |
 | `match` | sfx | [Kalimba.wav](https://freesound.org/people/PanPiper5/sounds/659909/) | PanPiper5 | CC0-1.0 | nota de kalimba (A3) que acompaña el desvanecido de la ficha; rate 1+racha·0.03 en el motor |
 | `miss` | sfx | [water drop](https://freesound.org/people/florianreichelt/sounds/683102/) | florianreichelt | CC0-1.0 | gota de agua transpuesta −4 semitonos: grave, sin castigo |
-| `deal` | sfx | [card_shuffle.mp3 (Memorice v1)](legacy/v1) | proyecto (v1) | own | barajar (card_shuffle v1 reutilizado) |
+| `deal` | sfx | [Interface Sounds — glass_001](https://kenney.nl/assets/interface-sounds) | Kenney (kenney.nl) | CC0-1.0 | gemas cayendo sobre vidrio templado (pedido del dueño); sustituye el barajado v1 |
 | `win` | sfx | [Kalimba.wav](https://freesound.org/people/PanPiper5/sounds/659909/) | PanPiper5 | CC0-1.0 | acorde ascendente A3–C#4–E4–A4 construido con la misma kalimba (4 capas transpuestas, 140 ms entre notas) |
 | `hint` | sfx | [Kalimba.wav](https://freesound.org/people/PanPiper5/sounds/659909/) | PanPiper5 | CC0-1.0 | cuenco grave de meditación: kalimba bajada una octava con ataque suavizado y cola larga meditativa |
 | `hint-v1` | sfx | [wind chimes - single 04.wav](https://freesound.org/people/Anthousai/sounds/398496/) | Anthousai | CC0-1.0 | v1: campanilla suave (versión anterior, mantenida para comparación) |
