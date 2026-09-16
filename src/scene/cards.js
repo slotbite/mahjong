@@ -13,7 +13,7 @@ export const GLASS = Object.freeze({
   // Boceto gema_cristal_transparente.html: cristal sin color propio, todo es refracción del entorno.
   // Cámara ortográfica y ficha delgada: ior moderado y grosor óptico corto para que la selva
   // se vea a través; el ior 2.4 del boceto desplazaba la muestra fuera de la ficha (gris).
-  transmission: 1.0, roughness: 0.04, thickness: 0.3, ior: 1.35,
+  transmission: 1.0, roughness: 0.16, thickness: 0.3, ior: 1.35, // roughness 0.16 = esmerilado suave (pedido del dueño)
   attenuationColor: 0xffffff, attenuationDistance: Infinity, // vidrio incoloro: el fondo se ve sin tinte
   clearcoat: 1.0, clearcoatRoughness: 0.1, metalness: 0.0,
   specularIntensity: 0.8, envMapIntensity: 0.7,
@@ -65,7 +65,7 @@ function diagonalShineTexture(opacity = 0.35) {
 
 function createGemGeometry() {
   const shape = new THREE.Shape();
-  const size = 0.5;      // mitad de lado 1.0
+  const size = 0.5 - 0.16; // mitad de lado 1.0 TOTAL: el bisel (bevelSize 0.16) se suma por fuera
   const radius = 0.1;    // radio de esquina
   shape.moveTo(-size + radius, -size);
   shape.lineTo(size - radius, -size);
