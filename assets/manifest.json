@@ -1199,10 +1199,10 @@
         "ogg": "assets/audio/flip.ogg",
         "m4a": "assets/audio/flip.m4a",
         "loop": false,
-        "gain": 0.55,
+        "gain": 0.5,
         "license": "CC0-1.0",
         "attribution": "Kalimba.wav — PanPiper5 (https://freesound.org/people/PanPiper5/sounds/659909/)",
-        "duration": 0.18
+        "duration": 0.28
       },
       "flip-v1": {
         "ogg": "assets/audio/flip-v1.ogg",
