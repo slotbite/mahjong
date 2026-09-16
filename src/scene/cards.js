@@ -41,25 +41,6 @@ export function createGlassMaterial() {
   });
 }
 
-// Destello de 4 puntas para el hover "diamante": aditivo, sin color propio.
-function sparkleTexture() {
-  const c = document.createElement('canvas'); c.width = 128; c.height = 128;
-  const g = c.getContext('2d');
-  g.clearRect(0, 0, 128, 128);
-  const core = g.createRadialGradient(64, 64, 0, 64, 64, 14);
-  core.addColorStop(0, 'rgba(255,255,255,1)'); core.addColorStop(1, 'rgba(255,255,255,0)');
-  g.fillStyle = core; g.fillRect(0, 0, 128, 128);
-  g.strokeStyle = 'rgba(255,255,255,0.95)'; g.lineCap = 'round';
-  for (const [dx, dy, w, len] of [[1, 0, 2.2, 60], [0, 1, 2.2, 60], [1, 1, 1.2, 26], [1, -1, 1.2, 26]]) {
-    const n = Math.hypot(dx, dy); const ux = dx / n, uy = dy / n;
-    const grad = g.createLinearGradient(64 - ux * len, 64 - uy * len, 64 + ux * len, 64 + uy * len);
-    grad.addColorStop(0, 'rgba(255,255,255,0)'); grad.addColorStop(0.5, 'rgba(255,255,255,1)'); grad.addColorStop(1, 'rgba(255,255,255,0)');
-    g.strokeStyle = grad; g.lineWidth = w;
-    g.beginPath(); g.moveTo(64 - ux * len, 64 - uy * len); g.lineTo(64 + ux * len, 64 + uy * len); g.stroke();
-  }
-  return new THREE.CanvasTexture(c);
-}
-
 function radialTexture() {
   const c = document.createElement('canvas'); c.width = 128; c.height = 128;
   const g = c.getContext('2d');
@@ -155,8 +136,6 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
   const holeGeo = new THREE.PlaneGeometry(1.15, 1.15);
   const baseGlass = createGlassMaterial();
   const holeTex = radialTexture();
-  const sparkleTex = sparkleTexture();
-  const sparkleGeo = new THREE.PlaneGeometry(0.34, 0.34);
   const shineTex = diagonalShineTexture(0.35);
   const shineTexBack = diagonalShineTexture(0.2);
 
@@ -232,19 +211,11 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
     // Nodo de inclinación por ficha (sigue al puntero) entre el grupo (giro/posición) y las mallas.
     const tilt = new THREE.Group();
     tilt.add(glass, front, voxelGroup);
-    // Destello de diamante (hover): en una esquina del bisel, aditivo, escala 0 en reposo.
-    const sparkleMat = new THREE.MeshBasicMaterial({ map: sparkleTex, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, depthTest: false, toneMapped: false, opacity: 0 });
-    const sparkle = new THREE.Mesh(sparkleGeo, sparkleMat);
-    const corner = [[-1, 1], [1, 1], [1, -1], [-1, -1]][Math.floor(Math.random() * 4)];
-    sparkle.position.set(corner[0] * 0.36, corner[1] * 0.36, 0.11);
-    sparkle.renderOrder = 5;
-    sparkle.scale.set(0.001, 0.001, 1);
-    tilt.add(sparkle);
     group.add(tilt);
     glass.renderOrder = 0;
     const slot = slotPosition(data.index, cols, rows);
     const card = {
-      index: data.index, pairKey: data.pairKey, group, tilt, glass, glassMat, front, frontMat, voxelGroup, sparkle, sparkleMat,
+      index: data.index, pairKey: data.pairKey, group, tilt, glass, glassMat, front, frontMat, voxelGroup,
       slot, faceUp: false, matched: false, tiltTarget: 0, dropping: false, hoverK: 0, tweens: [], baseZ: 0, bobPhase: Math.random() * 6.283,
     };
     group.rotation.y = FACE_DOWN;
@@ -282,7 +253,7 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
     for (const c of cards) {
       kill(c);
       board.remove(c.group);
-      c.glassMat.dispose(); c.frontMat.dispose(); c.sparkleMat?.dispose();
+      c.glassMat.dispose(); c.frontMat.dispose();
       if (c.voxelGroup) {
         for (const child of c.voxelGroup.children) {
           if (child.material) child.material.dispose();
@@ -526,20 +497,10 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
       if (card.hoverK !== target) {
         card.hoverK += (target - card.hoverK) * Math.min(1, dt * 9);
         if (Math.abs(card.hoverK - target) < 0.01) card.hoverK = target;
-        // Hover "diamante": nada opaco. Suben los reflejos y el especular del cristal.
-        card.glassMat.emissiveIntensity = 0;
-        card.glassMat.envMapIntensity = GLASS.envMapIntensity + card.hoverK * 1.6;
-        card.glassMat.specularIntensity = GLASS.specularIntensity + card.hoverK * 0.8;
-        card.glassMat.clearcoatRoughness = 0.1 - card.hoverK * 0.07;
-      }
-      if (card.sparkle && (card.hoverK > 0 || card.sparkleMat.opacity > 0)) {
-        const tw = 0.55 + 0.45 * Math.sin(t * 9 + card.bobPhase) * Math.sin(t * 5.3 + card.bobPhase * 2);
-        const k = card.hoverK * tw;
-        card.sparkleMat.opacity = Math.min(1, k * 1.1);
-        const sc = Math.max(0.001, 0.6 + 0.5 * k);
-        card.sparkle.scale.set(sc, sc, 1);
-        card.sparkle.rotation.z = t * 0.6;
-        if (card.hoverK === 0) { card.sparkleMat.opacity = 0; card.sparkle.scale.set(0.001, 0.001, 1); }
+        if (phase !== 'won') {
+          card.glassMat.emissive.copy(SKY);
+          card.glassMat.emissiveIntensity = card.hoverK * 0.22;
+        }
       }
     }
     if (phase === 'won') {
