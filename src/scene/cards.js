@@ -373,7 +373,9 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
       const reduced = isReducedMotion();
       card.group.rotation.y = 0;
       const z0 = card.group.position.z;
-      card.glassMat.emissive.copy(LIME);
+      // Sin tinte de selección: el match luce por destellos especulares en los biseles al girar.
+      card.glassMat.emissive.set(0xffffff);
+      const env0 = card.glassMat.envMapIntensity;
       // Pedido del dueño: la gema gira sobre sí misma (3 vueltas de 180° por segundo) mientras se
       // aleja en zoom-out hasta desaparecer.
       const spinDur = reduced ? 300 : DUR.settle;
@@ -383,12 +385,15 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
         onUpdate: (k) => {
           card.group.position.z = z0 + (reduced ? 0 : 0.4 * k);
           card.group.rotation.y = reduced ? 0 : k * spinTurns * Math.PI;
-          card.glassMat.emissiveIntensity = Math.sin(Math.min(1, k * 1.4) * Math.PI) * 0.9;
+          const glint = Math.sin(Math.min(1, k * 1.2) * Math.PI);
+          card.glassMat.emissiveIntensity = glint * 0.12;
+          card.glassMat.envMapIntensity = env0 + glint * 2.4;  // los reflejos barren los biseles mientras gira
+          card.glassMat.clearcoatRoughness = 0.03;
           const s = Math.max(0.001, 1 - ease.inOutCubic(k));   // zoom-out hasta desaparecer
           card.group.scale.set(s, s, s);
           setOpacity(card, Math.max(0, 1 - k * 1.1));
         },
-        onDone: () => { card.group.visible = false; card.glassMat.emissiveIntensity = 0; addHole(card); },
+        onDone: () => { card.group.visible = false; card.glassMat.emissiveIntensity = 0; card.glassMat.envMapIntensity = env0; addHole(card); },
       }));
     }
   }
