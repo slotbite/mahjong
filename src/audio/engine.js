@@ -9,6 +9,8 @@ const buffers = {};
 let masterGain, ambientGain, sfxGain;
 const ambientGainNodes = {};
 let currentAmbientIds = [];
+let defaultAmbientIds = []; // IDs de ambiente por defecto (loops)
+const fileHashes = {}; // Cache de hashes por ID para cache-busting
 
 // ─────────────────────────────────────────────────────────────────────────────────
 // Infraestructura de audio
@@ -32,8 +34,17 @@ function resume() {
   if (audioCtx.state === 'suspended') {
     audioCtx.resume().then(() => {
       console.info('[audio] contexto reanudado');
+      // Arrancar ambiente tras desbloquear si está habilitado
+      if (ctx && ctx.settings && ctx.settings.ambientOn && defaultAmbientIds.length > 0) {
+        ambient.start(defaultAmbientIds);
+      }
       ctx.bus.emit(ctx.EV.AUDIO_UNLOCKED, {});
     });
+  } else {
+    // Si contexto ya está running, también arrancar
+    if (ctx && ctx.settings && ctx.settings.ambientOn && defaultAmbientIds.length > 0) {
+      ambient.start(defaultAmbientIds);
+    }
   }
 }
 
@@ -41,10 +52,14 @@ function resume() {
 // Precarga de buffers (ogg si se puede, si no m4a)
 // ─────────────────────────────────────────────────────────────────────────────────
 
-async function loadBuffer(path) {
+async function loadBuffer(path, fileId) {
   try {
     // Resolver la ruta contra la raíz del sitio (document.baseURI)
-    const url = new URL(path, document.baseURI).href;
+    let url = new URL(path, document.baseURI).href;
+    // Agregar cache-busting si hay hash disponible
+    if (fileId && fileHashes[fileId]) {
+      url += (url.includes('?') ? '&' : '?') + 'v=' + fileHashes[fileId];
+    }
     const resp = await fetch(url);
     if (!resp.ok) return null;
     const ab = await resp.arrayBuffer();
@@ -63,21 +78,41 @@ function canPlayOgg() {
 
 async function preloadBuffers(manifestAudio) {
   const isOgg = canPlayOgg();
-  const doLoad = async (entry) => {
+
+  // Cargar report.json para hashes de cache-busting
+  try {
+    const reportUrl = new URL('./assets/audio/report.json', document.baseURI).href;
+    const resp = await fetch(reportUrl);
+    if (resp.ok) {
+      const report = await resp.json();
+      for (const [id, meta] of Object.entries(report.sounds || {})) {
+        if (meta.hash) fileHashes[id] = meta.hash;
+      }
+    }
+  } catch (err) {
+    console.warn('[audio] no se pudo cargar report.json:', err.message);
+  }
+
+  const doLoad = async (entry, id) => {
     const path = isOgg ? entry.ogg : entry.m4a;
     if (!path) return null;
-    return loadBuffer(path);
+    return loadBuffer(path, id);
   };
 
   // Ambientes
+  defaultAmbientIds = []; // Reset
   for (const [id, entry] of Object.entries(manifestAudio.ambient || {})) {
-    const buf = await doLoad(entry);
-    if (buf) buffers[id] = buf;
+    const buf = await doLoad(entry, id);
+    if (buf) {
+      buffers[id] = buf;
+      // Guardar IDs de ambiente con loop para arranque automático
+      if (entry.loop) defaultAmbientIds.push(id);
+    }
   }
 
   // SFX
   for (const [id, entry] of Object.entries(manifestAudio.sfx || {})) {
-    const buf = await doLoad(entry);
+    const buf = await doLoad(entry, id);
     if (buf) buffers[id] = buf;
   }
 }
@@ -253,8 +288,13 @@ function handleBusEvents() {
     if (key === 'ambientVolume') setVolume('ambient', value);
     else if (key === 'sfxVolume') setVolume('sfx', value);
     else if (key === 'ambientOn') {
-      if (value) ambient.start(currentAmbientIds);
-      else ambient.stop();
+      if (value) {
+        // Usar IDs por defecto si está vacío
+        const idsToStart = currentAmbientIds.length > 0 ? currentAmbientIds : defaultAmbientIds;
+        ambient.start(idsToStart);
+      } else {
+        ambient.stop();
+      }
     }
   });
 }

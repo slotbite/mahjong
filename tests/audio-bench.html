@@ -122,9 +122,15 @@
       <button onclick="playSfx('miss')">miss</button>
       <button onclick="playSfx('deal')">deal</button>
       <button onclick="playSfx('win')">win</button>
-      <button onclick="playSfx('hint')">hint</button>
+      <button onclick="playSfx('hint')">hint v2 (cuenco)</button>
+      <button onclick="playSfx('hint-v1')">hint v1 (chime)</button>
       <button onclick="playSfx('combo')">combo</button>
       <button onclick="playSfx('cat_purr')">cat_purr</button>
+    </div>
+    <div class="info" id="hintVersions" style="margin-top: 1rem; font-size: 0.85rem;">
+      <strong>Versiones de hint:</strong><br>
+      <div>v1 (chime): <code id="hint-v1-hash">-</code></div>
+      <div>v2 (kalimba): <code id="hint-hash">-</code></div>
     </div>
   </div>
 
@@ -177,6 +183,7 @@
     let analyser = null;
     const logBuffer = [];
     const maxLogs = 15;
+    const fileHashes = {}; // Hashes para mostrar versiones
 
     // Logging en pantalla
     function addLog(msg, type = 'info') {
@@ -216,10 +223,33 @@
     // Monitoreo periódico del contexto
     setInterval(updateContextStatus, 500);
 
+    // Cargar hashes de archivos para mostrar versiones
+    async function loadFileHashes() {
+      try {
+        const reportResp = await fetch('../assets/audio/report.json');
+        if (reportResp.ok) {
+          const report = await reportResp.json();
+          for (const [id, meta] of Object.entries(report.sounds || {})) {
+            if (meta.hash) fileHashes[id] = meta.hash;
+          }
+          // Mostrar hashes de hint
+          if (fileHashes['hint-v1']) {
+            document.getElementById('hint-v1-hash').textContent = fileHashes['hint-v1'];
+          }
+          if (fileHashes['hint']) {
+            document.getElementById('hint-hash').textContent = fileHashes['hint'];
+          }
+        }
+      } catch (err) {
+        console.warn('[test] error al cargar report.json:', err);
+      }
+    }
+
     // Inicializar motor
     async function init() {
       try {
         addLog('Inicializando motor...', 'info');
+        await loadFileHashes();
         const manifestResp = await fetch('../assets/manifest.json');
         if (!manifestResp.ok) {
           throw new Error(`No se pudo cargar el manifiesto (${manifestResp.status})`);

@@ -131,6 +131,8 @@ const SOUNDS = [
   { id: 'hint', kind: 'sfx', src: 'kalimba', lufs: -21, gain: 0.45, maxDur: 3.0,
     af: `asetrate=${SR*0.5},aresample=${SR},lowpass=f=900,afade=t=in:d=0.08,afade=t=out:st=1.6:d=1.2`,
     note: 'cuenco grave de meditación: kalimba bajada una octava con ataque suavizado y cola larga meditativa' },
+  { id: 'hint-v1', kind: 'sfx', src: 'chime', lufs: -19, gain: 0.55, maxDur: 2.6, fadeOut: 0.8,
+    note: 'v1: campanilla suave (versión anterior, mantenida para comparación)' },
   { id: 'combo', kind: 'sfx', src: 'chime', lufs: -18, gain: 0.6, af: `asetrate=${SR * 1.5},aresample=${SR}`, maxDur: 1.8, fadeOut: 0.6,
     note: 'la misma campanilla una quinta arriba; el motor la sube más con la racha' },
   { id: 'cat_purr', kind: 'sfx', src: 'purr', lufs: -20, gain: 0.7, maxDur: 2.3, fadeOut: 0.3,
