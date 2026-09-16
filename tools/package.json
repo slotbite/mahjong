@@ -1,0 +1,13 @@
+{
+  "name": "memorice-cozy-tools",
+  "private": true,
+  "type": "module",
+  "description": "Herramientas dev de Memorice Cozy v2 (pipeline de assets). No forma parte de la carga del juego.",
+  "scripts": {
+    "build:assets": "node build-assets.mjs",
+    "check:assets": "node build-assets.mjs --check"
+  },
+  "dependencies": {
+    "sharp": "^0.34.3"
+  }
+}

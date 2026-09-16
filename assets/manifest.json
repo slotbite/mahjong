@@ -1,71 +1,1279 @@
 {
   "version": 2,
-  "_nota": "Manifiesto inicial del andamiaje. assets-2 lo reemplaza con rutas a assets/themes/** optimizadas. Mientras, apunta a img/ actual para que las demás ramas rendericen.",
   "themes": [
     {
       "id": "plantas",
-      "name": { "es": "Plantas de interior", "en": "Houseplants" },
+      "name": {
+        "es": "Plantas de interior",
+        "en": "Houseplants"
+      },
       "palette": "original",
-      "backSymbol": "img/question.png",
-      "easterEgg": { "match": "michi", "sfx": "cat_purr" },
+      "backSymbol": "assets/themes/plantas/_back.webp",
+      "easterEgg": {
+        "match": "michi",
+        "sfx": "cat_purr"
+      },
       "cards": [
-        { "id": "snake_plant", "src": "img/snake_plant.png", "w": 512, "h": 768, "license": "own", "attribution": "" },
-        { "id": "dragon_plant", "src": "img/dragon_plant.png", "w": 512, "h": 768, "license": "own", "attribution": "" },
-        { "id": "helecho", "src": "img/helecho.png", "w": 512, "h": 768, "license": "own", "attribution": "" },
-        { "id": "mostera", "src": "img/mostera.png", "w": 512, "h": 768, "license": "own", "attribution": "" },
-        { "id": "michi", "src": "img/michi.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "michi2", "src": "img/michi2.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "tocomple", "src": "img/tocomple.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "image1", "src": "img/image1.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "image2", "src": "img/image2.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "image3", "src": "img/image3.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "image4", "src": "img/image4.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "image5", "src": "img/image5.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "image6", "src": "img/image6.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "p_0652f4", "src": "img/0652f495af742bfc227868aef1895b87-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "p_212a5d", "src": "img/212a5d208ff38edae4ec52148f612dbc-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "p_40e8bc", "src": "img/40e8bcd1f4b7ae3807d032663e4add1a-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "p_53917e", "src": "img/53917e4a0b9a5e824a62e0d9fffaabd0-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "p_574ec3", "src": "img/574ec3c4ea68f82161b66d44b1c505b1-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "p_708386", "src": "img/7083865e376f9f2de39cc379697c25e7-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "p_82ba85", "src": "img/82ba85e1b41683b4959882410e5ccf11-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "p_ad9b21", "src": "img/ad9b212973142413798eea793bb79cfb-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "p_ba3ec5", "src": "img/ba3ec572793b6aefb7f025000afec006-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "p_bcd038", "src": "img/bcd038cd7bf05e6b045d573b45344e4a-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "p_c3d423", "src": "img/c3d423e2584adc54fa880aa4cf3acc2d-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "p_cfc0b4", "src": "img/cfc0b46bd063dbe4cdfcb97678d72d1d-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "p_d21720", "src": "img/d217204d254399cfda91ace90f5a1ec8-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "p_e0ec5d", "src": "img/e0ec5dfedb542bd0c594ed26d6795c61-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "p_e25ebb", "src": "img/e25ebbc2ee51c8372118111c078848b4-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" },
-        { "id": "p_eac1d2", "src": "img/eac1d280713648dad40b89501e248b9d-pixelicious.png", "w": 512, "h": 512, "license": "own", "attribution": "" }
+        {
+          "id": "snake_plant",
+          "src": "assets/themes/plantas/snake_plant.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "dragon_plant",
+          "src": "assets/themes/plantas/dragon_plant.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "helecho",
+          "src": "assets/themes/plantas/helecho.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "monstera",
+          "src": "assets/themes/plantas/monstera.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "michi",
+          "src": "assets/themes/plantas/michi.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "michi2",
+          "src": "assets/themes/plantas/michi2.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "tocomple",
+          "src": "assets/themes/plantas/tocomple.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "yucca",
+          "src": "assets/themes/plantas/yucca.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "monstera_leaf",
+          "src": "assets/themes/plantas/monstera_leaf.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "peperomia",
+          "src": "assets/themes/plantas/peperomia.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "boxwood_ball",
+          "src": "assets/themes/plantas/boxwood_ball.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "petunia_hanging",
+          "src": "assets/themes/plantas/petunia_hanging.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "ficus_elastica",
+          "src": "assets/themes/plantas/ficus_elastica.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "asparagus_fern",
+          "src": "assets/themes/plantas/asparagus_fern.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "clover_cube",
+          "src": "assets/themes/plantas/clover_cube.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "succulent_agave",
+          "src": "assets/themes/plantas/succulent_agave.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "calathea",
+          "src": "assets/themes/plantas/calathea.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "haworthia_pot",
+          "src": "assets/themes/plantas/haworthia_pot.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "bird_of_paradise",
+          "src": "assets/themes/plantas/bird_of_paradise.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "pine_bonsai",
+          "src": "assets/themes/plantas/pine_bonsai.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "palm_trees",
+          "src": "assets/themes/plantas/palm_trees.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "ponytail_palm",
+          "src": "assets/themes/plantas/ponytail_palm.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "fern_frond",
+          "src": "assets/themes/plantas/fern_frond.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "herb_sprig",
+          "src": "assets/themes/plantas/herb_sprig.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "begonia_hanging",
+          "src": "assets/themes/plantas/begonia_hanging.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "haworthia_zebra",
+          "src": "assets/themes/plantas/haworthia_zebra.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "rose_climbing",
+          "src": "assets/themes/plantas/rose_climbing.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "cactus_barrel",
+          "src": "assets/themes/plantas/cactus_barrel.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "ficus_tree",
+          "src": "assets/themes/plantas/ficus_tree.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "clover_ladybug",
+          "src": "assets/themes/plantas/clover_ladybug.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        }
       ]
     },
-    { "id": "selva", "name": { "es": "Selva tropical", "en": "Rainforest" }, "palette": "jungle-dusk", "backSymbol": null, "cards": [] },
-    { "id": "cozy", "name": { "es": "Rincón cozy", "en": "Cozy corner" }, "palette": "cozy-pastel", "backSymbol": null, "cards": [] },
-    { "id": "geek", "name": { "es": "Pasatiempos geek", "en": "Geek hobbies" }, "palette": "pico8", "backSymbol": null, "cards": [] },
-    { "id": "cafe", "name": { "es": "Café y té", "en": "Coffee & tea" }, "palette": "cozy-pastel", "backSymbol": null, "cards": [] },
-    { "id": "manualidades", "name": { "es": "Manualidades", "en": "Crafts" }, "palette": "sweetie16", "backSymbol": null, "cards": [] },
-    { "id": "noche", "name": { "es": "Cielo nocturno", "en": "Night sky" }, "palette": "endesga32", "backSymbol": null, "cards": [] },
-    { "id": "acuario", "name": { "es": "Acuario", "en": "Aquarium" }, "palette": "sweetie16", "backSymbol": null, "cards": [] }
+    {
+      "id": "selva",
+      "name": {
+        "es": "Selva tropical",
+        "en": "Rainforest"
+      },
+      "palette": "jungle-dusk",
+      "backSymbol": "assets/themes/selva/_back.webp",
+      "cards": [
+        {
+          "id": "parrot",
+          "src": "assets/themes/selva/parrot.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Animal Pack (Round) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/animal-pack"
+        },
+        {
+          "id": "monkey",
+          "src": "assets/themes/selva/monkey.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Animal Pack (Round) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/animal-pack"
+        },
+        {
+          "id": "snake",
+          "src": "assets/themes/selva/snake.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Animal Pack (Round) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/animal-pack"
+        },
+        {
+          "id": "hippo",
+          "src": "assets/themes/selva/hippo.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Animal Pack (Round) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/animal-pack"
+        },
+        {
+          "id": "elephant",
+          "src": "assets/themes/selva/elephant.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Animal Pack (Round) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/animal-pack"
+        },
+        {
+          "id": "giraffe",
+          "src": "assets/themes/selva/giraffe.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Animal Pack (Round) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/animal-pack"
+        },
+        {
+          "id": "tree_frog",
+          "src": "assets/themes/selva/tree_frog.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "snail",
+          "src": "assets/themes/selva/snail.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Platformer Art Deluxe (Base pack) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/platformer-art-deluxe"
+        },
+        {
+          "id": "fly",
+          "src": "assets/themes/selva/fly.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Platformer Art Deluxe (Base pack) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/platformer-art-deluxe"
+        },
+        {
+          "id": "river_fish",
+          "src": "assets/themes/selva/river_fish.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Platformer Art Deluxe (Base pack) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/platformer-art-deluxe"
+        },
+        {
+          "id": "mushroom_red",
+          "src": "assets/themes/selva/mushroom_red.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Platformer Art Deluxe (Base pack) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/platformer-art-deluxe"
+        },
+        {
+          "id": "mushroom_brown",
+          "src": "assets/themes/selva/mushroom_brown.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Platformer Art Deluxe (Base pack) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/platformer-art-deluxe"
+        },
+        {
+          "id": "grass_tuft",
+          "src": "assets/themes/selva/grass_tuft.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Platformer Art Deluxe (Base pack) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/platformer-art-deluxe"
+        },
+        {
+          "id": "orchid_purple",
+          "src": "assets/themes/selva/orchid_purple.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Platformer Art Deluxe (Base pack) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/platformer-art-deluxe"
+        },
+        {
+          "id": "bush",
+          "src": "assets/themes/selva/bush.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Platformer Art Deluxe (Base pack) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/platformer-art-deluxe"
+        },
+        {
+          "id": "tree_round",
+          "src": "assets/themes/selva/tree_round.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Tiny Town (16px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/tiny-town"
+        },
+        {
+          "id": "sprout",
+          "src": "assets/themes/selva/sprout.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Tiny Town (16px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/tiny-town"
+        },
+        {
+          "id": "beehive",
+          "src": "assets/themes/selva/beehive.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Tiny Town (16px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/tiny-town"
+        },
+        {
+          "id": "reeds",
+          "src": "assets/themes/selva/reeds.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
+        },
+        {
+          "id": "bulb_plant",
+          "src": "assets/themes/selva/bulb_plant.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
+        },
+        {
+          "id": "wildflowers",
+          "src": "assets/themes/selva/wildflowers.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
+        },
+        {
+          "id": "agave",
+          "src": "assets/themes/selva/agave.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
+        },
+        {
+          "id": "leaf_simple",
+          "src": "assets/themes/selva/leaf_simple.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
+        },
+        {
+          "id": "leaf_serrated",
+          "src": "assets/themes/selva/leaf_serrated.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
+        },
+        {
+          "id": "leaf_maple",
+          "src": "assets/themes/selva/leaf_maple.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
+        },
+        {
+          "id": "leaf_palmate",
+          "src": "assets/themes/selva/leaf_palmate.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
+        },
+        {
+          "id": "leaf_oval",
+          "src": "assets/themes/selva/leaf_oval.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
+        },
+        {
+          "id": "bush_round",
+          "src": "assets/themes/selva/bush_round.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
+        },
+        {
+          "id": "fern_branch",
+          "src": "assets/themes/selva/fern_branch.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
+        },
+        {
+          "id": "twig_berries",
+          "src": "assets/themes/selva/twig_berries.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Foliage Sprites (Shaded) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/foliage-sprites"
+        }
+      ]
+    },
+    {
+      "id": "cozy",
+      "name": {
+        "es": "Rincón cozy",
+        "en": "Cozy corner"
+      },
+      "palette": "cozy-pastel",
+      "backSymbol": "assets/themes/cozy/_back.webp",
+      "easterEgg": {
+        "match": "cat",
+        "sfx": "cat_purr"
+      },
+      "cards": [
+        {
+          "id": "cat",
+          "src": "assets/themes/cozy/cat.webp",
+          "w": 256,
+          "h": 256,
+          "license": "own",
+          "attribution": ""
+        },
+        {
+          "id": "mug",
+          "src": "assets/themes/cozy/mug.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+        },
+        {
+          "id": "candle_blue",
+          "src": "assets/themes/cozy/candle_blue.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+        },
+        {
+          "id": "candle_red",
+          "src": "assets/themes/cozy/candle_red.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+        },
+        {
+          "id": "goblet",
+          "src": "assets/themes/cozy/goblet.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+        },
+        {
+          "id": "glass_water",
+          "src": "assets/themes/cozy/glass_water.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+        },
+        {
+          "id": "cup",
+          "src": "assets/themes/cozy/cup.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+        },
+        {
+          "id": "donut_pink",
+          "src": "assets/themes/cozy/donut_pink.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+        },
+        {
+          "id": "cookie",
+          "src": "assets/themes/cozy/cookie.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+        },
+        {
+          "id": "lollipop",
+          "src": "assets/themes/cozy/lollipop.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+        },
+        {
+          "id": "candy_wrapped",
+          "src": "assets/themes/cozy/candy_wrapped.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+        },
+        {
+          "id": "candy_cane",
+          "src": "assets/themes/cozy/candy_cane.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+        },
+        {
+          "id": "pie_slice",
+          "src": "assets/themes/cozy/pie_slice.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+        },
+        {
+          "id": "pudding",
+          "src": "assets/themes/cozy/pudding.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+        },
+        {
+          "id": "ice_cream",
+          "src": "assets/themes/cozy/ice_cream.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+        },
+        {
+          "id": "sandwich",
+          "src": "assets/themes/cozy/sandwich.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+        },
+        {
+          "id": "pizza_slice",
+          "src": "assets/themes/cozy/pizza_slice.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+        },
+        {
+          "id": "cake",
+          "src": "assets/themes/cozy/cake.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Pixel Platformer Food Expansion (18px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/pixel-platformer-food-expansion"
+        },
+        {
+          "id": "heart",
+          "src": "assets/themes/cozy/heart.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Emotes Pack (Pixel, Style 8 sin globo) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/emotes-pack"
+        },
+        {
+          "id": "sleep_z",
+          "src": "assets/themes/cozy/sleep_z.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Emotes Pack (Pixel, Style 8 sin globo) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/emotes-pack"
+        },
+        {
+          "id": "music_note",
+          "src": "assets/themes/cozy/music_note.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Emotes Pack (Pixel, Style 8 sin globo) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/emotes-pack"
+        },
+        {
+          "id": "idea_bulb",
+          "src": "assets/themes/cozy/idea_bulb.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Emotes Pack (Pixel, Style 8 sin globo) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/emotes-pack"
+        },
+        {
+          "id": "star",
+          "src": "assets/themes/cozy/star.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Emotes Pack (Pixel, Style 8 sin globo) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/emotes-pack"
+        },
+        {
+          "id": "rain_drop",
+          "src": "assets/themes/cozy/rain_drop.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Emotes Pack (Pixel, Style 8 sin globo) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/emotes-pack"
+        },
+        {
+          "id": "book_open",
+          "src": "assets/themes/cozy/book_open.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "book_red",
+          "src": "assets/themes/cozy/book_red.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "teapot",
+          "src": "assets/themes/cozy/teapot.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "coffee_pot",
+          "src": "assets/themes/cozy/coffee_pot.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "bowl",
+          "src": "assets/themes/cozy/bowl.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "mug_big",
+          "src": "assets/themes/cozy/mug_big.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        }
+      ]
+    },
+    {
+      "id": "geek",
+      "name": {
+        "es": "Pasatiempos geek",
+        "en": "Geek hobbies"
+      },
+      "palette": "pico8",
+      "backSymbol": "assets/themes/geek/_back.webp",
+      "cards": [
+        {
+          "id": "laptop",
+          "src": "assets/themes/geek/laptop.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "retro_pc",
+          "src": "assets/themes/geek/retro_pc.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "monitor",
+          "src": "assets/themes/geek/monitor.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "pc_tower",
+          "src": "assets/themes/geek/pc_tower.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "cellphone_retro",
+          "src": "assets/themes/geek/cellphone_retro.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "mp3_player",
+          "src": "assets/themes/geek/mp3_player.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "tablet",
+          "src": "assets/themes/geek/tablet.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "usb_drive",
+          "src": "assets/themes/geek/usb_drive.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "motherboard",
+          "src": "assets/themes/geek/motherboard.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "ram_stick",
+          "src": "assets/themes/geek/ram_stick.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "gpu",
+          "src": "assets/themes/geek/gpu.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "joystick",
+          "src": "assets/themes/geek/joystick.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "arcade_stick",
+          "src": "assets/themes/geek/arcade_stick.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "gamepad_retro",
+          "src": "assets/themes/geek/gamepad_retro.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "gamepad",
+          "src": "assets/themes/geek/gamepad.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "microphone",
+          "src": "assets/themes/geek/microphone.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "headphones",
+          "src": "assets/themes/geek/headphones.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "cd",
+          "src": "assets/themes/geek/cd.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "camera",
+          "src": "assets/themes/geek/camera.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "microscope",
+          "src": "assets/themes/geek/microscope.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Generic Items (Colored) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/generic-items"
+        },
+        {
+          "id": "d20",
+          "src": "assets/themes/geek/d20.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Board Game Icons (128px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/board-game-icons"
+        },
+        {
+          "id": "dice",
+          "src": "assets/themes/geek/dice.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Board Game Icons (128px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/board-game-icons"
+        },
+        {
+          "id": "chess_knight",
+          "src": "assets/themes/geek/chess_knight.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Board Game Icons (128px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/board-game-icons"
+        },
+        {
+          "id": "puzzle",
+          "src": "assets/themes/geek/puzzle.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Board Game Icons (128px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/board-game-icons"
+        },
+        {
+          "id": "cards_fan",
+          "src": "assets/themes/geek/cards_fan.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Board Game Icons (128px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/board-game-icons"
+        },
+        {
+          "id": "controller_xbox",
+          "src": "assets/themes/geek/controller_xbox.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Input Prompts 1.5 (Double 128px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/input-prompts"
+        },
+        {
+          "id": "controller_playstation",
+          "src": "assets/themes/geek/controller_playstation.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Input Prompts 1.5 (Double 128px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/input-prompts"
+        },
+        {
+          "id": "controller_switch",
+          "src": "assets/themes/geek/controller_switch.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Input Prompts 1.5 (Double 128px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/input-prompts"
+        },
+        {
+          "id": "steam_deck",
+          "src": "assets/themes/geek/steam_deck.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Input Prompts 1.5 (Double 128px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/input-prompts"
+        },
+        {
+          "id": "keyboard",
+          "src": "assets/themes/geek/keyboard.webp",
+          "w": 256,
+          "h": 256,
+          "license": "CC0-1.0",
+          "attribution": "Kenney - Input Prompts 1.5 (Double 128px) — Kenney (Kenney Vleugels) — https://kenney.nl/assets/input-prompts"
+        }
+      ]
+    },
+    {
+      "id": "cafe",
+      "name": {
+        "es": "Café y té",
+        "en": "Coffee & tea"
+      },
+      "palette": "cozy-pastel",
+      "backSymbol": "assets/themes/cafe/_back.webp",
+      "cards": []
+    },
+    {
+      "id": "manualidades",
+      "name": {
+        "es": "Manualidades",
+        "en": "Crafts"
+      },
+      "palette": "sweetie16",
+      "backSymbol": "assets/themes/manualidades/_back.webp",
+      "cards": []
+    },
+    {
+      "id": "noche",
+      "name": {
+        "es": "Cielo nocturno",
+        "en": "Night sky"
+      },
+      "palette": "endesga32",
+      "backSymbol": "assets/themes/noche/_back.webp",
+      "cards": []
+    },
+    {
+      "id": "acuario",
+      "name": {
+        "es": "Acuario",
+        "en": "Aquarium"
+      },
+      "palette": "sweetie16",
+      "backSymbol": "assets/themes/acuario/_back.webp",
+      "cards": []
+    }
   ],
   "backgrounds": [
-    { "id": "jungle-rain", "srcset": { "1920": "img/plants_wallpaper.jpg" }, "license": "unknown", "attribution": "wallpaper v1, pendiente de reemplazo por assets-2" }
+    {
+      "id": "jungle-rain",
+      "srcset": {
+        "1280": "assets/bg/jungle-rain-1280.webp",
+        "1920": "assets/bg/jungle-rain-1920.webp",
+        "2560": "assets/bg/jungle-rain-2560.webp"
+      },
+      "license": "Pexels License (uso libre, sin atribución obligatoria; no revender sin modificar)",
+      "attribution": "Pexels - Lush misty tropical rainforest landscape in Tasikmalaya, Indonesia (foto 25306350) — Firman Fatthul — https://www.pexels.com/photo/lush-forests-in-remote-areas-of-tasikmalaya-25306350/"
+    }
   ],
   "audio": {
     "ambient": {},
     "sfx": {
-      "flip":     { "mp3": "sound/flip_card.mp3", "gain": 0.6 },
-      "match":    { "mp3": "sound/match.mp3", "gain": 0.7 },
-      "miss":     { "mp3": "sound/bad_match.mp3", "gain": 0.5 },
-      "deal":     { "mp3": "sound/card_shuffle.mp3", "gain": 0.6 },
-      "win":      { "mp3": "sound/clean_win.mp3", "gain": 0.8 },
-      "cat_purr": { "mp3": "sound/cat_purr.mp3", "gain": 0.7 }
+      "flip": {
+        "mp3": "sound/flip_card.mp3",
+        "gain": 0.6
+      },
+      "match": {
+        "mp3": "sound/match.mp3",
+        "gain": 0.7
+      },
+      "miss": {
+        "mp3": "sound/bad_match.mp3",
+        "gain": 0.5
+      },
+      "deal": {
+        "mp3": "sound/card_shuffle.mp3",
+        "gain": 0.6
+      },
+      "win": {
+        "mp3": "sound/clean_win.mp3",
+        "gain": 0.8
+      },
+      "cat_purr": {
+        "mp3": "sound/cat_purr.mp3",
+        "gain": 0.7
+      }
     }
   },
   "palettes": {
-    "gameboy": ["#0f380f", "#306230", "#8bac0f", "#9bbc0f"],
-    "pico8": ["#000000", "#1d2b53", "#7e2553", "#008751", "#ab5236", "#5f574f", "#c2c3c7", "#fff1e8", "#ff004d", "#ffa300", "#ffec27", "#00e436", "#29adff", "#83769c", "#ff77a8", "#ffccaa"],
-    "cozy-pastel": ["#2b2a33", "#5a4a5f", "#8c6f8a", "#c9a7b8", "#f4ead8", "#e8c39e", "#c8744a", "#9a5a3c", "#6a9a5b", "#b8d96a", "#8fb3c7", "#5d7f94"],
-    "jungle-dusk": ["#0f2a22", "#1f4d3a", "#2f6b4b", "#6a9a5b", "#b8d96a", "#f4ead8", "#c8744a", "#8fb3c7", "#e0b04c", "#7b3f5c", "#3b6f8a", "#1a1a24"]
+    "gameboy": [
+      "#0f380f",
+      "#306230",
+      "#8bac0f",
+      "#9bbc0f"
+    ],
+    "pico8": [
+      "#000000",
+      "#1d2b53",
+      "#7e2553",
+      "#008751",
+      "#ab5236",
+      "#5f574f",
+      "#c2c3c7",
+      "#fff1e8",
+      "#ff004d",
+      "#ffa300",
+      "#ffec27",
+      "#00e436",
+      "#29adff",
+      "#83769c",
+      "#ff77a8",
+      "#ffccaa"
+    ],
+    "nes": [
+      "#000000",
+      "#fcfcfc",
+      "#f8f8f8",
+      "#bcbcbc",
+      "#7c7c7c",
+      "#a4e4fc",
+      "#3cbcfc",
+      "#0078f8",
+      "#0000fc",
+      "#b8b8f8",
+      "#6888fc",
+      "#0058f8",
+      "#0000bc",
+      "#d8b8f8",
+      "#9878f8",
+      "#6844fc",
+      "#4428bc",
+      "#f8b8f8",
+      "#f878f8",
+      "#d800cc",
+      "#940084",
+      "#f8a4c0",
+      "#f85898",
+      "#e40058",
+      "#a80020",
+      "#f0d0b0",
+      "#f87858",
+      "#f83800",
+      "#a81000",
+      "#fce0a8",
+      "#fca044",
+      "#e45c10",
+      "#881400",
+      "#f8d878",
+      "#f8b800",
+      "#ac7c00",
+      "#503000",
+      "#d8f878",
+      "#b8f818",
+      "#00b800",
+      "#007800",
+      "#b8f8b8",
+      "#58d854",
+      "#00a800",
+      "#006800",
+      "#b8f8d8",
+      "#58f898",
+      "#00a844",
+      "#005800",
+      "#00fcfc",
+      "#00e8d8",
+      "#008888",
+      "#004058",
+      "#f8d8f8",
+      "#787878"
+    ],
+    "sweetie16": [
+      "#1a1c2c",
+      "#5d275d",
+      "#b13e53",
+      "#ef7d57",
+      "#ffcd75",
+      "#a7f070",
+      "#38b764",
+      "#257179",
+      "#29366f",
+      "#3b5dc9",
+      "#41a6f6",
+      "#73eff7",
+      "#f4f4f4",
+      "#94b0c2",
+      "#566c86",
+      "#333c57"
+    ],
+    "endesga32": [
+      "#be4a2f",
+      "#d77643",
+      "#ead4aa",
+      "#e4a672",
+      "#b86f50",
+      "#733e39",
+      "#3e2731",
+      "#a22633",
+      "#e43b44",
+      "#f77622",
+      "#feae34",
+      "#fee761",
+      "#63c74d",
+      "#3e8948",
+      "#265c42",
+      "#193c3e",
+      "#124e89",
+      "#0099db",
+      "#2ce8f5",
+      "#ffffff",
+      "#c0cbdc",
+      "#8b9bb4",
+      "#5a6988",
+      "#3a4466",
+      "#262b44",
+      "#181425",
+      "#ff0044",
+      "#68386c",
+      "#b55088",
+      "#f6757a",
+      "#e8b796",
+      "#c28569"
+    ],
+    "cga": [
+      "#000000",
+      "#0000aa",
+      "#00aa00",
+      "#00aaaa",
+      "#aa0000",
+      "#aa00aa",
+      "#aa5500",
+      "#aaaaaa",
+      "#555555",
+      "#5555ff",
+      "#55ff55",
+      "#55ffff",
+      "#ff5555",
+      "#ff55ff",
+      "#ffff55",
+      "#ffffff"
+    ],
+    "cozy-pastel": [
+      "#2b2a33",
+      "#5a4a5f",
+      "#8c6f8a",
+      "#c9a7b8",
+      "#f4ead8",
+      "#e8c39e",
+      "#c8744a",
+      "#9a5a3c",
+      "#6a9a5b",
+      "#b8d96a",
+      "#8fb3c7",
+      "#5d7f94"
+    ],
+    "jungle-dusk": [
+      "#0f2a22",
+      "#1f4d3a",
+      "#2f6b4b",
+      "#6a9a5b",
+      "#b8d96a",
+      "#f4ead8",
+      "#c8744a",
+      "#8fb3c7",
+      "#e0b04c",
+      "#7b3f5c",
+      "#3b6f8a",
+      "#1a1a24"
+    ]
   }
 }
