@@ -183,9 +183,23 @@
       "gainDb": 10.3,
       "ogg": 15514,
       "m4a": 15865
+    },
+    "hint-v1": {
+      "hash": "2dcb5b5ba9",
+      "kind": "sfx",
+      "src": "chime",
+      "duration": 2.305,
+      "channels": 1,
+      "kbps": 56,
+      "lufsIn": -50.1,
+      "lufsOut": -18.4,
+      "truePeakOut": 0,
+      "gainDb": 31.1,
+      "ogg": 19591,
+      "m4a": 17711
     }
   },
-  "generatedAt": "2026-09-16T13:56:32.331Z",
+  "generatedAt": "2026-09-16T14:17:23.779Z",
   "targets": {
     "ambientLufs": -23,
     "sfxLufs": -18,

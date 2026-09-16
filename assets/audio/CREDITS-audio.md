@@ -12,7 +12,8 @@ Generado por `tools/build-audio.mjs`. Todos los archivos externos son **CC0 1.0*
 | `miss` | sfx | [water drop](https://freesound.org/people/florianreichelt/sounds/683102/) | florianreichelt | CC0-1.0 | gota de agua transpuesta −4 semitonos: grave, sin castigo |
 | `deal` | sfx | [card_shuffle.mp3 (Memorice v1)](legacy/v1) | proyecto (v1) | own | barajar (card_shuffle v1 reutilizado) |
 | `win` | sfx | [Kalimba.wav](https://freesound.org/people/PanPiper5/sounds/659909/) | PanPiper5 | CC0-1.0 | acorde ascendente A3–C#4–E4–A4 construido con la misma kalimba (4 capas transpuestas, 140 ms entre notas) |
-| `hint` | sfx | [wind chimes - single 04.wav](https://freesound.org/people/Anthousai/sounds/398496/) | Anthousai | CC0-1.0 | campanilla de viento |
+| `hint` | sfx | [Kalimba.wav](https://freesound.org/people/PanPiper5/sounds/659909/) | PanPiper5 | CC0-1.0 | cuenco grave de meditación: kalimba bajada una octava con ataque suavizado y cola larga meditativa |
+| `hint-v1` | sfx | [wind chimes - single 04.wav](https://freesound.org/people/Anthousai/sounds/398496/) | Anthousai | CC0-1.0 | v1: campanilla suave (versión anterior, mantenida para comparación) |
 | `combo` | sfx | [wind chimes - single 04.wav](https://freesound.org/people/Anthousai/sounds/398496/) | Anthousai | CC0-1.0 | la misma campanilla una quinta arriba; el motor la sube más con la racha |
 | `cat_purr` | sfx | [cat_purr.mp3 (Memorice v1)](legacy/v1) | proyecto (v1) | own | easter egg v1 conservado (michi) |
 
