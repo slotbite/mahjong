@@ -249,9 +249,8 @@ function handleBusEvents() {
   });
 
   // pair:miss → miss
-  ctx.bus.on(ctx.EV.PAIR_MISS, () => {
-    playSfx('miss');
-  });
+  // pair:miss → sin sonido (pedido del dueño: la 'burbuja' molestaba). El archivo miss.* se conserva.
+  ctx.bus.on(ctx.EV.PAIR_MISS, () => {});
 
   // game:dealt → deal
   ctx.bus.on(ctx.EV.GAME_DEALT, () => {
