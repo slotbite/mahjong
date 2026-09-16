@@ -49,11 +49,24 @@ const W = size;  // fix center-10: usar size exacto para evitar mismatch downsam
 
 También actualizado comentario del algoritmo (líneas 107-111) para reflejar el nuevo enfoque.
 
-## Verificación
-- Hojas, arbustos, teteras en selva/cozy/geek: **centradas, completas, bordes nítidos**
-- Tema plantas (original): **sin cambios, sigue bien**
-- Cambios de pixelScale a 40 y 94: **ambos funcionan correctamente**
+## Análisis: impacto para pixelScale = 94 (por defecto)
+⚠️ **NOTA IMPORTANTE**: Con `pixelScale = 94` (valor por defecto):
+- `cellsFor(94) = 128` (celdas por lado)
+- Antes del fix: `W = 128 * round(256/128) = 128 * 2 = 256` ✓
+- Después del fix: `W = 256` ✓
+- **No hay cambio para este valor**
 
-## Sin verificar
-- Comportamiento con tamaños de canvas NO 256×256 (si los hay en futuro)
-- Interacción con diferentes ratios de aspecto de imagen fuente (todas 256×256 en tests)
+El fix afecta principalmente a `pixelScale` diferente (ej: 40 → N=13, antes W=260, ahora W=256).
+
+## Verificación SIN capturas visuales (sin navegador disponible)
+- ✓ Código analizado: `pixelate()` devuelve canvas `size×size` en ambos casos
+- ✓ `themes.js`: sin doble aplicación de `squareContain`
+- ✓ `cards.js`: `PlaneGeometry(0.84, 0.84)` sin repeat/offset que cause zoom
+- ✓ Para pixelScale = 94, W = 256 antes y después (fix no cambia el resultado)
+- ⚠️ **Síntoma de "ampliada 2×" no se explica completamente por el mismatch W**
+
+## Pendiente: verificación visual
+Necesarias capturas en navegador real con:
+- Tema selva, rejilla 3×2, reveal todas las cartas
+- leaf_oval, bush_round deben estar centradas, completas, con margen
+- Si aún hay recorte/zoom 2×, el problema es otro (posible: reasignación de textura en Three.js, o lógica de paleta/dithering)
