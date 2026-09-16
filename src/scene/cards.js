@@ -148,6 +148,7 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
   let hovered = -1;
   // Tilt sutil del tablero siguiendo el puntero (±4.5°), para que los biseles cambien de brillo.
   const pointer = { x: 0, y: 0 };
+  const pointerSmooth = { x: 0, y: 0 };
   const TILT_X = 0.075, TILT_Y = 0.09;
   function setPointer(nx, ny) { pointer.x = Math.max(-1, Math.min(1, nx)); pointer.y = Math.max(-1, Math.min(1, ny)); }
   let time = 0;
@@ -207,11 +208,14 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
     shineBack.renderOrder = 2;
 
     // Los planos de brillo aditivo (shine/shineBack) quedan fuera: emblanquecían el cristal. El brillo lo dan clearcoat y el entorno.
-    group.add(glass, front, voxelGroup);
+    // Nodo de inclinación por ficha (sigue al puntero) entre el grupo (giro/posición) y las mallas.
+    const tilt = new THREE.Group();
+    tilt.add(glass, front, voxelGroup);
+    group.add(tilt);
     glass.renderOrder = 0;
     const slot = slotPosition(data.index, cols, rows);
     const card = {
-      index: data.index, pairKey: data.pairKey, group, glass, glassMat, front, frontMat, voxelGroup,
+      index: data.index, pairKey: data.pairKey, group, tilt, glass, glassMat, front, frontMat, voxelGroup,
       slot, faceUp: false, matched: false, tiltTarget: 0, dropping: false, hoverK: 0, tweens: [], baseZ: 0, bobPhase: Math.random() * 6.283,
     };
     group.rotation.y = FACE_DOWN;
@@ -472,13 +476,11 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
 
   function update(dt, t) {
     time = t;
-    // Guiado por el propio puntero y de poca amplitud: se aplica también con movimiento reducido
-    // (el sistema del dueño lo reporta activo y el efecto desaparecía).
-    {
-      const tx = -pointer.y * TILT_X, ty = pointer.x * TILT_Y;
-      board.rotation.x += (tx - board.rotation.x) * Math.min(1, dt * 4);
-      board.rotation.y += (ty - board.rotation.y) * Math.min(1, dt * 4);
-    }
+    // Inclinación por ficha siguiendo al puntero (pedido del dueño: cada gema, no el paño entero).
+    // Se aplica también con movimiento reducido: es sutil y lo guía el propio puntero.
+    pointerSmooth.x += (pointer.x - pointerSmooth.x) * Math.min(1, dt * 4);
+    pointerSmooth.y += (pointer.y - pointerSmooth.y) * Math.min(1, dt * 4);
+    const tiltX = -pointerSmooth.y * TILT_X, tiltY = pointerSmooth.x * TILT_Y;
     for (const card of cards) {
       if (card.matched && phase !== 'won') continue;
       if (!card.dropping && phase !== 'won') {
@@ -486,6 +488,11 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
         const dz = card.tiltTarget - card.group.rotation.z;
         if (Math.abs(dz) > 0.0005) card.group.rotation.z += dz * Math.min(1, dt * 11);
         else card.group.rotation.z = card.tiltTarget;
+      }
+      if (card.tilt) {
+        // El nodo vive dentro del grupo girado: con la carta boca abajo (π en Y) el eje X local se invierte.
+        card.tilt.rotation.x = tiltX * Math.cos(card.group.rotation.y);
+        card.tilt.rotation.y = tiltY;
       }
       const target = card.index === hovered ? 1 : 0;
       if (card.hoverK !== target) {
