@@ -230,17 +230,20 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
   }
   function track(card, t) { card.tweens.push(t); return t; }
 
+  // Funde arte y voxels. El vidrio NO se funde por opacidad: al volverse `transparent` sale del pase
+  // de transmisión y cambia de aspecto de golpe (glitch al final del match); el vidrio se encoge.
   function setOpacity(card, o) {
-    const mats = [card.glassMat, card.frontMat];
-    // Agregar materiales de voxels
+    const mats = [card.frontMat];
     if (card.voxelGroup) {
       for (const child of card.voxelGroup.children) {
         if (child.material) mats.push(child.material);
       }
     }
+    const transparent = o < 0.999;
     for (const m of mats) {
-      const transparent = o < 0.999;
       if (m.transparent !== transparent) { m.transparent = transparent; m.needsUpdate = true; }
+      // alphaTest 0.5 recortaba el arte de golpe al cruzar el 50 % de opacidad: durante el fundido se relaja.
+      if ('alphaTest' in m && m.map) { const at = transparent ? 0.02 : 0.5; if (m.alphaTest !== at) { m.alphaTest = at; m.needsUpdate = true; } }
       m.opacity = o;
       m.depthWrite = !transparent;
     }
@@ -376,9 +379,9 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
         onUpdate: (k) => {
           card.group.position.z = z0 + (reduced ? 0 : 0.3 * k);
           card.glassMat.emissiveIntensity = Math.sin(Math.min(1, k * 1.4) * Math.PI) * 0.9;
-          const s = 1 - 0.12 * k;
-          card.group.scale.set(s, s, 1);
-          setOpacity(card, 1 - k);
+          const s = 1 - 0.55 * ease.inOutCubic(k);     // el vidrio se encoge en vez de fundirse
+          card.group.scale.set(s, s, s);
+          setOpacity(card, Math.max(0, 1 - k * 1.25));  // el arte se funde antes de que termine el encogido
         },
         onDone: () => { card.group.visible = false; card.glassMat.emissiveIntensity = 0; addHole(card); },
       }));
