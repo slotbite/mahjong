@@ -28,8 +28,7 @@ export function initKeyboard(ui) {
     clear(grid);
     grid.append(help);
     const { cols, rows } = session;
-    const total = cols * rows;
-    const hole = total % 2 ? Math.floor(total / 2) : -1;   // casilla central vacía en 3×3
+    const total = session.cards.length || cols * rows;
     grid.style.setProperty('--cols', cols);
     grid.style.setProperty('--rows', rows);
     grid.setAttribute('aria-label', t('a11y.board'));
@@ -39,10 +38,8 @@ export function initKeyboard(ui) {
     for (let r = 0; r < rows; r++) {
       const row = h('div', { role: 'row', class: 'a11y-row' });
       for (let c = 0; c < cols; c++) {
-        const cell = r * cols + c;
-        if (cell >= total) break;
-        if (cell === hole) { row.append(h('div', { role: 'gridcell', class: 'a11y-cell a11y-cell-empty', aria: { hidden: 'true' } })); continue; }
-        const i = hole >= 0 && cell > hole ? cell - 1 : cell;   // índice de carta
+        const i = r * cols + c;
+        if (i >= total) break;
         const btn = h('button', { type: 'button', class: 'a11y-card', tabindex: i === 0 ? 0 : -1, data: { index: i }, aria: { label: labelFor(i), pressed: 'false' } });
         btn.addEventListener('click', () => pick(i));
         btn.addEventListener('focus', () => { focusIdx = i; });

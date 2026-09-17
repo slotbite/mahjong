@@ -105,16 +105,12 @@ test('shuffle no muta y buildDeck es reproducible por semilla', () => {
 });
 
 test('resolveGrid valida contra la cantidad de cartas', () => {
-  assert.deepEqual(resolveGrid(4, 4, 20), { cols: 4, rows: 4, pairs: 8, hole: -1, adjusted: false });
+  assert.deepEqual(resolveGrid(4, 4, 20), { cols: 4, rows: 4, pairs: 8, adjusted: false });
   assert.equal(resolveGrid(6, 6, 20).adjusted, false);          // 18 pares ≤ 20 cartas → válido
   assert.equal(resolveGrid(6, 6, 20).pairs, 18);
   const small = resolveGrid(6, 6, 10);                           // solo caben 10 pares → 4x4 (8)
   assert.deepEqual([small.cols, small.rows, small.adjusted], [4, 4, true]);
-  // 3×3: rejilla impar válida con la casilla central (índice 4) vacía → 4 pares
-  assert.deepEqual(resolveGrid(3, 3, 20), { cols: 3, rows: 3, pairs: 4, hole: 4, adjusted: false });
-  const d33 = buildDeck({ cards: Array.from({ length: 20 }, (_, i) => ({ id: 'c' + i })) }, 3, 3, 'x');
-  assert.equal(d33.cards.length, 8);
-  assert.deepEqual(d33.cards.map((c) => c.slot), [0, 1, 2, 3, 5, 6, 7, 8]); // salta la casilla 4
+  assert.equal(resolveGrid(3, 3, 20).adjusted, true);            // impar
   assert.throws(() => resolveGrid(4, 4, 2));
   assert.match(dailySeed(new Date(2026, 8, 16)), /^2026-09-16$/);
 });

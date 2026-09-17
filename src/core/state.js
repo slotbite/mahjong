@@ -3,9 +3,7 @@
 // `createGame(deps)`. `init(ctx)` cablea con los globales reales del navegador.
 
 export const MODES = Object.freeze(['zen', 'classic', 'timed', 'daily']);
-export const GRIDS = Object.freeze([[3, 2], [3, 3], [4, 3], [4, 4], [6, 4], [6, 5], [6, 6]]);
-/** Casilla vacía en rejillas impares (3×3): la central. -1 si no hay. */
-export function holeFor(cols, rows) { const cells = cols * rows; return cells % 2 ? Math.floor(cells / 2) : -1; }
+export const GRIDS = Object.freeze([[3, 2], [4, 3], [4, 4], [6, 4], [6, 5], [6, 6]]);
 
 export const RULES = Object.freeze({
   basePerPair: 100,
@@ -77,14 +75,12 @@ export function randomSeed(rand = Math.random) {
 export function resolveGrid(cols, rows, cardCount) {
   cols = Number(cols) | 0; rows = Number(rows) | 0;
   const cells = cols * rows;
-  // Rejillas impares (3×3) dejan la casilla central vacía: pares = floor(celdas / 2).
-  const pairsOf = (c, r) => Math.floor((c * r) / 2);
-  if (cols > 0 && rows > 0 && pairsOf(cols, rows) <= cardCount && cells >= 4) {
-    return { cols, rows, pairs: pairsOf(cols, rows), hole: holeFor(cols, rows), adjusted: false };
+  if (cols > 0 && rows > 0 && cells % 2 === 0 && cells / 2 <= cardCount && cells >= 4) {
+    return { cols, rows, pairs: cells / 2, adjusted: false };
   }
   for (let i = GRIDS.length - 1; i >= 0; i--) {
     const [c, r] = GRIDS[i];
-    if (pairsOf(c, r) <= cardCount) return { cols: c, rows: r, pairs: pairsOf(c, r), hole: holeFor(c, r), adjusted: true };
+    if ((c * r) / 2 <= cardCount) return { cols: c, rows: r, pairs: (c * r) / 2, adjusted: true };
   }
   throw new Error(`El tema tiene ${cardCount} cartas; se necesitan al menos 3`);
 }
@@ -98,8 +94,7 @@ export function buildDeck(theme, cols, rows, seed) {
   const rng = mulberry32(hashSeed(seed));
   const chosen = shuffle(theme.cards, rng).slice(0, grid.pairs);
   const deck = shuffle([...chosen, ...chosen], rng);
-  // `slot` es la casilla visual (salta la casilla vacía de las rejillas impares); `index` es el índice de carta.
-  const cards = deck.map((c, index) => ({ id: c.id, pairKey: c.id, index, slot: grid.hole >= 0 && index >= grid.hole ? index + 1 : index }));
+  const cards = deck.map((c, index) => ({ id: c.id, pairKey: c.id, index }));
   return { cards, seed: String(seed), ...grid };
 }
 
@@ -273,7 +268,7 @@ export function createGame(deps) {
 
     bus.emit(EV.GAME_DEALT, {
       cards: deck.cards, seed: deck.seed,
-      mode, themeId, cols: deck.cols, rows: deck.rows, pairs: deck.pairs, hole: deck.hole ?? -1,
+      mode, themeId, cols: deck.cols, rows: deck.rows, pairs: deck.pairs,
       hints: S.hintsLeft, timeLimit: S.timeLimit,
     });
     emitTick();

@@ -226,7 +226,7 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
     tilt.add(glass, front, voxelGroup);
     group.add(tilt);
     glass.renderOrder = 0;
-    const slot = slotPosition(data.slot ?? data.index, cols, rows);
+    const slot = slotPosition(data.index, cols, rows);
     const card = {
       index: data.index, pairKey: data.pairKey, group, tilt, glass, glassMat, capMat, front, frontMat, voxelGroup,
       slot, faceUp: false, matched: false, tiltTarget: 0, dropping: false, hoverK: 0, tweens: [], baseZ: 0, bobPhase: Math.random() * 6.283,
