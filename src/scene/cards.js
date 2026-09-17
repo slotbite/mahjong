@@ -66,16 +66,16 @@ function diagonalShineTexture(opacity = 0.35) {
 function createGemGeometry() {
   const shape = new THREE.Shape();
   const size = 0.5 - 0.06; // mitad de lado 1.0 TOTAL: el bisel (bevelSize 0.06) se suma por fuera
-  const radius = 0.1;    // radio de esquina
-  shape.moveTo(-size + radius, -size);
-  shape.lineTo(size - radius, -size);
-  shape.quadraticCurveTo(size, -size, size, -size + radius);
-  shape.lineTo(size, size - radius);
-  shape.quadraticCurveTo(size, size, size - radius, size);
-  shape.lineTo(-size + radius, size);
-  shape.quadraticCurveTo(-size, size, -size, size - radius);
-  shape.lineTo(-size, -size + radius);
-  shape.quadraticCurveTo(-size, -size, -size + radius, -size);
+  const cut = 0.1;       // chaflán de esquina a 45° (pedido del dueño: corte recto en vez de curva)
+  shape.moveTo(-size + cut, -size);
+  shape.lineTo(size - cut, -size);
+  shape.lineTo(size, -size + cut);
+  shape.lineTo(size, size - cut);
+  shape.lineTo(size - cut, size);
+  shape.lineTo(-size + cut, size);
+  shape.lineTo(-size, size - cut);
+  shape.lineTo(-size, -size + cut);
+  shape.lineTo(-size + cut, -size);
 
   const extrudeSettings = {
     // Un solo bisel fino (prueba con usuario en móvil: el arte se veía pequeño con el bisel ancho).
