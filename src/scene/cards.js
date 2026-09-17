@@ -65,7 +65,7 @@ function diagonalShineTexture(opacity = 0.35) {
 
 function createGemGeometry() {
   const shape = new THREE.Shape();
-  const size = 0.5 - 0.16; // mitad de lado 1.0 TOTAL: el bisel (bevelSize 0.16) se suma por fuera
+  const size = 0.5 - 0.06; // mitad de lado 1.0 TOTAL: el bisel (bevelSize 0.06) se suma por fuera
   const radius = 0.1;    // radio de esquina
   shape.moveTo(-size + radius, -size);
   shape.lineTo(size - radius, -size);
@@ -78,8 +78,9 @@ function createGemGeometry() {
   shape.quadraticCurveTo(-size, -size, -size + radius, -size);
 
   const extrudeSettings = {
+    // Un solo bisel fino (prueba con usuario en móvil: el arte se veía pequeño con el bisel ancho).
     steps: 1, depth: 0.06, bevelEnabled: true,
-    bevelThickness: 0.07, bevelSize: 0.16, bevelSegments: 4
+    bevelThickness: 0.05, bevelSize: 0.06, bevelSegments: 1
   };
   const geo = new THREE.ExtrudeGeometry(shape, extrudeSettings);
   geo.center();
@@ -130,7 +131,7 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
   const artInside = urlParams.get('art') === 'inside';
 
   const geo = createGemGeometry();
-  const frontGeo = new THREE.PlaneGeometry(0.64, 0.64);
+  const frontGeo = new THREE.PlaneGeometry(0.84, 0.84);
   const symbolGeo = new THREE.PlaneGeometry(0.5, 0.5);
   const shineGeo = new THREE.PlaneGeometry(0.9, 0.9);
   const holeGeo = new THREE.PlaneGeometry(1.15, 1.15);
@@ -198,7 +199,7 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
     const frontMat = new THREE.MeshBasicMaterial({ map: texFor(data.pairKey), alphaTest: 0.5, side: THREE.FrontSide, toneMapped: false });
     const front = new THREE.Mesh(frontGeo, frontMat);
     // Geometría gem: faceta frontal aproximadamente en z = 0.06-0.09; con bevel de 0.06, ponemos front en +0.091
-    front.position.z = artInside ? -0.03 : 0.101;
+    front.position.z = artInside ? -0.03 : 0.081;
     front.renderOrder = 1;
 
     // Brillo especular diagonal en la cara frontal
