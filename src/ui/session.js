@@ -1,6 +1,6 @@
 // Estado de la partida visto desde la UI. Se alimenta SOLO de eventos del bus (§7.1);
 // no toca el estado de core-1. Los módulos de UI leen `session` y se suscriben con `onSession`.
-export const GRIDS = Object.freeze([[3, 2], [4, 3], [4, 4], [6, 4], [6, 5], [6, 6]]);
+export const GRIDS = Object.freeze([[3, 2], [3, 3], [4, 3], [4, 4], [6, 4], [6, 5], [6, 6]]);
 export const MODES = Object.freeze(['zen', 'classic', 'timed', 'daily']);
 
 // Umbrales de combo (asunción de UI mientras core-1 no publique `multiplier` en pair:match).

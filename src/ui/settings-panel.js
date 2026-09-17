@@ -19,7 +19,7 @@ export function initSettingsPanel(ui) {
 
   const themeById = (id) => themes.find((th) => th.id === id);
   const cardsOf = (id) => themeById(id)?.cards?.length ?? 0;
-  const gridFits = (cols, rows, themeId = settings.get('themeId')) => cols * rows <= cardsOf(themeId) * 2;
+  const gridFits = (cols, rows, themeId = settings.get('themeId')) => Math.floor((cols * rows) / 2) <= cardsOf(themeId);
   const register = (c) => { controls.add(c); c.sync?.(); return c.el; };
   const syncAll = () => controls.forEach((c) => c.sync?.());
   const relabelAll = () => controls.forEach((c) => { c.relabel?.(); c.sync?.(); });
@@ -128,7 +128,7 @@ export function initSettingsPanel(ui) {
       isDisabled: (v) => { const [c, r] = v.split('x').map(Number); return !gridFits(c, r); },
       render(btn, { cols, rows }) {
         btn.classList.add('grid-chip');
-        btn.append(h('span', { class: 'chip-name' }, `${cols}×${rows}`), h('small', { class: 'chip-sub' }, t('settings.gridPairs', { n: (cols * rows) / 2 })));
+        btn.append(h('span', { class: 'chip-name' }, `${cols}×${rows}`), h('small', { class: 'chip-sub' }, t('settings.gridPairs', { n: Math.floor((cols * rows) / 2) })));
         if (!gridFits(cols, rows)) btn.title = t('settings.gridTooBig');
       },
     });
