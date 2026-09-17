@@ -27,7 +27,10 @@ export function initKeyboard(ui) {
   function build() {
     clear(grid);
     grid.append(help);
-    const { cols, rows } = session;
+    // Misma transposición que la escena en pantallas verticales (menos columnas).
+    const portrait = window.innerHeight > window.innerWidth * 1.05;
+    const cols = portrait ? Math.min(session.cols, session.rows) : session.cols;
+    const rows = portrait ? Math.max(session.cols, session.rows) : session.rows;
     const total = session.cards.length || cols * rows;
     grid.style.setProperty('--cols', cols);
     grid.style.setProperty('--rows', rows);

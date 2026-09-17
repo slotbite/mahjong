@@ -1,7 +1,7 @@
 // Escena Three.js de Memorice Cozy (core-1). Punto de entrada: init(ctx).
 import * as THREE from 'three';
 import { createRenderer, applyRendererLayout } from './renderer.js';
-import { computeLayout, pixelRatioFor, CAMERA_TILT } from './layout.js';
+import { computeLayout, pixelRatioFor, CAMERA_TILT, visualGrid } from './layout.js';
 import { createEnvironment } from './environment.js';
 import { createRain } from './rain.js';
 import { createCards } from './cards.js';
@@ -68,7 +68,10 @@ export function init(ctx) {
 
   function applyLayout(emit = true) {
     const w = Math.max(1, window.innerWidth), h = Math.max(1, window.innerHeight);
-    const L = computeLayout(w, h, view.cols, view.rows);
+    // En vertical la rejilla se transpone (menos columnas) para losetas más grandes.
+    const [vc, vr] = visualGrid(view.cols, view.rows, w, h);
+    view.vcols = vc; view.vrows = vr;
+    const L = computeLayout(w, h, vc, vr);
     const dpr = pixelRatioFor(w, window.devicePixelRatio || 1);
     Object.assign(view, { w, h, dpr, kind: L.kind, unitPx: L.unitPx, boardW: L.boardW, boardH: L.boardH, rect: L.rect });
     view.halfW = w / (2 * L.unitPx);
@@ -87,7 +90,8 @@ export function init(ctx) {
     rain.layout(view);
     input.refreshHover();
 
-    if (emit) bus.emit(EV.LAYOUT_CHANGED, { kind: L.kind, w, h, dpr, cardPx: L.cardPx, board: L.rect, cols: view.cols, rows: view.rows });
+    cards.relayout?.(vc, vr);
+    if (emit) bus.emit(EV.LAYOUT_CHANGED, { kind: L.kind, w, h, dpr, cardPx: L.cardPx, board: L.rect, cols: vc, rows: vr });
   }
 
   let resizeTimer = null;
@@ -104,6 +108,7 @@ export function init(ctx) {
     applyLayout(true);
     rain.setIntensity(1, 1500);
     cards.deal(p);
+    cards.relayout(view.vcols, view.vrows);
   });
   bus.on(EV.CARD_FLIP, ({ index, faceUp }) => cards.flip(index, faceUp));
   bus.on(EV.CARD_PICK, ({ index }) => cards.press(index));

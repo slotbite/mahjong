@@ -316,6 +316,21 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
     }));
   }
 
+  /** Reubica cartas y huecos según la rejilla visual (p. ej. transpuesta en móvil vertical). */
+  function relayout(vc, vr) {
+    if (!vc || !vr || (vc === cols && vr === rows)) return;
+    cols = vc; rows = vr;
+    for (const card of cards) {
+      const p = slotPosition(card.index, cols, rows);
+      card.slot.x = p.x; card.slot.y = p.y;
+      if (!card.dropping) { card.group.position.x = p.x; card.group.position.y = p.y; }
+    }
+    for (const h of holes) {
+      if (!h.card) continue;
+      h.mesh.position.x = h.card.slot.x; h.mesh.position.y = h.card.slot.y; h.base.copy(h.mesh.position);
+    }
+  }
+
   function deal(payload) {
     clear();
     cols = payload.cols; rows = payload.rows;
@@ -371,7 +386,7 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
     const mesh = new THREE.Mesh(holeGeo, mat);
     mesh.position.set(card.slot.x, card.slot.y, -0.06);
     board.add(mesh);
-    const hole = { mesh, phase: Math.random() * 6.283, base: mesh.position.clone() };
+    const hole = { mesh, phase: Math.random() * 6.283, base: mesh.position.clone(), card };
     holes.push(hole);
     tween({ dur: 700, onUpdate: (k) => { mat.opacity = 0.42 * k; } });
   }
@@ -525,7 +540,7 @@ export function createCards({ scene, bus, EV, isReducedMotion }) {
 
   return {
     board, baseGlass,
-    deal, flip, press, match, miss, hint, celebrate, dim, setTheme, setHover, setPointer, update,
+    deal, flip, press, match, miss, hint, celebrate, dim, setTheme, setHover, setPointer, relayout, update,
     get phase() { return phase; },
     get hovered() { return hovered; },
     pickables() {

@@ -61,6 +61,13 @@ export function computeLayout(w, h, cols, rows) {
 }
 
 /** Posición de la ficha `index` en unidades de mundo, centrada en el origen del tablero. */
+/** Rejilla visual: en pantallas verticales se transpone para tener menos columnas y losetas más grandes. */
+export function visualGrid(cols, rows, w, h) {
+  const portrait = h > w * 1.05;
+  const lo = Math.min(cols, rows), hi = Math.max(cols, rows);
+  return portrait ? [lo, hi] : [cols, rows];
+}
+
 export function slotPosition(index, cols, rows) {
   const col = index % cols;
   const row = Math.floor(index / cols);
